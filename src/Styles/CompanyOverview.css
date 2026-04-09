@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+.company {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: #f6f8fc;
+  color: #111827;
+}
+
+body.dark .company {
+  background: #0f1224;
+  color: #e5e7eb;
+}
+
+/* ===============================
+   BLOCK SECTION
+================================ */
+
+.founder-block {
+  padding: 120px 24px;
+}
+
+.founder-block.alt {
+  background: #ffffff;
+}
+
+body.dark .founder-block.alt {
+  background: #14183a;
+}
+
+.founder-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ===============================
+   IMAGE
+================================ */
+
+.founder-image img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease;
+}
+
+.founder-image img:hover {
+  transform: translateY(-10px);
+}
+
+body.dark .founder-image img {
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+}
+
+/* ===============================
+   TEXT
+================================ */
+
+.founder-text h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+  color: #2f2f9f;
+}
+
+body.dark .founder-text h2 {
+  color: #a5b4fc;
+}
+
+.founder-text p {
+  font-size: 16.5px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+  color: #4b5563;
+  text-align: justify;
+}
+
+body.dark .founder-text p {
+  color: #cbd5e1;
+}
+
+/* ===============================
+   SIGNATURE
+================================ */
+
+.founder-sign {
+  margin-top: 30px;
+}
+
+.founder-sign strong {
+  font-weight: 700;
+}
+
+.founder-sign span {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+body.dark .founder-sign span {
+  color: #9ca3af;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .founder-block {
+    padding: 80px 20px;
+  }
+
+  .founder-text {
+    text-align: center;
+  }
+}

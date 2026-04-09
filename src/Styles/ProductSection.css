@@ -1,0 +1,883 @@
+/* ============================================================
+   PRODUCTS SECTION — AXSEM SOFTWARES  (Rebuilt)
+   Font      : Plus Jakarta Sans
+   Colors    : #f0f1fa light · #0d0e1a dark · #f05a28 orange
+   Hover     : Soothing — radial glow bloom + icon lift +
+               shimmer line + desc fade-in + arrow scale
+               NO aggressive full-card fill. Soft & layered.
+   Animation : cubic-bezier(.25,.46,.45,.94) — silk easing
+============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+
+/* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
+.prd-section {
+  position: relative;
+  background: #f0f1fa !important;
+  padding: 110px 0 60px;
+  overflow: hidden;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  transition: background 0.5s;
+}
+body.dark .prd-section {
+  background: #0d0e1a !important;
+}
+
+/* ── Background layers ── */
+.prd-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.prd-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+.prd-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(240, 90, 40, 0.07), transparent 70%);
+  top: -80px;
+  left: -60px;
+  animation: prdBlob1 22s ease-in-out infinite;
+}
+.prd-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(61, 61, 158, 0.08), transparent 70%);
+  bottom: -80px;
+  right: -40px;
+  animation: prdBlob2 28s ease-in-out infinite;
+}
+.prd-orb-3 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(
+    circle,
+    rgba(14, 158, 110, 0.05),
+    transparent 70%
+  );
+  top: 50%;
+  left: 40%;
+  animation: prdBlob3 34s ease-in-out infinite;
+}
+body.dark .prd-orb-1 {
+  background: radial-gradient(circle, rgba(240, 90, 40, 0.13), transparent 70%);
+}
+body.dark .prd-orb-2 {
+  background: radial-gradient(circle, rgba(61, 61, 158, 0.16), transparent 70%);
+}
+body.dark .prd-orb-3 {
+  background: radial-gradient(circle, rgba(14, 158, 110, 0.1), transparent 70%);
+}
+@keyframes prdBlob1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(50px, -60px);
+  }
+}
+@keyframes prdBlob2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-45px, 55px);
+  }
+}
+@keyframes prdBlob3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(60px, -40px);
+  }
+}
+
+.prd-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(61, 61, 158, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 61, 158, 0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+body.dark .prd-grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* ── Container ── */
+.prd-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+}
+
+/* ═══════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════ */
+.prd-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.prd-header.prd-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.prd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #f05a28;
+}
+.prd-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f05a28;
+  animation: prdDot 2.2s ease-in-out infinite;
+}
+@keyframes prdDot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.7);
+    opacity: 0.45;
+  }
+}
+.prd-eyebrow-rule {
+  width: 40px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #f05a28, transparent);
+}
+
+.prd-heading {
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+body.dark .prd-heading {
+  color: #fff;
+}
+
+.prd-hl {
+  color: #f05a28;
+  position: relative;
+  display: inline-block;
+}
+.prd-hl::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background: #f05a28;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: prdUnderline 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+@keyframes prdUnderline {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.prd-sub {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4a4a6a;
+  max-width: 560px;
+  margin: 0;
+}
+body.dark .prd-sub {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+/* ═══════════════════════════════════════════
+   TAB BAR — sliding ink
+═══════════════════════════════════════════ */
+.prd-tab-row {
+  display: flex;
+  justify-content: center;
+}
+
+.prd-tabbar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(61, 61, 158, 0.11);
+  backdrop-filter: blur(16px);
+  border-radius: 60px;
+  padding: 5px;
+  box-shadow: 0 4px 20px rgba(61, 61, 158, 0.07);
+}
+body.dark .prd-tabbar {
+  background: rgba(14, 15, 36, 0.82);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Sliding orange indicator */
+.prd-tab-ink {
+  position: absolute;
+  top: 5px;
+  height: calc(100% - 10px);
+  background: #f05a28;
+  border-radius: 50px;
+  transition:
+    left 0.38s cubic-bezier(0.34, 1.2, 0.64, 1),
+    width 0.38s cubic-bezier(0.34, 1.2, 0.64, 1);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 2px 12px rgba(240, 90, 40, 0.35);
+}
+
+.prd-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 20px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #6a6a8a;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+body.dark .prd-tab {
+  color: rgba(255, 255, 255, 0.45);
+}
+.prd-tab.prd-tab-on {
+  color: #fff;
+}
+.prd-tab:not(.prd-tab-on):hover {
+  color: #1a1a2e;
+}
+body.dark .prd-tab:not(.prd-tab-on):hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.prd-tab-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.22);
+  transition: background 0.25s;
+}
+.prd-tab:not(.prd-tab-on) .prd-tab-badge {
+  background: rgba(240, 90, 40, 0.1);
+  color: #f05a28;
+}
+body.dark .prd-tab:not(.prd-tab-on) .prd-tab-badge {
+  background: rgba(240, 90, 40, 0.14);
+}
+
+/* ═══════════════════════════════════════════
+   CARDS GRID
+═══════════════════════════════════════════ */
+.prd-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ═══════════════════════════════════════════
+   PRODUCT CARD — soothing hover system
+═══════════════════════════════════════════ */
+.prd-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 26px 24px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(18px);
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* Scroll reveal */
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      calc(var(--i, 0) * 0.055s),
+    transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      calc(var(--i, 0) * 0.055s),
+    box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.4s ease;
+  will-change: opacity, transform;
+}
+body.dark .prd-card {
+  background: rgba(16, 17, 40, 0.8);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+.prd-card.prd-card-vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hover: lift + border glow ── */
+.prd-card:hover {
+  /* box-shadow:
+    0 0 0 1.5px var(--accent),
+    0 16px 48px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.06); */
+  border-color: transparent;
+  transform: translateY(-4px);
+}
+body.dark .prd-card:hover {
+  box-shadow:
+    0 0 0 1.5px var(--accent),
+    0 20px 56px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ── 1. Radial glow — blooms from icon corner ── */
+.prd-glow {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  filter: blur(55px);
+  transform: scale(0.4);
+  transition:
+    opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+  z-index: 0;
+}
+.prd-card:hover .prd-glow {
+  opacity: 0.11;
+  transform: scale(1);
+}
+body.dark .prd-card:hover .prd-glow {
+  opacity: 0.18;
+}
+
+/* ── 2. Shimmer top line — scaleX in from left ── */
+.prd-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  border-radius: 20px 20px 0 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.04s;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
+}
+.prd-card:hover .prd-shimmer {
+  transform: scaleX(1);
+}
+
+/* ── Icon wrap ── */
+.prd-icon-wrap {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+/* Dashed rotating ring */
+.prd-icon-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--accent);
+  opacity: 0.2;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+.prd-card:hover .prd-icon-ring {
+  opacity: 0.55;
+  transform: rotate(45deg) scale(1.1);
+}
+
+/* ── 3. Icon box — lift + glow on hover ── */
+.prd-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 10px rgba(61, 61, 158, 0.08);
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background 0.4s ease,
+    color 0.35s ease;
+}
+body.dark .prd-icon-box {
+  background: rgba(20, 21, 50, 0.7);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+.prd-card:hover .prd-icon-box {
+  transform: translateY(-3px) scale(1.07);
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.14),
+    0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .prd-card:hover .prd-icon-box {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  }
+}
+
+/* ── Content area ── */
+.prd-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Name + tag row */
+.prd-top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+
+.prd-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a2e;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  transition: color 0.35s ease;
+}
+body.dark .prd-name {
+  color: #fff;
+}
+
+/* ── 4. Tag — subtle shift on hover ── */
+.prd-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border-radius: 50px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  white-space: nowrap;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .prd-tag {
+    background: rgba(240, 90, 40, 0.09);
+    border-color: rgba(240, 90, 40, 0.2);
+  }
+}
+.prd-card:hover .prd-tag {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  transform: translateY(-1px);
+}
+
+/* Tagline */
+.prd-tagline {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2a2a4a;
+  line-height: 1.45;
+  margin: 0 0 8px;
+  transition: color 0.35s ease;
+}
+body.dark .prd-tagline {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── 5. Desc — hidden, reveals with smooth fade + slide ── */
+.prd-desc {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #5a5a7a;
+  line-height: 1.65;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+body.dark .prd-desc {
+  color: rgba(255, 255, 255, 0.5);
+}
+.prd-card:hover .prd-desc {
+  max-height: 80px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 6. Arrow — scale bounce on hover ── */
+.prd-arrow {
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #9a9abb;
+  border: 1.5px solid rgba(61, 61, 158, 0.12);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  transition:
+    color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+body.dark .prd-arrow {
+  color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+}
+.prd-card:hover .prd-arrow {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, rgba(255, 255, 255, 0.8));
+  border-color: var(--accent);
+  transform: scale(1.12) rotate(0deg);
+}
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .prd-card:hover .prd-arrow {
+    background: rgba(240, 90, 40, 0.1);
+  }
+}
+body.dark .prd-card:hover .prd-arrow {
+  background: color-mix(in srgb, var(--accent) 16%, rgba(14, 15, 36, 0.9));
+}
+
+/* ── 7. Bottom foot bar — scaleX from left ── */
+.prd-foot-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 0 0 20px 20px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.06s;
+  opacity: 0.7;
+}
+.prd-card:hover .prd-foot-bar {
+  transform: scaleX(1);
+}
+
+/* ═══════════════════════════════════════════
+   STATS STRIP
+═══════════════════════════════════════════ */
+.prd-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.prd-stat {
+  padding: 26px 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(61, 61, 158, 0.06);
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease calc(var(--i, 0) * 0.09s),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.09s),
+    box-shadow 0.4s ease,
+    border-color 0.35s ease;
+}
+body.dark .prd-stat {
+  background: rgba(16, 17, 40, 0.78);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.38);
+}
+.prd-stats.prd-revealed .prd-stat {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stat hover: gentle lift + orange outline */
+.prd-stat:hover {
+  box-shadow:
+    0 0 0 1.5px #f05a28,
+    0 10px 32px rgba(61, 61, 158, 0.12);
+  border-color: transparent;
+  transform: translateY(-3px);
+}
+body.dark .prd-stat:hover {
+  box-shadow:
+    0 0 0 1.5px #f05a28,
+    0 10px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Left accent bar on hover */
+.prd-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #f05a28;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0 2px 2px 0;
+}
+.prd-stat:hover::before {
+  transform: scaleY(1);
+}
+
+.prd-stat-val {
+  font-size: 32px;
+  font-weight: 800;
+  color: #f05a28;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prd-stat:hover .prd-stat-val {
+  transform: scale(1.06);
+}
+
+.prd-stat-lbl {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #5a5a7a;
+  line-height: 1.4;
+}
+body.dark .prd-stat-lbl {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+/* ═══════════════════════════════════════════
+   CTA ROW
+═══════════════════════════════════════════ */
+.prd-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.prd-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  border-radius: 50px;
+  background: #f05a28;
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(240, 90, 40, 0.32);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease;
+}
+.prd-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(240, 90, 40, 0.42);
+}
+.prd-btn-primary svg {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prd-btn-primary:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.prd-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 30px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(61, 61, 158, 0.18);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  color: #1a1a2e;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+body.dark .prd-btn-ghost {
+  background: rgba(14, 15, 36, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.prd-btn-ghost:hover {
+  border-color: #f05a28;
+  color: #f05a28;
+  transform: translateY(-2px);
+  background: rgba(240, 90, 40, 0.04);
+}
+.prd-btn-ghost svg {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prd-btn-ghost:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .prd-container {
+    padding: 0 40px;
+  }
+  .prd-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .prd-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .prd-section {
+    padding: 72px 0 64px;
+  }
+  .prd-container {
+    padding: 0 20px;
+    gap: 36px;
+  }
+  .prd-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .prd-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .prd-heading {
+    font-size: 30px;
+  }
+  .prd-tab-row {
+    overflow-x: auto;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+  }
+  .prd-tabbar {
+    gap: 0;
+  }
+  .prd-tab {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .prd-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .prd-btn-primary,
+  .prd-btn-ghost {
+    justify-content: center;
+  }
+  /* Disable 3D transforms on mobile */
+  .prd-card:hover {
+    transform: translateY(-2px);
+  }
+}

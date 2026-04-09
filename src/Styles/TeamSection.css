@@ -1,0 +1,272 @@
+/* =========================
+   TEAM SECTION – ENTERPRISE
+========================= */
+:root {
+  --purple: #4f46a5;
+  --purple-dark: #3e3a8c;
+  --accent-orange: #f05a28;
+  --orange-light: #ff6b3d;
+  --bg-light: #eef1f6;
+  --text-dark: #1e1e2f;
+}
+
+.team-section {
+  padding: 130px 20px 70px;
+  background: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  overflow: hidden;
+}
+
+.team-container {
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* HEADER */
+
+.team-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 80px;
+}
+
+.team-label {
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(232, 91, 10, 0.15);
+  color: var(--accent-orange);
+  border-radius: 999px;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+
+.team-header h2 {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+
+.team-header p {
+  font-size: 18px;
+  color: var(--color-text);
+  margin-bottom: 28px;
+}
+
+/* GLOBAL BUTTON */
+
+.team-global-btn {
+  padding: 12px 32px;
+  border-radius: 999px;
+  border: 2px solid var(--accent-orange);
+  background: transparent;
+  color: var(--accent-orange);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.team-global-btn:hover {
+  background: var(--accent-orange);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(232, 91, 10, 0.4);
+}
+
+/* SLIDER */
+
+.team-slider-wrapper {
+  perspective: 1400px;
+}
+
+.team-slider {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: teamScroll 35s linear infinite;
+}
+
+.team-slider-wrapper:hover .team-slider {
+  animation-play-state: paused;
+}
+
+@keyframes teamScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* CARD */
+
+.team-card {
+  width: 320px;
+  border-radius: 26px;
+  overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all 0.6s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-18px) scale(1.04);
+}
+
+/* IMAGE */
+
+.team-image {
+  position: relative;
+}
+
+.team-image img,
+.team-image video {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+
+.team-image video {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.team-card:hover .team-image video {
+  opacity: 1;
+}
+
+/* PLAY ICON */
+
+.team-play {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.team-card:hover .team-play {
+  background: var(--accent-orange);
+  transform: scale(1.1);
+}
+
+/* OVERLAY */
+
+.team-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 26px;
+}
+
+.team-card:hover .team-overlay {
+  opacity: 1;
+}
+
+/* SOCIAL */
+
+.team-socials {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.team-socials a {
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  color: var(--accent-orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* INFO */
+
+.team-overlay-info h4 {
+  font-size: 20px;
+  color: #fff;
+}
+
+.team-overlay-info p {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.team-overlay-info span {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* MODAL */
+
+.team-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.modal-content {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.modal-content video {
+  width: 100%;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #fff;
+  border-radius: 50%;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* DARK MODE */
+
+.dark .team-section {
+  background: var(--color-bg-dark);
+}
+
+.dark .team-header h2 {
+  color: #fff;
+}
+
+.dark .team-header p {
+  color: #d8d8f5;
+}

@@ -1,0 +1,71 @@
+/* ================================================================
+   CASESTUDIES.CSS — AXSEM SOFTWARES
+   ================================================================ */
+
+.casestudies-section {
+    padding: 120px 80px;
+}
+
+.casestudies-section h2 {
+    font-size: clamp(32px, 4vw, 42px);
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.casestudies-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 40px;
+}
+
+.case-card {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+}
+
+body.dark .case-card {
+    background: #1e2030;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.case-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+}
+
+.case-card-image {
+    height: 220px;
+    background: linear-gradient(135deg, #4f46a5, #6c63ff);
+}
+
+.case-card-body {
+    padding: 30px;
+}
+
+.case-card-body h3 {
+    color: var(--text-primary);
+    font-size: 20px;
+}
+
+.case-card-body p {
+    margin-top: 10px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .casestudies-section {
+        padding: 80px 24px;
+    }
+
+    .casestudies-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}

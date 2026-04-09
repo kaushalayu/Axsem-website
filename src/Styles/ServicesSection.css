@@ -1,0 +1,614 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+
+/* ============================================================
+   SERVICES SECTION — AXSEM SOFTWARES
+   Font: Plus Jakarta Sans throughout
+   Light default · body.dark override · Fully responsive
+============================================================ */
+
+/* ── Reveal animations ── */
+.svc-header,
+.svc-grid,
+.svc-process {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svc-header.revealed,
+.svc-grid.revealed,
+.svc-process.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.svc-grid.revealed .svc-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   SECTION BASE
+============================================================ */
+section.svc-section,
+.svc-section {
+  position: relative;
+  background: #f0f1fa !important;
+  padding: 100px 0 30px;
+  overflow: hidden;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  transition: background 0.4s ease;
+}
+
+body.dark section.svc-section,
+body.dark .svc-section {
+  background: #0d0e1a !important;
+}
+
+/* ── Background ── */
+.svc-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.svc-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+}
+
+.svc-orb-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(
+    circle,
+    rgba(240, 90, 40, 0.08) 0%,
+    transparent 70%
+  );
+  top: -80px;
+  right: 10%;
+  animation: svcOrb1 18s ease-in-out infinite;
+}
+
+.svc-orb-2 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(
+    circle,
+    rgba(61, 61, 158, 0.09) 0%,
+    transparent 70%
+  );
+  bottom: -60px;
+  left: 5%;
+  animation: svcOrb2 22s ease-in-out infinite;
+}
+
+body.dark .svc-orb-1 {
+  background: radial-gradient(
+    circle,
+    rgba(240, 90, 40, 0.16) 0%,
+    transparent 70%
+  );
+}
+body.dark .svc-orb-2 {
+  background: radial-gradient(
+    circle,
+    rgba(61, 61, 158, 0.2) 0%,
+    transparent 70%
+  );
+}
+
+@keyframes svcOrb1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-50px, 70px);
+  }
+}
+@keyframes svcOrb2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(60px, -40px);
+  }
+}
+
+.svc-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(61, 61, 158, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 61, 158, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+body.dark .svc-grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* ── Container ── */
+.svc-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.svc-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.svc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 18px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  background: rgba(240, 90, 40, 0.1);
+  border: 1px solid rgba(240, 90, 40, 0.25);
+  color: #f05a28;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.svc-heading {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  color: #1a1a2e;
+  transition: color 0.4s;
+}
+
+body.dark .svc-heading {
+  color: #ffffff;
+}
+
+.svc-heading-accent {
+  background: linear-gradient(130deg, #f05a28, #ff8c5a, #f05a28);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.svc-subheading {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #5a5a7a;
+  transition: color 0.4s;
+}
+
+body.dark .svc-subheading {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ============================================================
+   CARDS GRID
+============================================================ */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* ── Single Card ── */
+.svc-card {
+  position: relative;
+  padding: 32px 28px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1) var(--delay, 0s),
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1) var(--delay, 0s),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  /* LIGHT */
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(61, 61, 158, 0.1);
+  box-shadow: 0 4px 20px rgba(61, 61, 158, 0.06);
+}
+
+body.dark .svc-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.svc-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 50px rgba(26, 26, 46, 0.2);
+  border-color: #1a1a2e;
+}
+
+body.dark .svc-card:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  border-color: #1a1a2e;
+}
+
+.svc-card.svc-active {
+  border-color: var(--svc-color);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--svc-color) 15%, transparent),
+    0 16px 48px rgba(0, 0, 0, 0.1);
+}
+
+/* Subtle glow on hover */
+.svc-card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: radial-gradient(
+    circle at 50% 0%,
+    color-mix(in srgb, var(--svc-color) 8%, transparent) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.svc-card:hover .svc-card-glow,
+.svc-card.svc-active .svc-card-glow {
+  opacity: 1;
+}
+
+/* ── Card Top Row ── */
+.svc-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.svc-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--svc-color) 12%, transparent);
+  color: var(--svc-color);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svc-card:hover .svc-icon-wrap {
+  transform: scale(1.15) rotate(-8deg);
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.svc-tag {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 50px;
+  background: color-mix(in srgb, var(--svc-color) 10%, transparent);
+  color: var(--svc-color);
+  border: 1px solid color-mix(in srgb, var(--svc-color) 25%, transparent);
+}
+
+/* ── Card Title ── */
+.svc-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #1a1a2e;
+  transition: color 0.4s;
+}
+
+body.dark .svc-title {
+  color: #ffffff;
+}
+
+/* ── Card Desc ── */
+.svc-desc {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #5a5a7a;
+  transition: color 0.4s;
+}
+
+body.dark .svc-desc {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+/* ── Points List ── */
+.svc-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.svc-points li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3a3a5a;
+  transition: color 0.4s;
+}
+
+body.dark .svc-points li {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.svc-check {
+  font-size: 14px;
+  color: var(--svc-color);
+  flex-shrink: 0;
+}
+
+/* ── Card Footer ── */
+.svc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(61, 61, 158, 0.08);
+}
+
+body.dark .svc-footer {
+  border-top-color: rgba(255, 255, 255, 0.07);
+}
+
+.svc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.svc-stat-num {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--svc-color);
+  line-height: 1;
+}
+
+.svc-stat-label {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #9090b0;
+  letter-spacing: 0.02em;
+}
+
+body.dark .svc-stat-label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.svc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--svc-color) 10%, transparent);
+  color: var(--svc-color);
+  border: 1px solid color-mix(in srgb, var(--svc-color) 22%, transparent);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svc-cta:hover {
+  background: var(--svc-color);
+  color: #ffffff;
+  transform: translateX(4px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--svc-color) 35%, transparent);
+}
+
+/* ============================================================
+   PROCESS STRIP
+============================================================ */
+.svc-process {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(61, 61, 158, 0.1);
+  border-radius: 22px;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  backdrop-filter: blur(10px);
+}
+
+body.dark .svc-process {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.process-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f05a28;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-right: 24px;
+  border-right: 1px solid rgba(61, 61, 158, 0.12);
+}
+
+body.dark .process-label {
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+
+.process-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.process-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-num {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: #f05a28;
+  opacity: 0.7;
+  line-height: 1;
+}
+
+.step-name {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  transition: color 0.4s;
+}
+
+body.dark .step-name {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.step-arrow {
+  font-size: 14px;
+  color: rgba(61, 61, 158, 0.25);
+  margin-left: 8px;
+  font-weight: 300;
+}
+
+body.dark .step-arrow {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1200px) {
+  .svc-container {
+    padding: 0 60px;
+  }
+  .svc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 960px) {
+  section.svc-section,
+  .svc-section {
+    padding: 80px 0 72px;
+  }
+  .svc-container {
+    padding: 0 40px;
+    gap: 52px;
+  }
+  .svc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .svc-process {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px 28px;
+  }
+  .process-label {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid rgba(61, 61, 158, 0.12);
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  body.dark .process-label {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  .process-steps {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .svc-container {
+    padding: 0 20px;
+    gap: 40px;
+  }
+  .svc-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .svc-card {
+    padding: 26px 22px;
+  }
+  .svc-heading {
+    font-size: clamp(24px, 7vw, 34px);
+  }
+
+  .svc-process {
+    padding: 22px 20px;
+    border-radius: 18px;
+  }
+  .process-steps {
+    gap: 10px;
+  }
+  .step-arrow {
+    display: none;
+  }
+}

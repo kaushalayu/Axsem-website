@@ -1,0 +1,224 @@
+/* ================================================================
+   PAGELOADER.CSS — AXSEM SOFTWARES
+   Optimized Smooth Loader
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+.page-loader {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+    will-change: opacity;
+}
+
+.loader-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.loader-orb {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform, opacity;
+}
+
+.loader-orb.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(240, 90, 40, 0.12) 0%, transparent 70%);
+    top: -150px;
+    left: -100px;
+    animation: orbFloat1 8s ease-in-out infinite;
+}
+
+.loader-orb.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+    bottom: -100px;
+    right: -80px;
+    animation: orbFloat2 10s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 20px); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -15px); }
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+.loader-logo-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-logo-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(240, 90, 40, 0.3);
+    animation: ringPulse 2s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+.loader-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 10px 40px rgba(240, 90, 40, 0.25);
+}
+
+.loader-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.loader-company {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    display: flex;
+    gap: 2px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loader-letter {
+    display: inline-block;
+    background: linear-gradient(135deg, #f05a28 0%, #ff7a45 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.loader-tagline {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.loader-tagline-word {
+    display: inline-block;
+    position: relative;
+}
+
+.loader-tagline-word:not(:last-child)::after {
+    content: '•';
+    margin-left: 10px;
+    color: #f05a28;
+}
+
+.loader-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 280px;
+}
+
+.loader-progress-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loader-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #f05a28, #ff7a45);
+    border-radius: 10px;
+}
+
+.loader-progress-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loading-dots {
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .loader-company {
+        font-size: 36px;
+        letter-spacing: 0.1em;
+    }
+    
+    .loader-tagline {
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    .loader-logo-wrapper {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .loader-logo {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .loader-orb.orb-1 {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .loader-orb.orb-2 {
+        width: 250px;
+        height: 250px;
+    }
+}

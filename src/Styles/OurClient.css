@@ -1,0 +1,324 @@
+/* ============================================================
+   OUR CLIENTS PAGE — Extra styles
+   Base styles from servicePageShared.css
+============================================================ */
+
+/* ── Client card layout ── */
+.oc-client-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 20px;
+}
+
+.oc-client-card .sp-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.oc-client-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.oc-client-info .sp-card-title {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.oc-client-info .sp-card-tag {
+  margin-bottom: 4px;
+  display: block;
+}
+
+.oc-client-info .sp-card-desc {
+  font-size: 12.5px;
+}
+
+/* ── Industry tags ── */
+.oc-industry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.oc-ind-tag {
+  padding: 9px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--sp-border);
+  background: var(--sp-white);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--sp-text);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.sp-anim.sp-revealed .oc-ind-tag {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.4s ease var(--delay, 0s),
+    transform 0.4s ease var(--delay, 0s),
+    border-color 0.3s,
+    color 0.3s,
+    transform 0.3s ease;
+}
+
+.oc-ind-tag:hover {
+  border-color: var(--sp-orange);
+  color: var(--sp-orange);
+  transform: translateY(-2px);
+}
+
+/* dark */
+body.dark .oc-ind-tag {
+  background: var(--sp-white);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--sp-text);
+}
+
+body.dark .oc-ind-tag:hover {
+  background: #161728;
+  border-color: var(--sp-orange);
+  color: var(--sp-orange) !important;
+}
+
+/* ── Testimonial card ── */
+.oc-testi-card {
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1.5px solid #ebebf5;
+  background: #fff;
+  transition:
+    border-color 0.3s,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .oc-testi-card {
+  background: #161728;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .oc-testi-card:hover {
+  background: #161728;
+}
+
+.oc-testi-card:hover {
+  transform: translateY(-4px);
+  border-color: transparent;
+  box-shadow: 
+    0 0 0 1px #f05a28,
+    0 0 20px rgba(240, 90, 40, 0.15),
+    0 0 40px rgba(240, 90, 40, 0.08);
+}
+
+.oc-testi-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.oc-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.oc-star {
+  font-size: 14px;
+  color: var(--sp-orange);
+  fill: var(--sp-orange);
+}
+
+/* Hover states - stars turn orange on hover */
+.oc-testi-card:hover .oc-star {
+  color: #f05a28;
+  fill: #f05a28;
+}
+
+.oc-quote {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--sp-text-mid);
+  font-style: italic;
+  margin: 0;
+  transition: color 0.3s;
+}
+.oc-testi-card:hover .oc-quote {
+  color: var(--sp-text);
+}
+
+.oc-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.oc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--sp-orange);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.oc-testi-card:hover .oc-avatar {
+  background: #f05a28;
+}
+
+.oc-author-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--sp-text);
+  transition: color 0.3s;
+}
+.oc-testi-card:hover .oc-author-name {
+  color: #f05a28;
+}
+
+.oc-author-role {
+  font-size: 12px;
+  color: var(--sp-text-muted);
+  transition: color 0.3s;
+}
+.oc-testi-card:hover .oc-author-role {
+  color: var(--sp-text-mid);
+}
+
+.oc-testi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(61, 61, 158, 0.08);
+  border-color: #f05a28;
+}
+
+.oc-testi-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f05a28;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+}
+
+.oc-testi-card:hover::before {
+  opacity: 1;
+}
+
+.oc-testi-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.oc-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.oc-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.oc-star {
+  font-size: 14px;
+  color: var(--sp-orange);
+  fill: var(--sp-orange);
+}
+
+/* Hover states - text turns white on fill */
+.oc-testi-card:hover .oc-star {
+  color: #fff;
+  fill: #fff;
+}
+
+.oc-quote {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--sp-text-mid);
+  font-style: italic;
+  margin: 0;
+  transition: color 0.3s;
+}
+.oc-testi-card:hover .oc-quote {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.oc-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.oc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--sp-orange);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.oc-testi-card:hover .oc-avatar {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.oc-author-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--sp-text);
+  transition: color 0.3s;
+}
+.oc-testi-card:hover .oc-author-name {
+  color: #fff;
+}
+
+.oc-author-role {
+  font-size: 12px;
+  color: var(--sp-text-muted);
+  transition: color 0.3s;
+}
+.oc-testi-card:hover .oc-author-role {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .sp-cards-grid.sp-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .sp-cards-grid.sp-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}

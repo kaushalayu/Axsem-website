@@ -1,0 +1,66 @@
+/* ================================================================
+   SERVICES3D.CSS — AXSEM SOFTWARES
+   ================================================================ */
+
+.services-section {
+    padding: 120px 80px;
+}
+
+.services-section h2 {
+    text-align: center;
+    font-size: clamp(32px, 4vw, 42px);
+    color: var(--text-primary);
+}
+
+.services-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+/* ── Service Card ── */
+.service-card {
+    opacity: 0;
+    padding: 40px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .service-card {
+    background: #1e2030;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.service-card h3 {
+    color: var(--brand-purple);
+}
+
+body.dark .service-card h3 {
+    color: #a0a0ff;
+}
+
+.service-card p {
+    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .services-section {
+        padding: 80px 24px;
+    }
+
+    .services-grid {
+        gap: 24px;
+    }
+}

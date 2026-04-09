@@ -1,0 +1,191 @@
+/* =====================================
+   APPLY JOB PAGE — AXSEM
+===================================== */
+
+.apply-page {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: #f2f4fb;
+  transition: background 0.4s;
+}
+
+body.dark .apply-page {
+  background: #0d0f1f;
+}
+
+/* SECTION */
+.apply-section {
+  max-width: 1250px;
+  margin: auto;
+  padding: 100px 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+}
+
+/* JOB CARD */
+.apply-job-card {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 42px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+
+body.dark .apply-job-card {
+  background: #14162b;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.apply-job-card h2 {
+  font-size: 28px;
+  margin-bottom: 6px;
+  color: #1a1a2e;
+}
+body.dark .apply-job-card h2 {
+  color: #ffffff;
+}
+
+.apply-job-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f05a28;
+  margin-bottom: 18px;
+}
+
+.apply-job-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #5a5a7a;
+  margin-bottom: 26px;
+}
+body.dark .apply-job-desc {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.apply-job-card h4 {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #1a1a2e;
+}
+body.dark .apply-job-card h4 {
+  color: #ffffff;
+}
+
+.apply-job-card ul {
+  margin-left: 18px;
+}
+
+.apply-job-card li {
+  font-size: 14.5px;
+  margin-bottom: 8px;
+  color: #444;
+}
+body.dark .apply-job-card li {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* FORM CARD */
+.apply-form-card {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 42px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+
+body.dark .apply-form-card {
+  background: #14162b;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.apply-form-card h2 {
+  font-size: 26px;
+  margin-bottom: 22px;
+  color: #1a1a2e;
+}
+body.dark .apply-form-card h2 {
+  color: #ffffff;
+}
+
+/* FORM */
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.apply-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apply-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+body.dark .apply-field label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.apply-field input,
+.apply-field textarea {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.apply-field input:focus,
+.apply-field textarea:focus {
+  border-color: #f05a28;
+  outline: none;
+}
+
+body.dark .apply-field input,
+body.dark .apply-field textarea {
+  background: #0f1124;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* SUBMIT */
+.apply-submit {
+  margin-top: 8px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #f05a28;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    background 0.25s,
+    box-shadow 0.25s;
+}
+
+.apply-submit:hover {
+  background: #e14e1d;
+  box-shadow: 0 12px 30px rgba(240, 90, 40, 0.35);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .apply-section {
+    grid-template-columns: 1fr;
+    padding: 80px 20px;
+  }
+}

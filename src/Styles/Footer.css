@@ -1,0 +1,1151 @@
+/* ═══════════════════════════════════════════════════════════════
+   AXSEM FOOTER — Redesigned
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+.axf,
+.axf * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.axf a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.axf ul {
+  list-style: none;
+}
+
+.axf {
+  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #fff;
+  padding: 20px 0 0;
+}
+
+.axf-copy-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.axf-copy-text strong {
+  color: #fff;
+}
+
+.axf-copy-love {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Inner Container */
+.axf-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* Links Actions */
+.axf-links-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+  justify-content: flex-end;
+}
+
+.axf-action-btn {
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.axf-action-contact {
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a45 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(240, 90, 40, 0.35);
+}
+
+.axf-action-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(240, 90, 40, 0.45);
+}
+
+.axf-action-meeting {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.axf-action-meeting:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Top Section: Brand + Links */
+.axf-top-section {
+  display: grid;
+  grid-template-columns: 1.2fr 3fr;
+  gap: 80px;
+  padding: 60px 0 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Brand Column */
+.axf-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-right: 20px;
+}
+
+.axf-logo-link {
+  display: inline-block;
+}
+
+.axf-logo {
+  height: 90px;
+  width: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 10px rgba(240, 90, 40, 0.2), 0 0 20px rgba(240, 90, 40, 0.1);
+}
+
+.axf-about-text-2 {
+  margin-top: 4px;
+}
+
+/* Links Section */
+.axf-links-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.axf-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  padding-top: 24px;
+}
+
+.axf-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.axf-logo-link {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.axf-logo {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 24px rgba(240, 90, 40, 0.35);
+}
+
+/* Top Buttons */
+.axf-top-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.axf-top-btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.axf-btn-contact {
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a45 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(240, 90, 40, 0.35);
+}
+
+.axf-btn-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240, 90, 40, 0.45);
+}
+
+.axf-btn-meeting {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.axf-btn-meeting:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.axf-logo-link {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.axf-logo {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 24px rgba(240, 90, 40, 0.35);
+}
+
+.axf-about-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 0;
+  padding: 8px 0 14px;
+  padding-left: 12px;
+  border-left: 3px solid #f05a28;
+}
+
+.axf-about-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 0;
+  text-align: justify;
+}
+
+.axf-about-text-2 {
+  margin-top: 4px;
+}
+
+/* Links Section */
+.axf-links-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.axf-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  padding-top: 20px;
+}
+
+/* Top Buttons */
+.axf-top-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.axf-top-btn {
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.axf-btn-contact {
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a45 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(240, 90, 40, 0.35);
+}
+
+.axf-btn-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240, 90, 40, 0.45);
+}
+
+.axf-btn-meeting {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.axf-btn-meeting:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.axf-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.axf-logo-link {
+  display: inline-block;
+}
+
+.axf-logo {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 24px rgba(240, 90, 40, 0.35);
+}
+
+.axf-about-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+  padding-left: 4px;
+  border-left: 3px solid #f05a28;
+}
+
+.axf-about-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.axf-about-text-2 {
+  margin-top: 4px;
+}
+
+.axf-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.axf-soc {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s;
+}
+
+.axf-soc:hover {
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a45 100%);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Links Section */
+.axf-links-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.axf-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  margin-top: 16px;
+}
+
+.axf-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.axf-nav-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding-bottom: 14px;
+  padding-left: 25px;
+  border-bottom: 3px solid #f05a28;
+  margin-bottom: 6px;
+}
+
+.axf-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.axf-nav-link {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+  padding: 4px 0;
+}
+
+.axf-nav-link {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.axf-nav-arrow {
+  font-size: 12px;
+  color: #f05a28;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 0.2s;
+}
+
+.axf-nav-link:hover {
+  color: #f05a28;
+  transform: translateX(5px);
+}
+
+.axf-nav-link:hover .axf-nav-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODERN FOOTER CARDS — Redesigned
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cards Section */
+.axf-cards-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 48px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Modern Card Base */
+.axf-info-card,
+.axf-address-card,
+.axf-contact-info,
+.axf-map-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 28px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient top border effect */
+.axf-info-card::before,
+.axf-address-card::before,
+.axf-contact-info::before,
+.axf-map-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f05a28, #4f46a5, #f05a28);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.axf-info-card:hover,
+.axf-address-card:hover,
+.axf-contact-info:hover,
+.axf-map-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(240, 90, 40, 0.3);
+}
+
+.axf-info-card:hover::before,
+.axf-address-card:hover::before,
+.axf-contact-info:hover::before,
+.axf-map-card:hover::before {
+  opacity: 1;
+}
+
+/* Glow effect on hover */
+.axf-info-card::after,
+.axf-address-card::after,
+.axf-contact-info::after,
+.axf-map-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(240, 90, 40, 0.08) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.axf-info-card:hover::after,
+.axf-address-card:hover::after,
+.axf-contact-info:hover::after,
+.axf-map-card:hover::after {
+  opacity: 1;
+}
+
+/* Contact List Styles */
+.axf-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.axf-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.axf-contact-item:hover {
+  background: rgba(240, 90, 40, 0.1);
+  border-color: rgba(240, 90, 40, 0.2);
+  transform: translateX(6px);
+}
+
+.axf-contact-role {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+}
+
+.axf-contact-value {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.axf-map-btn-full {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a5c 100%);
+  color: white;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(240, 90, 40, 0.35);
+  text-decoration: none;
+}
+
+.axf-map-btn-full:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(240, 90, 40, 0.5);
+}
+
+/* Address Card */
+.axf-address-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.axf-map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.axf-map-container iframe {
+  display: block;
+  border-radius: 12px;
+}
+
+.axf-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.axf-card-title .axf-title-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(240, 90, 40, 0.2), rgba(79, 70, 165, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #f05a28;
+  transition: all 0.3s ease;
+}
+
+.axf-address-card:hover .axf-card-title .axf-title-icon {
+  transform: scale(1.1) rotate(-5deg);
+  background: linear-gradient(135deg, #f05a28, #ff7a5c);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(240, 90, 40, 0.35);
+}
+
+.axf-address-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.axf-address {
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s ease;
+}
+
+.axf-address-card:hover .axf-address {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(240, 90, 40, 0.15);
+}
+
+/* Contact Info Card */
+.axf-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.axf-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.axf-contact-link:hover {
+  background: rgba(240, 90, 40, 0.1);
+  border-color: rgba(240, 90, 40, 0.2);
+  transform: translateX(6px);
+}
+
+.axf-contact-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(240, 90, 40, 0.15), rgba(79, 70, 165, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #f05a28;
+  transition: all 0.3s ease;
+}
+
+.axf-contact-link:hover .axf-contact-icon {
+  background: linear-gradient(135deg, #f05a28, #ff7a5c);
+  color: #fff;
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 8px 20px rgba(240, 90, 40, 0.35);
+}
+
+.axf-contact-link div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.axf-contact-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+}
+
+.axf-contact-val {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+/* Map Card - Enhanced */
+.axf-map-card {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.5) 0%, rgba(15, 15, 26, 0.8) 100%);
+  border-color: rgba(240, 90, 40, 0.15);
+  overflow: hidden;
+}
+
+.axf-map-card::before {
+  background: linear-gradient(135deg, rgba(240, 90, 40, 0.2) 0%, transparent 60%);
+}
+
+.axf-map-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px 0;
+  height: 100%;
+}
+
+.axf-map-overlay {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.axf-map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a5c 100%);
+  border-radius: 50% 50% 50% 0;
+  transform: translate(-50%, -60%) rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(240, 90, 40, 0.5);
+  z-index: 2;
+  animation: mapPinFloat 3s ease-in-out infinite;
+}
+
+@keyframes mapPinFloat {
+  0%, 100% {
+    transform: translate(-50%, -60%) rotate(-45deg) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -60%) rotate(-45deg) translateY(-8px);
+  }
+}
+
+.axf-map-pin svg {
+  transform: rotate(45deg);
+  color: white;
+  font-size: 28px;
+}
+
+.axf-map-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(240, 90, 40, 0.2);
+  animation: mapPulse 2s infinite;
+}
+
+@keyframes mapPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
+}
+
+.axf-map-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.axf-map-location {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.axf-map-country {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.axf-map-btn {
+  margin-top: 12px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a5c 100%);
+  color: white;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(240, 90, 40, 0.35);
+}
+
+.axf-map-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(240, 90, 40, 0.5);
+}
+
+/* Floating Action Buttons */
+.axf-float-btns {
+  display: none;
+}
+
+.axf-float-left,
+.axf-float-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.axf-float-left {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.axf-float-right {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.axf-float-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.axf-float-whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.axf-float-whatsapp:hover {
+  background: #128c7e;
+  transform: translateY(-3px);
+}
+
+.axf-float-call {
+  background: linear-gradient(135deg, #f05a28 0%, #ff7a45 100%);
+  color: white;
+}
+
+.axf-float-call:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(240, 90, 40, 0.4);
+}
+
+.axf-float-chat {
+  background: #0084ff;
+  color: white;
+}
+
+.axf-float-chat:hover {
+  background: #0066cc;
+  transform: translateY(-3px);
+}
+
+.axf-float-top {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.axf-float-top:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Certifications Section */
+.axf-certifications {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.axf-cert-img {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Copyright Bar */
+.axf-copy-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 0;
+  margin-top: 12px;
+}
+
+.axf-copy-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.axf-copy-text strong {
+  color: #fff;
+}
+
+.axf-copy-love {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.axf-heart {
+  color: #f05a28;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .axf-top-section {
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+  }
+  .axf-links-section {
+    gap: 30px;
+  }
+  .axf-cards-section {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .axf-top-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .axf-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .axf-cards-section {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .axf-links-actions {
+    padding: 24px 0 20px;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+  .axf-action-btn {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+  .axf-float-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .axf-inner {
+    padding: 0 20px;
+  }
+  .axf-cards-section {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    padding: 32px 0;
+  }
+  .axf-info-card,
+  .axf-address-card {
+    width: 100%;
+    padding: 24px;
+    border-radius: 20px;
+  }
+  .axf-card-title {
+    font-size: 15px;
+  }
+  .axf-card-title .axf-title-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 18px;
+  }
+  .axf-contact-link {
+    padding: 14px 16px;
+  }
+  .axf-contact-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 16px;
+  }
+  .axf-contact-val {
+    font-size: 14px;
+  }
+  .axf-address {
+    padding: 16px;
+    font-size: 13px;
+  }
+  .axf-links-actions {
+    padding: 20px 0 16px;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  .axf-action-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+  .axf-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-top: 0;
+  }
+  .axf-logo {
+    height: 60px;
+    width: 60px;
+  }
+  .axf-top-section {
+    gap: 32px;
+    padding: 32px 0;
+  }
+  .axf-about-text {
+    font-size: 14px;
+  }
+  .axf-float-left {
+    left: 10px;
+  }
+  .axf-float-right {
+    right: 10px;
+  }
+  .axf-float-btns {
+    width: 50px;
+    right: 10px;
+  }
+  .axf-float-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .axf-cards-section {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .axf-info-card,
+  .axf-address-card,
+  .axf-contact-info,
+  .axf-map-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+  .axf-contact-item {
+    padding: 12px 14px;
+  }
+  .axf-contact-value {
+    font-size: 13px;
+  }
+  .axf-links-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .axf-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .axf-links-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .axf-top-section {
+    grid-template-columns: 1fr;
+  }
+  .axf-brand-col {
+    padding-right: 0;
+  }
+}

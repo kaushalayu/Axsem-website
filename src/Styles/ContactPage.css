@@ -1,0 +1,241 @@
+/* ================================
+   CONTACT PAGE — AXSEM
+================================ */
+.contact-page {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: #f2f4fb;
+  transition: background 0.4s;
+}
+
+body.dark .contact-page {
+  background: #0d0f1f;
+}
+
+/* SECTION */
+.contact-section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+}
+
+/* INFO CARD */
+.contact-info-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+
+body.dark .contact-info-card {
+  background: #14162b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.contact-info-card h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+  color: #1a1a2e;
+}
+body.dark .contact-info-card h2 {
+  color: #ffffff;
+}
+
+.contact-info-card p {
+  font-size: 15px;
+  color: #5a5a7a;
+  line-height: 1.7;
+}
+body.dark .contact-info-card p {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* INFO LIST */
+.contact-info-list {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #1a1a2e;
+}
+.contact-info-item svg {
+  color: #f05a28;
+  font-size: 18px;
+}
+
+body.dark .contact-info-item {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* NOTE */
+.contact-note {
+  margin-top: 28px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(240, 90, 40, 0.08);
+  font-size: 14px;
+  color: #5a2b1b;
+}
+body.dark .contact-note {
+  background: rgba(240, 90, 40, 0.15);
+  color: #ffd2c2;
+}
+
+/* MAP */
+.contact-map {
+  margin-top: 28px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 220px;
+}
+
+/* FORM CARD */
+.contact-form-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+
+body.dark .contact-form-card {
+  background: #14162b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.contact-form-card h2 {
+  font-size: 26px;
+  margin-bottom: 24px;
+  color: #1a1a2e;
+}
+body.dark .contact-form-card h2 {
+  color: #ffffff;
+}
+
+/* FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+body.dark .contact-field label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-field input,
+.contact-field textarea {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition:
+    border 0.2s,
+    background 0.2s;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: #f05a28;
+  outline: none;
+}
+
+body.dark .contact-field input,
+body.dark .contact-field textarea {
+  background: #0f1124;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* SUBMIT */
+.contact-submit {
+  margin-top: 10px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #f05a28;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    background 0.25s,
+    box-shadow 0.25s;
+}
+
+.contact-submit:hover {
+  background: #e14e1d;
+  box-shadow: 0 10px 28px rgba(240, 90, 40, 0.35);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    padding: 80px 20px;
+  }
+  
+  .contact-info-card,
+  .contact-form-card {
+    padding: 28px;
+  }
+  
+  .contact-map iframe {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 60px 16px;
+  }
+  
+  .contact-info-card,
+  .contact-form-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  
+  .contact-info-card h2,
+  .contact-form-card h2 {
+    font-size: 22px;
+  }
+  
+  .contact-map iframe {
+    height: 160px;
+  }
+}

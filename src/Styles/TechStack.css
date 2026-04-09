@@ -1,0 +1,530 @@
+/* ============================================================
+   TECH STACK SECTION — AXSEM SOFTWARES
+   Font: Plus Jakarta Sans · Light + Dark · Orange accent
+   Hover: left-to-right fill (site-wide pattern)
+============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+section.ts-section,
+.ts-section {
+  position: relative;
+  background: #ffffff !important;
+  padding: 100px 0 30px;
+  overflow: hidden;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  transition: background 0.4s;
+}
+body.dark section.ts-section,
+body.dark .ts-section {
+  background: #0d0e1a !important;
+}
+
+.ts-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.ts-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+}
+.ts-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(240, 90, 40, 0.07) 0%,
+    transparent 70%
+  );
+  top: -60px;
+  left: 6%;
+  animation: tsOrb1 20s ease-in-out infinite;
+}
+.ts-orb-2 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(
+    circle,
+    rgba(61, 61, 158, 0.07) 0%,
+    transparent 70%
+  );
+  bottom: -60px;
+  right: 5%;
+  animation: tsOrb2 25s ease-in-out infinite;
+}
+body.dark .ts-orb-1 {
+  background: radial-gradient(
+    circle,
+    rgba(240, 90, 40, 0.14) 0%,
+    transparent 70%
+  );
+}
+body.dark .ts-orb-2 {
+  background: radial-gradient(
+    circle,
+    rgba(61, 61, 158, 0.14) 0%,
+    transparent 70%
+  );
+}
+@keyframes tsOrb1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(40px, -40px);
+  }
+}
+@keyframes tsOrb2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-40px, 40px);
+  }
+}
+.ts-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(61, 61, 158, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 61, 158, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+body.dark .ts-grid-overlay {
+  background-image:
+    linear-gradient(rgba(240, 90, 40, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 90, 40, 0.04) 1px, transparent 1px);
+}
+
+.ts-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Header */
+.ts-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.ts-header.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ts-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f05a28;
+}
+.ts-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f05a28;
+  animation: tsDot 2s ease-in-out infinite;
+}
+@keyframes tsDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+}
+.ts-heading {
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+body.dark .ts-heading {
+  color: #fff;
+}
+.ts-heading-hl {
+  color: #f05a28;
+}
+.ts-subheading {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4a4a6a;
+  max-width: 540px;
+  margin: 0;
+}
+body.dark .ts-subheading {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Filter pills */
+.ts-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ts-filter {
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1.5px solid #ebebf5;
+  background: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a4a6a;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    color 0.3s;
+}
+body.dark .ts-filter {
+  background: #161728;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+.ts-filter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #f05a28);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ts-filter:hover::before {
+  transform: scaleX(1);
+}
+.ts-filter:hover {
+  border-color: var(--accent, #f05a28);
+  color: #fff;
+}
+.ts-filter > * {
+  position: relative;
+  z-index: 1;
+}
+.ts-filter span {
+  position: relative;
+  z-index: 1;
+}
+.ts-filter-active {
+  background: #f05a28 !important;
+  border-color: #f05a28 !important;
+  color: #fff !important;
+}
+.ts-filter-active::before {
+  display: none;
+}
+
+/* Category grid */
+.ts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.ts-grid.revealed .ts-cat-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ts-grid.revealed .ts-tech-chip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ts-cat-block {
+  padding: 24px 22px;
+  border-radius: 18px;
+  border: 1.5px solid #ebebf5;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease calc(var(--ci, 0) * 0.08s),
+    transform 0.5s ease calc(var(--ci, 0) * 0.08s),
+    border-color 0.3s;
+}
+.ts-cat-block:hover {
+  border-color: var(--accent, #f05a28);
+}
+body.dark .ts-cat-block {
+  background: #161728;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.ts-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ts-cat-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ts-cat-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a1a2e;
+  flex: 1;
+}
+body.dark .ts-cat-name {
+  color: #fff;
+}
+.ts-cat-count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 50px;
+  background: rgba(240, 90, 40, 0.1);
+  color: #f05a28;
+  border: 1px solid rgba(240, 90, 40, 0.2);
+}
+
+/* Tech chips */
+.ts-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.ts-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 50px;
+  border: 1.5px solid #ebebf5;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease var(--delay, 0s),
+    transform 0.4s ease var(--delay, 0s),
+    border-color 0.3s,
+    color 0.3s;
+}
+body.dark .ts-tech-chip {
+  background: #0d0e1a;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.ts-tech-chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #f05a28);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ts-tech-chip:hover::before {
+  transform: scaleX(1);
+}
+.ts-tech-chip:hover {
+  border-color: var(--accent, #f05a28);
+  color: #fff;
+}
+.ts-tech-chip > * {
+  position: relative;
+  z-index: 1;
+}
+.ts-tech-icon {
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ts-tech-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Bottom strip */
+.ts-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 40px;
+  border-radius: 20px;
+  border: 1.5px solid #ebebf5;
+  background: #fafafa;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+}
+.ts-bottom.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+body.dark .ts-bottom {
+  background: #161728;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.ts-bottom-text {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ts-bottom-stat {
+  font-size: 40px;
+  font-weight: 800;
+  color: #f05a28;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.ts-bottom-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #4a4a6a;
+  max-width: 300px;
+  line-height: 1.5;
+}
+body.dark .ts-bottom-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+.ts-bottom-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ts-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 50px;
+  background: #f05a28;
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.ts-btn-primary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.ts-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 26px;
+  border-radius: 50px;
+  border: 1.5px solid #ebebf5;
+  background: #fff;
+  color: #1a1a2e;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    color 0.3s;
+}
+.ts-btn-outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f05a28;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ts-btn-outline:hover::before {
+  transform: scaleX(1);
+}
+.ts-btn-outline:hover {
+  border-color: #f05a28;
+  color: #fff;
+}
+.ts-btn-outline > * {
+  position: relative;
+  z-index: 1;
+}
+body.dark .ts-btn-outline {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .ts-container {
+    padding: 0 40px;
+  }
+  .ts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .ts-section {
+    padding: 70px 0 60px;
+  }
+  .ts-container {
+    padding: 0 20px;
+    gap: 32px;
+  }
+  .ts-grid {
+    grid-template-columns: 1fr;
+  }
+  .ts-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+  }
+  .ts-bottom-btns {
+    width: 100%;
+  }
+  .ts-btn-primary,
+  .ts-btn-outline {
+    flex: 1;
+    justify-content: center;
+  }
+}
