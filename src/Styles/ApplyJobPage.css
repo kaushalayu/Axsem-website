@@ -4,12 +4,12 @@
 
 .apply-page {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f2f4fb;
+  background: transparent;
   transition: background 0.4s;
 }
 
 body.dark .apply-page {
-  background: #0d0f1f;
+  background: transparent;
 }
 
 /* SECTION */
@@ -34,7 +34,7 @@ body.dark .apply-page {
 }
 
 body.dark .apply-job-card {
-  background: #14162b;
+  background: transparent;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
 }
 
@@ -99,7 +99,7 @@ body.dark .apply-job-card li {
 }
 
 body.dark .apply-form-card {
-  background: #14162b;
+  background: transparent;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
 }
 
@@ -153,7 +153,7 @@ body.dark .apply-field label {
 
 body.dark .apply-field input,
 body.dark .apply-field textarea {
-  background: #0f1124;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
@@ -165,7 +165,7 @@ body.dark .apply-field textarea {
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  background: #f05a28;
+background: #f05a28;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -178,7 +178,7 @@ body.dark .apply-field textarea {
 }
 
 .apply-submit:hover {
-  background: #e14e1d;
+  background: transparent;
   box-shadow: 0 12px 30px rgba(240, 90, 40, 0.35);
 }
 

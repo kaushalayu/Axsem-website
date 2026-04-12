@@ -94,8 +94,8 @@ export default function BasicSoftwarePage() {
                     <h2 className="sp-cta-title">Have a Software Idea?</h2>
                     <p className="sp-cta-sub">Tell us what you want to automate — we'll scope it and send a proposal in 24 hours.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>Book Basic Software <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Our Work <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary" >Book Basic Software <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary" >View Our Work <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

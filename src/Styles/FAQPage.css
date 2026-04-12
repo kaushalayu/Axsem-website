@@ -1,0 +1,56 @@
+/* ========================================
+   FAQ PAGE - STANDALONE PAGE STYLES
+   ======================================== */
+
+.faq-page {
+  min-height: 100vh;
+  background: var(--bg-light);
+  transition: background 0.3s;
+}
+
+body.dark .faq-page {
+  background: var(--bg-light);
+}
+
+/* Override FAQ section for standalone page */
+.faq-page .faq-section {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-page .faq-container {
+  max-width: 900px;
+}
+
+.faq-page .faq-label {
+  display: block;
+  text-align: center;
+}
+
+.faq-page .faq-left {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faq-page .faq-left h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.faq-page .faq-left p {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.faq-page .faq-right {
+  max-width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .faq-page .faq-section {
+    padding: 2rem 1rem;
+  }
+}

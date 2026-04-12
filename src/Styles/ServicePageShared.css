@@ -356,7 +356,7 @@ body.dark {
   padding: 28px 26px;
   border-radius: 20px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: var(--sp-white);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -368,13 +368,13 @@ body.dark {
     box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 body.dark .sp-card {
-  background: #161728;
+  background: var(--sp-white);
   border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Keep dark mode card background same on hover */
 body.dark .sp-card:hover {
-  background: #161728;
+  background: var(--sp-white);
 }
 
 /* Minimal hover - gradient border glow + lift */
@@ -399,7 +399,7 @@ body.dark .sp-card:hover {
   border-color: rgba(240, 90, 40, 0.3);
 }
 body.dark .sp-card {
-  background: #161728;
+  background: var(--sp-white);
   border-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -924,7 +924,7 @@ body.dark .sp-card {
   gap: 8px;
   padding: 13px 28px;
   border-radius: 50px;
-  background: #f05a28;
+  background: var(--sp-orange);
   color: #fff;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
@@ -946,7 +946,7 @@ body.dark .sp-card {
   border-color: var(--sp-orange);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(240, 90, 40, 0.25);
-  background: #e14e1d;
+  background: var(--sp-orange);
   color: #fff;
 }
 
@@ -971,7 +971,7 @@ body.dark .sp-card {
   gap: 8px;
   padding: 13px 28px;
   border-radius: 50px;
-  background: #f05a28;
+  background: var(--sp-orange);
   color: #fff;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
@@ -1153,11 +1153,11 @@ body.dark .sp-tech-card {
 
 /* Stat cards dark */
 body.dark .sp-stat-card {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
 }
 body.dark .sp-stat-card:hover {
-  background: #161728;
+  background: transparent;
 }
 body.dark .sp-stat-card:hover .sp-stat-val,
 body.dark .sp-stat-card:hover .sp-stat-lbl {
@@ -1213,7 +1213,7 @@ body.dark .sp-tags-block {
 
 /* CTA dark — keep orange border visible */
 body.dark .sp-cta {
-  background: #161728;
+  background: transparent;
   border-color: var(--sp-orange);
 }
 body.dark .sp-cta:hover .sp-cta-title,

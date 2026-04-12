@@ -370,7 +370,7 @@ body.dark .thumb-label {
   gap: 8px;
   padding: 10px 22px;
   border-radius: 50px;
-  background: #ffffff;
+  background: rgba(240, 90, 40, 0.1);
   color: #1a1a2e;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 13px;
@@ -382,7 +382,7 @@ body.dark .thumb-label {
     transform 0.2s;
 }
 .proj-view-btn:hover {
-  background: #1a1a2e;
+  background: #f05a28;
   color: #fff;
   transform: scale(1.04);
 }
@@ -441,7 +441,7 @@ body.dark .proj-link-btn {
   color: rgba(255, 255, 255, 0.45);
 }
 .proj-link-btn:hover {
-  background: #1a1a2e;
+  background: #f05a28;
   color: #fff;
   border-color: #1a1a2e;
 }
@@ -585,7 +585,7 @@ body.dark .metric-label {
   gap: 10px;
   padding: 14px 32px;
   border-radius: 50px;
-  background: #1a1a2e;
+  background: #f05a28;
   color: #fff;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14.5px;

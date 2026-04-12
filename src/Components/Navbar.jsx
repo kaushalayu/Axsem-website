@@ -16,6 +16,7 @@ import {
   FiFileText,
   FiBriefcase,
   FiMail,
+  FiUsers,
 } from "react-icons/fi"
 
 import logo from "../assets/axsem.jpg"
@@ -34,6 +35,7 @@ const mobileIcons = {
   Blog: <FiFileText />,
   Careers: <FiBriefcase />,
   Contact: <FiMail />,
+  "Partner With Us": <FiUsers />,
 }
 
 export default function Navbar() {
@@ -245,10 +247,10 @@ export default function Navbar() {
             </button>
 
             <a
-              href={`tel:${companyInfo.phone?.replace(/\s/g, '') || '+917860291285'}`}
-              className="nav-cta"
+              href="/partner/register"
+              className="nav-partner-btn"
             >
-              Get Free Consultation
+              Partner With Us
             </a>
           </div>
 
@@ -346,8 +348,8 @@ export default function Navbar() {
 
         {/* Mobile CTA */}
         <div className="mobile-cta">
-          <a href={`tel:${companyInfo.phone?.replace(/\s/g, '') || '+917860291285'}`} className="nav-phone-link">
-            Get Free Consultation
+          <a href="/partner/register" className="nav-partner-btn" style={{ width: '100%', justifyContent: 'center' }}>
+            Partner With Us
           </a>
         </div>
 

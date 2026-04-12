@@ -198,7 +198,7 @@
   transition:
     max-height 0.4s ease,
     padding 0.35s ease;
-  background: #ffffff;
+  background: transparent;
 }
 
 .faq-card.open .faq-answer {
@@ -234,12 +234,12 @@
 
 /* CARD */
 .dark .faq-card {
-  background: #0f102a;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.15);
 }
 
 .dark .faq-answer {
-  background: #0f102a;
+  background: transparent;
 }
 
 /* ICON VISIBLE IN DARK */

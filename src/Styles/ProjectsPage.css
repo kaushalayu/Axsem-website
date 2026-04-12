@@ -26,7 +26,7 @@
 /* ── Base ── */
 .projects-page {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f0f1fa;
+  background: #fafafa;
   transition: background 0.4s;
 }
 body.dark .projects-page {
@@ -365,7 +365,7 @@ body.dark .pp-thumb-inner {
   gap: 8px;
   padding: 11px 24px;
   border-radius: 50px;
-  background: #fff;
+  background: rgba(240, 90, 40, 0.1);
   color: #f05a28;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 13.5px;

@@ -90,7 +90,7 @@ body.dark .oc-ind-tag {
 }
 
 body.dark .oc-ind-tag:hover {
-  background: #161728;
+  background: transparent;
   border-color: var(--sp-orange);
   color: var(--sp-orange) !important;
 }
@@ -105,7 +105,7 @@ body.dark .oc-ind-tag:hover {
   overflow: hidden;
   border-radius: 20px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   transition:
     border-color 0.3s,
     transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
@@ -113,12 +113,12 @@ body.dark .oc-ind-tag:hover {
 }
 
 body.dark .oc-testi-card {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 
 body.dark .oc-testi-card:hover {
-  background: #161728;
+  background: transparent;
 }
 
 .oc-testi-card:hover {
@@ -186,7 +186,7 @@ body.dark .oc-testi-card:hover {
   transition: background 0.3s;
 }
 .oc-testi-card:hover .oc-avatar {
-  background: #f05a28;
+  background: transparent;
 }
 
 .oc-author-name {

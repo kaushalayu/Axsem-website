@@ -48,7 +48,7 @@ const NOT = ["Full brand style guide (see Brand Identity package)", "Stationery 
 export default function LogoDesignPage() {
     const featRef = useRevealCards()
     const { getPrice } = usePricing()
-    
+
     const PACKAGES = [
         {
             name: "Basic Logo", price: getPrice('logo', 'basic'), per: "one-time", highlight: false,
@@ -63,7 +63,7 @@ export default function LogoDesignPage() {
             items: ["5 logo concepts", "Unlimited revisions", "All formats", "Dark + light + monochrome", "Brand mini style guide", "Stationery mockups (3)", "Social media kit", "Usage rights documentation"]
         },
     ]
-    
+
     const price = getPrice('logo', 'standard')
     return (
         <div className="sp-page dp-page">
@@ -155,8 +155,8 @@ export default function LogoDesignPage() {
                     <h2 className="sp-cta-title">Ready for a Logo Your Business is Proud Of?</h2>
                     <p className="sp-cta-sub">First draft in 48 hours — share your brief and we'll get started.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }} >Start Logo Design <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Portfolio <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary"  >Start Logo Design <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary" >View Portfolio <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

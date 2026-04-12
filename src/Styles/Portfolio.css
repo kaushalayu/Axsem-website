@@ -191,7 +191,7 @@ body.dark .pf-subheading {
   padding: 9px 20px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 13px;
   font-weight: 600;
@@ -204,7 +204,7 @@ body.dark .pf-subheading {
     color 0.3s;
 }
 body.dark .pf-filter-btn {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
 }
@@ -254,7 +254,7 @@ body.dark .pf-filter-btn {
   position: relative;
   border-radius: 20px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   overflow: hidden;
   text-decoration: none;
   display: flex;
@@ -272,7 +272,7 @@ body.dark .pf-filter-btn {
   transform: translateY(0);
 }
 body.dark .pf-card {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 .pf-card:hover {
@@ -364,7 +364,7 @@ body.dark .pf-card {
   gap: 8px;
   padding: 10px 22px;
   border-radius: 50px;
-  background: #fff;
+  background: rgba(240, 90, 40, 0.1);
   color: #1a1a2e;
   font-size: 13px;
   font-weight: 700;
@@ -461,7 +461,7 @@ body.dark .pf-desc {
   padding: 4px 11px;
   border-radius: 50px;
   border: 1px solid #ebebf5;
-  background: #f0f1fa;
+  background: #ffffff;
   font-size: 11.5px;
   font-weight: 600;
   color: #4a4a6a;
@@ -516,7 +516,7 @@ body.dark .pf-tech {
   padding: 12px 28px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   color: #1a1a2e;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14.5px;
@@ -549,7 +549,7 @@ body.dark .pf-tech {
   z-index: 1;
 }
 body.dark .pf-cta-outline {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: #fff;
 }

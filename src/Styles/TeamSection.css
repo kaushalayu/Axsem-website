@@ -12,7 +12,7 @@
 
 .team-section {
   padding: 130px 20px 70px;
-  background: #ffffff;
+  background: var(--bg-light);
   font-family: "Plus Jakarta Sans", sans-serif;
   overflow: hidden;
 }
@@ -192,7 +192,7 @@
 .team-socials a {
   width: 38px;
   height: 38px;
-  background: #fff;
+  background: rgba(240, 90, 40, 0.1);
   color: var(--accent-orange);
   border-radius: 50%;
   display: flex;
@@ -237,7 +237,7 @@
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
-  background: #000;
+  background: #ffffff;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -250,7 +250,7 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  background: #fff;
+  background: transparent;
   border-radius: 50%;
   border: none;
   padding: 8px;

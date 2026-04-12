@@ -309,7 +309,7 @@ body.dark .svc-card:hover {
 
 .svc-card:hover .svc-icon-wrap {
   transform: scale(1.15) rotate(-8deg);
-  background: #1a1a2e;
+  background: var(--svc-color);
   color: #fff;
 }
 

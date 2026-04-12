@@ -213,7 +213,7 @@ body.dark .pr-subheading {
   padding: 9px 22px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 13.5px;
   font-weight: 600;
@@ -226,7 +226,7 @@ body.dark .pr-subheading {
     color 0.3s;
 }
 body.dark .pr-tab {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
 }
@@ -275,7 +275,7 @@ body.dark .pr-tab {
   padding: 32px 28px;
   border-radius: 22px;
   border: 1.5px solid #ebebf5;
-  background: #fafafa;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -292,7 +292,7 @@ body.dark .pr-tab {
   transform: translateY(0);
 }
 body.dark .pr-card {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 .pr-card:hover {
@@ -302,7 +302,7 @@ body.dark .pr-card {
 /* Highlighted card */
 .pr-card-hl {
   border-color: var(--accent, #f05a28) !important;
-  background: #fff;
+  background: #ffffff;
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 20px 60px rgba(240, 90, 40, 0.12);
 }
@@ -313,7 +313,7 @@ body.dark .pr-card {
   transform: translateY(-12px) scale(1.02) !important;
 }
 body.dark .pr-card-hl {
-  background: #1e1f30;
+  background: transparent;
   box-shadow: 0 20px 60px rgba(240, 90, 40, 0.2);
 }
 
@@ -403,14 +403,14 @@ body.dark .pr-desc {
   position: relative;
   overflow: hidden;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   color: #1a1a2e;
   transition:
     border-color 0.3s,
     color 0.3s;
 }
 body.dark .pr-cta-btn {
-  background: #0d0e1a;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.12);
   color: #fff;
 }
@@ -500,7 +500,7 @@ body.dark .pr-card-right .pr-cta-btn:hover {
 /* Divider */
 .pr-divider {
   height: 1.5px;
-  background: #ebebf5;
+  background: transparent;
   border: none;
   margin: 0 0 20px;
 }
@@ -582,7 +582,7 @@ body.dark .pr-feat-icon-no {
   padding: 18px 16px;
   border-radius: 14px;
   border: 1.5px solid #ebebf5;
-  background: #fafafa;
+  background: #ffffff;
   opacity: 0;
   transform: translateY(12px);
   transition:
@@ -595,7 +595,7 @@ body.dark .pr-feat-icon-no {
   transform: translateY(0);
 }
 body.dark .pr-trust-item {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 .pr-trust-item:hover {
@@ -656,11 +656,11 @@ body.dark .pr-fly-plane a {
   padding: 36px 44px;
   border-radius: 22px;
   border: 1.5px solid #ebebf5;
-  background: #fafafa;
+  background: #ffffff;
   flex-wrap: wrap;
 }
 body.dark .pr-cta-row {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 .pr-cta-text h3 {
@@ -715,7 +715,7 @@ body.dark .pr-cta-text p {
   padding: 12px 28px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   color: #1a1a2e;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;

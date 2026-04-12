@@ -61,11 +61,11 @@
 /* ── Page base ── */
 .mv-page {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f0f1fa;
+  background: transparent;
   transition: background 0.4s;
 }
 body.dark .mv-page {
-  background: #0d0e1a;
+  background: transparent;
 }
 
 .mv-body {
@@ -985,7 +985,6 @@ body.dark .mv-cta-section {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-
   background: #f05a28;
   color: #fff;
   border: 1px solid transparent;
@@ -999,15 +998,15 @@ body.dark .mv-cta-section {
 
 /* Professional Hover */
 .mv-btn-apply:hover {
-  background: #e14e1d;
+  background: transparent;
   transform: translateY(-1px);
 }
 
 /* Dark Mode */
 body.dark .mv-btn-apply {
-  background: #ff6a3d;
+  background: transparent;
 }
 
 body.dark .mv-btn-apply:hover {
-  background: #f05a28;
+  background: transparent;
 }

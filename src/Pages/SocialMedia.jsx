@@ -39,7 +39,7 @@ const ALL_PRO = ["All platforms", "30 posts per month", "8 reels per month", "Pa
 export default function SocialMediaPage() {
     const featRef = useRevealCards()
     const { getPrice } = usePricing()
-    
+
     const PACKAGES = [
         { name: "Starter", price: getPrice('socialMedia', 'starter'), platforms: "2 platforms", posts: "12 posts/mo", reels: "2 reels/mo", ads: "❌", manager: "✓" },
         { name: "Growth", price: getPrice('socialMedia', 'growth'), platforms: "3 platforms", posts: "20 posts/mo", reels: "4 reels/mo", ads: "✓ (setup)", manager: "✓" },
@@ -132,8 +132,8 @@ export default function SocialMediaPage() {
                     <h2 className="sp-cta-title">Stop Posting Randomly — Start Growing</h2>
                     <p className="sp-cta-sub">Get a free social media audit — we'll review your current profiles and tell you what to fix.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>Get Free Audit <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Our Work <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary" >Get Free Audit <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary" >View Our Work <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

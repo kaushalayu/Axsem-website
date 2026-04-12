@@ -2,12 +2,33 @@
 
 .company {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f6f8fc;
+  background: transparent;
   color: #111827;
 }
 
 body.dark .company {
-  background: #0f1224;
+  background: transparent;
+  color: #e5e7eb;
+}
+
+/* ===============================
+   BLOCK SECTION
+=============================== */
+
+.founder-block {
+  padding: 120px 24px;
+}
+
+.founder-block.alt {
+  background: transparent;
+}
+
+body.dark .founder-block.alt {
+  background: transparent;
+}
+
+body.dark .company {
+  background: transparent;
   color: #e5e7eb;
 }
 
@@ -20,11 +41,11 @@ body.dark .company {
 }
 
 .founder-block.alt {
-  background: #ffffff;
+  background: transparent;
 }
 
 body.dark .founder-block.alt {
-  background: #14183a;
+  background: transparent;
 }
 
 .founder-grid {

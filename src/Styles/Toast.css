@@ -14,7 +14,7 @@
     gap: 12px;
     padding: 14px 18px;
     border-radius: 10px;
-    background: #fff;
+    background: #ffffff;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     animation: toastSlide 0.3s ease;
     min-width: 280px;
@@ -60,7 +60,7 @@
 }
 
 .toast-close:hover {
-    background: #f0f0f0;
+    background: rgba(0, 0, 0, 0.05);
     color: #333;
 }
 
@@ -79,7 +79,7 @@
 
 /* Dark mode */
 body.dark .toast {
-    background: #1e1e2e;
+    background: #1a1a2e;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 

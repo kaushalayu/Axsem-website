@@ -1,0 +1,520 @@
+/* ========================================
+   PARTNER FORGOT PASSWORD - STYLES
+   ======================================== */
+
+/* CSS Variables - Light Theme (default) */
+.pf-page {
+  --pf-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --pf-card-bg: #ffffff;
+  --pf-card-border: #e2e8f0;
+  --pf-card-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
+  --pf-text: #1e293b;
+  --pf-text-secondary: #64748b;
+  --pf-text-muted: #94a3b8;
+  --pf-input-bg: #f8fafc;
+  --pf-border: #cbd5e1;
+  --pf-primary: #f05a28;
+  --pf-primary-dark: #d14a1a;
+  --pf-primary-glow: rgba(240, 90, 40, 0.2);
+  --pf-accent-bg: rgba(240, 90, 40, 0.06);
+  --pf-success: #10b981;
+  --pf-info-bg: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+/* Dark Theme Override */
+body.dark .pf-page {
+  --pf-bg: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+  --pf-card-bg: #12121f;
+  --pf-card-border: #1f1f35;
+  --pf-card-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  --pf-text: #ffffff;
+  --pf-text-secondary: #a8b3cf;
+  --pf-text-muted: #6b7a99;
+  --pf-input-bg: #0a0a14;
+  --pf-border: #252540;
+  --pf-primary: #f05a28;
+  --pf-primary-dark: #d14a1a;
+  --pf-primary-glow: rgba(240, 90, 40, 0.3);
+  --pf-accent-bg: rgba(240, 90, 40, 0.08);
+  --pf-success: #10b981;
+  --pf-info-bg: linear-gradient(135deg, #1a1a2e 0%, #252545 100%);
+}
+
+.pf-page {
+  min-height: 100vh;
+  background: var(--pf-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.pf-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 1100px;
+  width: 100%;
+  align-items: stretch;
+  position: relative;
+  z-index: 10;
+}
+
+/* Card */
+.pf-card {
+  background: var(--pf-card-bg);
+  border-radius: 28px 0 0 28px;
+  border: 1px solid var(--pf-card-border);
+  border-right: none;
+  padding: 3rem;
+  position: relative;
+  box-shadow: var(--pf-card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pf-back-link {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  color: var(--pf-text-muted);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.pf-back-link:hover {
+  color: var(--pf-primary);
+}
+
+/* Header */
+.pf-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pf-logo-badge {
+  display: inline-flex;
+  margin-bottom: 1.5rem;
+}
+
+.pf-logo-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--pf-primary) 0%, var(--pf-primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  box-shadow: 0 12px 40px var(--pf-primary-glow);
+}
+
+.pf-portal-tag {
+  display: inline-block;
+  padding: 0.375rem 1rem;
+  background: var(--pf-accent-bg);
+  color: var(--pf-primary);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.pf-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--pf-text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.pf-header p {
+  color: var(--pf-text-secondary);
+  font-size: 0.9375rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Form */
+.pf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pf-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 14px;
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.pf-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pf-form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pf-text);
+  letter-spacing: 0.3px;
+}
+
+.pf-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pf-input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--pf-text-muted);
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+}
+
+.pf-input-wrapper input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  background: var(--pf-input-bg);
+  border: 2px solid var(--pf-border);
+  border-radius: 14px;
+  color: var(--pf-text);
+  font-size: 0.9375rem;
+  transition: all 0.3s;
+}
+
+.pf-input-wrapper input::placeholder {
+  color: var(--pf-text-muted);
+}
+
+.pf-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--pf-primary);
+  box-shadow: 0 0 0 4px var(--pf-primary-glow);
+}
+
+.pf-input-wrapper input.pf-error {
+  border-color: #ef4444;
+}
+
+/* Submit Button */
+.pf-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1.125rem;
+  background: linear-gradient(135deg, var(--pf-primary) 0%, var(--pf-primary-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 30px var(--pf-primary-glow);
+  letter-spacing: 0.3px;
+}
+
+.pf-submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px var(--pf-primary-glow);
+}
+
+.pf-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pf-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Resend OTP */
+.pf-resend {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--pf-text-muted);
+}
+
+.pf-resend button {
+  background: none;
+  border: none;
+  color: var(--pf-primary);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 0.25rem;
+}
+
+.pf-resend button:hover {
+  text-decoration: underline;
+}
+
+.pf-resend button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.pf-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pf-border);
+}
+
+.pf-footer p {
+  color: var(--pf-text-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 0.5rem;
+}
+
+.pf-login-link {
+  color: var(--pf-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.pf-login-link:hover {
+  opacity: 0.8;
+}
+
+.pf-login-link svg {
+  transition: transform 0.3s;
+}
+
+.pf-login-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* Info Side */
+.pf-info {
+  background: var(--pf-info-bg);
+  border-radius: 0 28px 28px 0;
+  border: 1px solid var(--pf-card-border);
+  border-left: none;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pf-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(180deg, var(--pf-primary-glow) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.pf-info-content {
+  position: relative;
+  z-index: 1;
+}
+
+.pf-info h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--pf-text);
+  margin-bottom: 0.75rem;
+}
+
+.pf-info > div > p {
+  color: var(--pf-text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.pf-help-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pf-help-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--pf-text-secondary);
+}
+
+.pf-help-item svg {
+  color: var(--pf-success);
+}
+
+.pf-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.5rem;
+  background: var(--pf-primary);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: all 0.3s;
+}
+
+.pf-contact-btn:hover {
+  background: var(--pf-primary-dark);
+}
+
+/* Success State */
+.pf-success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--pf-success), #059669);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2.5rem;
+  color: white;
+}
+
+.pf-card h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--pf-text);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.pf-card > p {
+  color: var(--pf-text-secondary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.pf-card > p strong {
+  color: var(--pf-text);
+}
+
+.pf-note {
+  font-size: 0.875rem;
+  color: var(--pf-text-muted);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pf-note button {
+  background: none;
+  border: none;
+  color: var(--pf-primary);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.pf-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--pf-primary);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.pf-back-btn:hover {
+  background: var(--pf-primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pf-container {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .pf-card {
+    border-radius: 28px;
+    border: 1px solid var(--pf-card-border);
+    padding: 2.5rem;
+  }
+
+  .pf-info {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .pf-page {
+    padding: 1rem;
+  }
+
+  .pf-card {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  .pf-back-link {
+    position: static;
+    display: inline-flex;
+    margin-bottom: 1rem;
+  }
+
+  .pf-logo-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.75rem;
+    border-radius: 16px;
+  }
+
+  .pf-header h1 {
+    font-size: 1.5rem;
+  }
+}

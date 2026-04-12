@@ -25,7 +25,7 @@ const NAV_COLS = [
             { label: "UI & UX Designing", href: "/services/ui-ux" },
             { label: "Software Development", href: "/services/software-development" },
             { label: "IT Maintenance", href: "/services/it-maintenance" },
-            { label: "Search Engine Optimization", href: "/services/seo" },
+            { label: "SEO Services", href: "/services/seo" },
         ],
     },
     {
@@ -36,8 +36,7 @@ const NAV_COLS = [
             { label: "E-Commerce Platform", href: "/products/ecommerce" },
             { label: "Real Estate Platform", href: "/products/real-estate" },
             { label: "HR & Payroll System", href: "/products/hr-payroll" },
-            { label: "School Management System", href: "/products/school-management" },
-            { label: "Tour Booking Platform", href: "/products/tour-booking" },
+            { label: "School Management", href: "/products/school-management" },
             { label: "AI Solutions", href: "/products/ai-solutions" },
             { label: "NGO Management", href: "/products/ngo" },
         ],
@@ -45,25 +44,27 @@ const NAV_COLS = [
     {
         title: "Company",
         links: [
-            { label: "Privacy Policy", href: "/privacy" },
-            { label: "Terms & Conditions", href: "/terms" },
-            { label: "Sitemap", href: "/sitemap" },
+            { label: "About Us", href: "/about/company" },
             { label: "Our Team", href: "/about/team" },
+            { label: "Our Journey", href: "/about/journay" },
+            { label: "Careers", href: "/about/careers" },
             { label: "Our Clients", href: "/portfolio/clients" },
             { label: "Projects", href: "/portfolio" },
             { label: "Blogs", href: "/blogs" },
+            { label: "Partner Portal", href: "/partner/register" },
         ],
     },
     {
         title: "Quick Links",
         links: [
-            { label: "Pricing & Packages", href: "/packages/website-basic" },
             { label: "Contact Us", href: "/contact" },
-            { label: "About Us", href: "/about/company" },
-            { label: "Our Journey", href: "/about/journay" },
-            { label: "Careers", href: "/about/careers" },
-            { label: "Marketing Strategy", href: "/marketing" },
-            { label: "Product Strategy", href: "/product" },
+            { label: "Partner Login", href: "/partner/login" },
+            { label: "Client Registration", href: "/client/register" },
+            { label: "Employee Verification", href: "/verify/employee" },
+            { label: "Raise Ticket", href: "/support/ticket" },
+            { label: "Privacy Policy", href: "/privacy" },
+            { label: "Terms & Conditions", href: "/terms" },
+            { label: "Sitemap", href: "/sitemap" },
         ],
     },
 ]
@@ -117,10 +118,10 @@ export default function AxsemFooter() {
                     <nav className="axf-links-section" aria-label="Footer navigation">
                         <div className="axf-links-actions">
                             <a href="/contact" className="axf-action-btn axf-action-contact">
-                                Contact
+                                Contact Us
                             </a>
-                            <a href="tel:+917860291285" className="axf-action-btn axf-action-meeting">
-                                Book a Free Consult
+                            <a href="/partner/register" className="axf-action-btn axf-action-meeting">
+                                Partner With Us
                             </a>
                         </div>
                         <div className="axf-links-grid">

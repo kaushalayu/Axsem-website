@@ -439,7 +439,7 @@ body.dark .visual-glow {
 
 /* ── Code Card ── */
 .visual-card {
-  background: #13151f;
+  background: #161825;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   overflow: hidden;
@@ -482,13 +482,13 @@ body:not(.dark) .visual-card {
   flex-shrink: 0;
 }
 .dot-red {
-  background: #ff5f57;
+  background: #ff5f56;
 }
 .dot-yellow {
   background: #ffbd2e;
 }
 .dot-green {
-  background: #28c840;
+  background: #27c93f;
 }
 
 .card-fname {
@@ -564,7 +564,7 @@ body:not(.dark) .visual-card {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #28c840;
+  background: #28c940;
   box-shadow: 0 0 8px rgba(40, 200, 64, 0.6);
   flex-shrink: 0;
   animation: pulseDot 2s infinite;

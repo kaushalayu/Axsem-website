@@ -95,8 +95,8 @@ export default function AdvancedSeoPage() {
                     <h2 className="sp-cta-title">Ready to Dominate Your Industry on Google?</h2>
                     <p className="sp-cta-sub">Free SEO audit first — then we show you the exact keyword opportunities you're missing.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>Get Free SEO Audit <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Case Studies <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary">Get Free SEO Audit <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary">View Case Studies <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

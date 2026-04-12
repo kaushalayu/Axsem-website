@@ -192,7 +192,7 @@ body.dark .ts-subheading {
   padding: 8px 18px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 13px;
   font-weight: 600;
@@ -205,7 +205,7 @@ body.dark .ts-subheading {
     color 0.3s;
 }
 body.dark .ts-filter {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
 }
@@ -261,7 +261,7 @@ body.dark .ts-filter {
   padding: 24px 22px;
   border-radius: 18px;
   border: 1.5px solid #ebebf5;
-  background: #fafafa;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -276,7 +276,7 @@ body.dark .ts-filter {
   border-color: var(--accent, #f05a28);
 }
 body.dark .ts-cat-block {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -325,7 +325,7 @@ body.dark .ts-cat-name {
   padding: 8px 14px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   font-size: 13px;
   font-weight: 600;
   color: #1a1a2e;
@@ -341,7 +341,7 @@ body.dark .ts-cat-name {
     color 0.3s;
 }
 body.dark .ts-tech-chip {
-  background: #0d0e1a;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
@@ -386,7 +386,7 @@ body.dark .ts-tech-chip {
   padding: 32px 40px;
   border-radius: 20px;
   border: 1.5px solid #ebebf5;
-  background: #fafafa;
+  background: #ffffff;
   flex-wrap: wrap;
   opacity: 0;
   transform: translateY(20px);
@@ -399,7 +399,7 @@ body.dark .ts-tech-chip {
   transform: translateY(0);
 }
 body.dark .ts-bottom {
-  background: #161728;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
 }
 .ts-bottom-text {
@@ -457,7 +457,7 @@ body.dark .ts-bottom-label {
   padding: 11px 26px;
   border-radius: 50px;
   border: 1.5px solid #ebebf5;
-  background: #fff;
+  background: #ffffff;
   color: #1a1a2e;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;

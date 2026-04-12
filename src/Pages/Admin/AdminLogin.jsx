@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { FiMail, FiLock, FiEye, FiEyeOff, FiShield } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
 
@@ -9,6 +10,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,46 +28,75 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="admin-login-page">
-      <div className="admin-login-container">
-        <div className="admin-login-header">
-          <h1>AXSEM Admin</h1>
-          <p>Sign in to your account</p>
+    <div className="admin-login-wrapper">
+      <div className="admin-login-page">
+        <div className="login-brand">
+          <div className="login-logo">
+            <FiShield size={32} />
+          </div>
         </div>
-
-        <form className="admin-login-form" onSubmit={handleSubmit}>
-          {error && <div className="admin-login-error">{error}</div>}
-          
-          <div className="admin-form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@axsem.com"
-              required
-            />
-          </div>
-          
-          <div className="admin-form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
+        
+        <div className="admin-login-container">
+          <div className="admin-login-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to Admin Panel</p>
           </div>
 
-          <button 
-            type="submit" 
-            className="admin-login-btn"
-            disabled={loading}
-          >
-            {loading ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
+          <form className="admin-login-form" onSubmit={handleSubmit}>
+            {error && <div className="admin-login-error">{error}</div>}
+            
+            <div className="input-group">
+              <div className="input-icon">
+                <FiMail />
+              </div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email address"
+                className="input-field"
+                required
+              />
+            </div>
+            
+            <div className="input-group">
+              <div className="input-icon">
+                <FiLock />
+              </div>
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className="input-field"
+                required
+              />
+              <button 
+                type="button" 
+                className="input-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>
+            </div>
+
+            <button 
+              type="submit" 
+              className="admin-login-btn"
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="btn-loader"></span>
+              ) : (
+                "Sign In"
+              )}
+            </button>
+          </form>
+          
+          <div className="login-footer">
+            <span>© 2024 AXSEM. All rights reserved.</span>
+          </div>
+        </div>
       </div>
     </div>
   )

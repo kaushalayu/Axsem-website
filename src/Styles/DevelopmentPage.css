@@ -178,7 +178,7 @@ body.dark .dp-scard::after {
 
 .dp-scard:hover .dp-scard-icon {
   transform: scale(1.1) rotate(5deg);
-  background: #f05a28;
+  background: transparent;
   color: #fff;
   box-shadow: 0 8px 20px rgba(240, 90, 40, 0.4);
 }

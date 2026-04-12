@@ -62,7 +62,7 @@
 /* ── Base ── */
 .pd-page {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f0f1fa;
+  background: #fafafa;
   transition: background 0.4s;
 }
 body.dark .pd-page {
@@ -1203,9 +1203,9 @@ body.dark .pd-error-actions .pd-cta-btn-outline {
 }
 
 .pd-error-actions .pd-cta-btn-outline:hover {
-  background: #f9fafb;
+  background: transparent;
 }
 
 body.dark .pd-error-actions .pd-cta-btn-outline:hover {
-  background: #2a2a2a;
+  background: transparent;
 }

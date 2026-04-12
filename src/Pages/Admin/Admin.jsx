@@ -3,17 +3,32 @@ import { Link, Routes, Route, useLocation, useNavigate } from "react-router-dom"
 import {
   FiUsers, FiBriefcase, FiMessageSquare, FiFileText,
   FiHome, FiPlus, FiTrash2, FiEdit, FiX, FiFolder, FiSave,
-  FiSettings, FiUpload, FiLogOut, FiDollarSign
+  FiSettings, FiUpload, FiLogOut, FiDollarSign, FiUser, FiMail, FiPhone, FiCalendar,
+  FiInbox, FiSend, FiTool, FiAward, FiMapPin, FiActivity, FiLayers
 } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
 import logo from "../../assets/logo-full.jpeg"
 import PricingManager from "./PricingManager"
+import PartnerManager from "./PartnerManager"
+import EmployeeManager from "./EmployeeManager"
+import SupportTicketManager from "./SupportTicketManager"
 
 function Dashboard() {
   const [stats, setStats] = useState({ team: 0, careers: 0, contacts: 0, blogs: 0, projects: 0, inquiries: 0 })
+  const [loading, setLoading] = useState(true)
   const [unreadContacts, setUnreadContacts] = useState(0)
-  const [error, setError] = useState(null)
+
+  const IconMap = { FiFolder, FiUsers, FiBriefcase, FiSend, FiMessageSquare, FiFileText, FiActivity }
+
+  const statCards = [
+    { label: 'Total Projects', value: stats.projects, icon: 'FiFolder', color: '#f05a28', bg: '#fff4f0' },
+    { label: 'Team Members', value: stats.team, icon: 'FiUsers', color: '#8b5cf6', bg: '#f3e8ff' },
+    { label: 'Open Jobs', value: stats.careers, icon: 'FiBriefcase', color: '#10b981', bg: '#ecfdf5' },
+    { label: 'Inquiries', value: stats.inquiries, icon: 'FiSend', color: '#f59e0b', bg: '#fffbeb' },
+    { label: 'Unread Messages', value: unreadContacts, icon: 'FiMessageSquare', color: '#ef4444', bg: '#fef2f2' },
+    { label: 'Blog Posts', value: stats.blogs, icon: 'FiFileText', color: '#3b82f6', bg: '#eff6ff' },
+  ]
 
   useEffect(() => {
     Promise.all([
@@ -33,9 +48,8 @@ function Dashboard() {
         inquiries: inquiries?.data?.length || inquiries?.length || 0
       })
       setUnreadContacts(contacts.filter(c => !c.isRead).length)
-    }).catch(err => {
-      setError('Failed to load dashboard data')
-    })
+      setLoading(false)
+    }).catch(() => setLoading(false))
 
     const handleFocus = () => {
       Promise.all([
@@ -62,39 +76,112 @@ function Dashboard() {
   }, [])
 
   return (
-    <div>
-      <div className="admin-header">
-        <h1>Dashboard</h1>
-      </div>
-
-      {error && <div className="admin-error" style={{ padding: '15px', background: '#fee', color: '#c00', borderRadius: '4px', marginBottom: '20px' }}>{error}</div>}
-
-      <div className="admin-stats">
-        <div className="stat-card">
-          <h4>Projects</h4>
-          <div className="stat-number">{stats.projects}</div>
+    <div className="dashboard-page">
+      <div className="dashboard-header">
+        <div className="dashboard-welcome">
+          <h1>Welcome Back!</h1>
+          <p>Here's what's happening with your business today.</p>
         </div>
-        <div className="stat-card">
-          <h4>Team Members</h4>
-          <div className="stat-number">{stats.team}</div>
-        </div>
-        <div className="stat-card">
-          <h4>Open Jobs</h4>
-          <div className="stat-number">{stats.careers}</div>
-        </div>
-        <div className="stat-card">
-          <h4>Inquiries</h4>
-          <div className="stat-number">{stats.inquiries}</div>
-        </div>
-        <div className="stat-card">
-          <h4>Messages</h4>
-          <div className="stat-number">{unreadContacts > 0 && <span className="unread-badge">{unreadContacts}</span>} {stats.contacts}</div>
-        </div>
-        <div className="stat-card">
-          <h4>Blog Posts</h4>
-          <div className="stat-number">{stats.blogs}</div>
+        <div className="dashboard-date">
+          <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
         </div>
       </div>
+
+      {loading ? (
+        <div className="dashboard-loading">
+          <div className="spinner"></div>
+          <p>Loading dashboard...</p>
+        </div>
+      ) : (
+        <>
+          <div className="stats-grid">
+            {statCards.map((stat, index) => {
+              const Icon = IconMap[stat.icon] || FiActivity
+              return (
+                <div key={index} className="stat-card" style={{ '--accent-color': stat.color, '--accent-bg': stat.bg }}>
+                  <div className="stat-icon" style={{ background: stat.bg, color: stat.color }}>
+                    <Icon size={22} />
+                  </div>
+                  <div className="stat-info">
+                    <span className="stat-label">{stat.label}</span>
+                    <span className="stat-value">{stat.value}</span>
+                  </div>
+                  <div className="stat-trend">
+                    <span className="stat-trend-up">↑</span>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="dashboard-grid">
+            <div className="dashboard-card">
+              <div className="card-header">
+                <h3>Quick Actions</h3>
+              </div>
+              <div className="quick-actions">
+                <Link to="/admin/partners" className="action-btn">
+                  <FiUsers />
+                  <span>Manage Partners</span>
+                </Link>
+                <Link to="/admin/employees" className="action-btn">
+                  <FiUser />
+                  <span>Manage Employees</span>
+                </Link>
+                <Link to="/admin/projects" className="action-btn">
+                  <FiFolder />
+                  <span>Add Project</span>
+                </Link>
+                <Link to="/admin/blogs" className="action-btn">
+                  <FiFileText />
+                  <span>Write Blog</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="dashboard-card">
+              <div className="card-header">
+                <h3>Recent Activity</h3>
+                <Link to="/admin/inquiries" className="view-all">View All</Link>
+              </div>
+              <div className="activity-list">
+                <div className="activity-item">
+                  <div className="activity-dot" style={{ background: '#10b981' }}></div>
+                  <div className="activity-content">
+                    <span className="activity-text">New partner registration</span>
+                    <span className="activity-time">2 hours ago</span>
+                  </div>
+                </div>
+                <div className="activity-item">
+                  <div className="activity-dot" style={{ background: '#3b82f6' }}></div>
+                  <div className="activity-content">
+                    <span className="activity-text">Project updated</span>
+                    <span className="activity-time">5 hours ago</span>
+                  </div>
+                </div>
+                <div className="activity-item">
+                  <div className="activity-dot" style={{ background: '#f59e0b' }}></div>
+                  <div className="activity-content">
+                    <span className="activity-text">New inquiry received</span>
+                    <span className="activity-time">1 day ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="dashboard-footer-stats">
+            <div className="footer-stat">
+              <FiActivity />
+              <span>System Status: <strong>Online</strong></span>
+            </div>
+            <div className="footer-stat">
+              <FiCalendar />
+              <span>Last Updated: <strong>{new Date().toLocaleTimeString()}</strong></span>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }
@@ -1362,11 +1449,26 @@ function InquiriesManager() {
   const [inquiries, setInquiries] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [filter, setFilter] = useState({ source: "", search: "" })
 
-  useEffect(() => { loadInquiries() }, [])
+  useEffect(() => { loadInquiries() }, [filter])
 
   const loadInquiries = () => api.getInquiries().then(data => {
-    setInquiries(data?.data || data || [])
+    let list = data?.data || data || []
+    
+    if (filter.source) {
+      list = list.filter(i => i.source === filter.source)
+    }
+    if (filter.search) {
+      const s = filter.search.toLowerCase()
+      list = list.filter(i => 
+        i.name?.toLowerCase().includes(s) ||
+        i.email?.toLowerCase().includes(s) ||
+        i.mobile?.includes(s)
+      )
+    }
+    
+    setInquiries(list)
     setLoading(false)
   }).catch(err => {
     setError('Failed to load inquiries')
@@ -1380,10 +1482,40 @@ function InquiriesManager() {
     }
   }
 
+  const getSourceBadge = (source) => {
+    const colors = {
+      client_registration: { bg: '#d4edda', color: '#155724', label: 'Client Reg' },
+      support_ticket: { bg: '#cce5ff', color: '#004085', label: 'Support' },
+      contact: { bg: '#fff3cd', color: '#856404', label: 'Contact' }
+    }
+    const style = colors[source] || colors.contact
+    return <span style={{ padding: '2px 6px', borderRadius: '3px', fontSize: '11px', background: style.bg, color: style.color }}>{style.label}</span>
+  }
+
   return (
     <div>
       <div className="admin-header">
         <h1>Service Inquiries</h1>
+      </div>
+
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+        <input
+          type="text"
+          placeholder="Search name, email, mobile..."
+          value={filter.search}
+          onChange={(e) => setFilter({ ...filter, search: e.target.value })}
+          style={{ padding: '8px 12px', border: '1px solid #ddd', borderRadius: '4px', minWidth: '200px' }}
+        />
+        <select
+          value={filter.source}
+          onChange={(e) => setFilter({ ...filter, source: e.target.value })}
+          style={{ padding: '8px 12px', border: '1px solid #ddd', borderRadius: '4px' }}
+        >
+          <option value="">All Sources</option>
+          <option value="client_registration">Client Registration</option>
+          <option value="support_ticket">Support Ticket</option>
+          <option value="contact">Contact Form</option>
+        </select>
       </div>
 
       <div className="admin-card">
@@ -1396,9 +1528,9 @@ function InquiriesManager() {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Service</th>
+                <th>Contact</th>
+                <th>Service/Subject</th>
+                <th>Source</th>
                 <th>Message</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -1408,10 +1540,13 @@ function InquiriesManager() {
               {inquiries.map(item => (
                 <tr key={item._id}>
                   <td>{item.name}</td>
-                  <td>{item.mobile}</td>
-                  <td>{item.email || '-'}</td>
-                  <td>{item.service || '-'}</td>
-                  <td>{item.message?.substring(0, 50)}{item.message?.length > 50 ? '...' : ''}</td>
+                  <td>
+                    <div>{item.mobile || item.phone || '-'}</div>
+                    <div style={{ fontSize: '12px', color: '#666' }}>{item.email || '-'}</div>
+                  </td>
+                  <td>{item.serviceInterest || item.service || item.subject || '-'}</td>
+                  <td>{getSourceBadge(item.source)}</td>
+                  <td style={{ maxWidth: '200px' }}>{item.message?.substring(0, 50)}{item.message?.length > 50 ? '...' : ''}</td>
                   <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                   <td>
                     <button className="admin-btn admin-btn-danger admin-btn-sm" onClick={() => handleDelete(item._id)}>
@@ -1438,14 +1573,17 @@ export default function AdminLayout() {
   }
 
   const navItems = [
-    { path: '/admin', icon: <FiHome />, label: 'Dashboard' },
+    { path: '/admin', icon: <FiActivity />, label: 'Dashboard' },
     { path: '/admin/pricing', icon: <FiDollarSign />, label: 'Pricing' },
-    { path: '/admin/company', icon: <FiSettings />, label: 'Company Info' },
-    { path: '/admin/services', icon: <FiSettings />, label: 'Services' },
+    { path: '/admin/partners', icon: <FiUsers />, label: 'Partners' },
+    { path: '/admin/employees', icon: <FiUser />, label: 'Employees' },
+    { path: '/admin/support-tickets', icon: <FiInbox />, label: 'Support Tickets' },
+    { path: '/admin/company', icon: <FiAward />, label: 'Company Info' },
+    { path: '/admin/services', icon: <FiTool />, label: 'Services' },
     { path: '/admin/projects', icon: <FiFolder />, label: 'Projects' },
-    { path: '/admin/team', icon: <FiUsers />, label: 'Team' },
+    { path: '/admin/team', icon: <FiLayers />, label: 'Team' },
     { path: '/admin/careers', icon: <FiBriefcase />, label: 'Careers' },
-    { path: '/admin/inquiries', icon: <FiMessageSquare />, label: 'Inquiries' },
+    { path: '/admin/inquiries', icon: <FiSend />, label: 'Inquiries' },
     { path: '/admin/contacts', icon: <FiMessageSquare />, label: 'Contact Us' },
     { path: '/admin/blogs', icon: <FiFileText />, label: 'Blogs' },
   ]
@@ -1479,12 +1617,15 @@ export default function AdminLayout() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/pricing" element={<PricingManager />} />
+          <Route path="/admin/partners" element={<PartnerManager />} />
           <Route path="/admin/company" element={<CompanyInfoManager />} />
           <Route path="/admin/services" element={<ServicesManager />} />
           <Route path="/admin/projects" element={<ProjectsManager />} />
           <Route path="/admin/team" element={<TeamManager />} />
           <Route path="/admin/careers" element={<CareersManager />} />
           <Route path="/admin/inquiries" element={<InquiriesManager />} />
+          <Route path="/admin/employees" element={<EmployeeManager />} />
+          <Route path="/admin/support-tickets" element={<SupportTicketManager />} />
           <Route path="/admin/contacts" element={<ContactsManager />} />
           <Route path="/admin/blogs" element={<BlogsManager />} />
         </Routes>

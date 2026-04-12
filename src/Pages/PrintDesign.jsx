@@ -48,7 +48,7 @@ const NOT = ["Actual printing / production", "Photography / product shoots", "3D
 export default function PrintDesignPage() {
     const featRef = useRevealCards()
     const { getPrice } = usePricing()
-    
+
     const SERVICES = [
         { icon: <FiCreditCard />, t: "Business Cards", d: "Premium business card design — front & back, standard or folded, print-ready 300 DPI PDF.", price: getPrice('printDesign', 'businessCards') },
         { icon: <FiFileText />, t: "Brochure & Flyer Design", d: "Tri-fold, bi-fold, or z-fold brochures and A4/A5/DL flyers — both sides, full bleed.", price: getPrice('printDesign', 'brochureFlyer') },
@@ -72,7 +72,7 @@ export default function PrintDesignPage() {
             items: ["Everything in Business", "12-page product catalogue", "Packaging design (1 product)", "Event backdrop design", "Presentation deck", "Unlimited revisions", "Printer liaison support"]
         },
     ]
-    
+
     const price = getPrice('printDesign', 'business')
     return (
         <div className="sp-page dp-page">
@@ -170,8 +170,8 @@ export default function PrintDesignPage() {
                     <h2 className="sp-cta-title">Ready to Print Something Remarkable?</h2>
                     <p className="sp-cta-sub">Share what you need — we'll send a quote and first draft within 48 hours.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>Start Print Project <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Portfolio <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary" >Start Print Project <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary" >View Portfolio <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

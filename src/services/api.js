@@ -266,6 +266,34 @@ export const api = {
     method: 'DELETE',
   }),
 
+  // Employee Verification
+  verifyEmployee: (employeeId, email) => {
+    const params = new URLSearchParams()
+    if (employeeId) params.append('employeeId', employeeId)
+    if (email) params.append('email', email)
+    return fetchWithErrorHandling(`${API_URL}/employees/verify?${params}`)
+  },
+  getEmployees: () => fetchWithErrorHandling(`${API_URL}/employees`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  addEmployee: (data) => fetchWithErrorHandling(`${API_URL}/employees`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  getEmployeeStats: () => fetchWithErrorHandling(`${API_URL}/employees/stats`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  deleteEmployee: (id) => fetchWithErrorHandling(`${API_URL}/employees/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  updateEmployee: (id, data) => fetchWithErrorHandling(`${API_URL}/employees/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+
   // Auth
   login: async (email, password) => {
     const res = await fetch(`${API_URL}/auth/login`, {
@@ -332,6 +360,190 @@ export const api = {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
+
+  // Partners
+  getPartners: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return fetchWithErrorHandling(`${API_URL}/partners${query ? `?${query}` : ''}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+    });
+  },
+  getPartnerStats: () => fetchWithErrorHandling(`${API_URL}/partners/stats`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  getPartnerById: (id) => fetchWithErrorHandling(`${API_URL}/partners/${id}`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  updatePartnerStatus: (id, status) => fetchWithErrorHandling(`${API_URL}/partners/${id}/status`, {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  setPartnerPassword: (id, password) => fetchWithErrorHandling(`${API_URL}/partners/${id}/password`, {
+    method: 'PUT',
+    body: JSON.stringify({ password }),
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  addPartnerCommission: (id, data) => fetchWithErrorHandling(`${API_URL}/partners/${id}/commission`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  markCommissionPaid: (partnerId, txnId) => fetchWithErrorHandling(`${API_URL}/partners/${partnerId}/commission/${txnId}/paid`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+  deletePartner: (id) => fetchWithErrorHandling(`${API_URL}/partners/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  }),
+
+  // Partner Auth
+  partnerRegister: (data) => fetchWithErrorHandling(`${API_URL}/partners/register`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  partnerLogin: (email, password) => fetchWithErrorHandling(`${API_URL}/partners/login`, {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  }),
+  partnerForgotPassword: (email) => fetchWithErrorHandling(`${API_URL}/partners/forgot-password`, {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  }),
+  partnerVerifyOtp: (email, otp) => fetchWithErrorHandling(`${API_URL}/partners/verify-otp`, {
+    method: 'POST',
+    body: JSON.stringify({ email, otp }),
+  }),
+  partnerResetPassword: (email, otp, newPassword) => fetchWithErrorHandling(`${API_URL}/partners/reset-password`, {
+    method: 'POST',
+    body: JSON.stringify({ email, otp, newPassword }),
+  }),
+  partnerVerify: () => {
+    const token = localStorage.getItem('partnerToken');
+    if (!token) return Promise.resolve({ success: false });
+    return fetchWithErrorHandling(`${API_URL}/partners/verify`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerUpdateProfile: (data) => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/profile`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerUpdateBank: (data) => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/bank-details`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerChangePassword: (currentPassword, newPassword) => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/change-password`, {
+      method: 'PUT',
+      body: JSON.stringify({ currentPassword, newPassword }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerGetClients: () => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/clients`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerAddClient: (data) => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/clients`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerUpdateClient: (clientId, data) => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/clients/${clientId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerGetCommissions: () => {
+    const token = localStorage.getItem('partnerToken');
+    return fetchWithErrorHandling(`${API_URL}/partners/commissions`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  partnerLogout: () => {
+    localStorage.removeItem('partnerToken');
+    localStorage.removeItem('partnerUser');
+  },
+
+  // Support Tickets (Partner/Employee/Admin)
+  createTicket: (data) => {
+    const token = localStorage.getItem('partnerToken') || localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/support-tickets`, {
+      method: 'POST',
+      body: JSON.stringify({ ...data, userType: data.userType || 'partner' }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  getTickets: (params = {}) => {
+    const token = localStorage.getItem('partnerToken') || localStorage.getItem('adminToken');
+    const query = new URLSearchParams(params).toString();
+    return fetchWithErrorHandling(`${API_URL}/support-tickets${query ? `?${query}` : ''}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  getTicketById: (id) => {
+    const token = localStorage.getItem('partnerToken') || localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/support-tickets/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  respondToTicket: (id, message) => {
+    const token = localStorage.getItem('partnerToken') || localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/support-tickets/${id}/respond`, {
+      method: 'POST',
+      body: JSON.stringify({ message }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  getTicketStats: () => {
+    const token = localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/support-tickets/stats`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  updateTicketStatus: (id, status) => {
+    const token = localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/support-tickets/${id}/status`, {
+      method: 'PUT',
+      body: JSON.stringify({ status }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+  assignTicket: (id, assignedTo) => {
+    const token = localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/support-tickets/${id}/assign`, {
+      method: 'PUT',
+      body: JSON.stringify({ assignedTo }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+
+  // Admin: Get all tickets (with filters)
+  getAllTickets: (params = {}) => {
+    const token = localStorage.getItem('adminToken');
+    const query = new URLSearchParams(params).toString();
+    return fetchWithErrorHandling(`${API_URL}/support-tickets${query ? `?${query}` : ''}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
 };
 
 export { ApiError };

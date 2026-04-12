@@ -1,0 +1,259 @@
+/* ========================================
+   FILE UPLOAD - STYLES
+   ======================================== */
+
+.fu-container {
+  width: 100%;
+}
+
+.fu-dropzone {
+  border: 2px dashed #27273a;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.fu-dropzone:hover {
+  border-color: #f05a28;
+  background: rgba(240, 90, 40, 0.05);
+}
+
+.fu-dropzone.dragging {
+  border-color: #f05a28;
+  background: rgba(240, 90, 40, 0.1);
+  transform: scale(1.01);
+}
+
+.fu-dropzone.has-error {
+  border-color: #ef4444;
+}
+
+.fu-input {
+  display: none;
+}
+
+.fu-dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fu-upload-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(240, 90, 40, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #f05a28;
+  margin-bottom: 0.5rem;
+}
+
+.fu-dropzone h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.fu-dropzone p {
+  color: #a1a1aa;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.fu-hint {
+  color: #71717a;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.fu-errors {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fu-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(239,  68, 68, 0.1);
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 0.8125rem;
+}
+
+.fu-files {
+  margin-top: 1.5rem;
+}
+
+.fu-files-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.fu-files-header span {
+  font-size: 0.875rem;
+  color: #a1a1aa;
+}
+
+.fu-progress-bar {
+  width: 120px;
+  height: 4px;
+  background: transparent;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fu-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f05a28, #ff7a4a);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.fu-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fu-file-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: 1px solid #27273a;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.fu-file-item:hover {
+  border-color: #3d3d9e;
+}
+
+.fu-file-preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fu-file-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fu-file-icon {
+  font-size: 1.5rem;
+}
+
+.fu-file-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fu-file-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fu-file-size {
+  font-size: 0.75rem;
+  color: #71717a;
+}
+
+.fu-file-remove {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #27273a;
+  color: #71717a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.fu-file-remove:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.fu-file-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f05a28;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .fu-dropzone {
+    padding: 2rem 1rem;
+  }
+
+  .fu-upload-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .fu-dropzone h4 {
+    font-size: 1rem;
+  }
+
+  .fu-file-item {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .fu-file-preview {
+    width: 40px;
+    height: 40px;
+  }
+
+  .fu-files-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .fu-progress-bar {
+    width: 100%;
+  }
+}

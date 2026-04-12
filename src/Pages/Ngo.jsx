@@ -385,7 +385,7 @@ export default function NgoManagementPage() {
                             Book Free NGO Demo <FiArrowRight />
                         </a>
                         <a href="/projects" className="sp-btn-primary"
-                            style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>
+                        >
                             View Our Work <FiArrowRight />
                         </a>
                     </div>

@@ -384,7 +384,7 @@ export default function AiAttendancePage() {
                             Book Live Demo <FiArrowRight />
                         </a>
                         <a href="/contact" className="sp-btn-primary"
-                            style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>
+                        >
                             Start Free Trial <FiArrowRight />
                         </a>
                     </div>

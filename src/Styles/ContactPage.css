@@ -3,12 +3,12 @@
 ================================ */
 .contact-page {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: #f2f4fb;
+  background: transparent;
   transition: background 0.4s;
 }
 
 body.dark .contact-page {
-  background: #0d0f1f;
+  background: transparent;
 }
 
 /* SECTION */
@@ -33,7 +33,7 @@ body.dark .contact-page {
 }
 
 body.dark .contact-info-card {
-  background: #14162b;
+  background: transparent;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
@@ -119,7 +119,7 @@ body.dark .contact-note {
 }
 
 body.dark .contact-form-card {
-  background: #14162b;
+  background: transparent;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
@@ -173,7 +173,7 @@ body.dark .contact-field label {
 
 body.dark .contact-field input,
 body.dark .contact-field textarea {
-  background: #0f1124;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
@@ -185,7 +185,7 @@ body.dark .contact-field textarea {
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  background: #f05a28;
+background: #f05a28;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -198,7 +198,7 @@ body.dark .contact-field textarea {
 }
 
 .contact-submit:hover {
-  background: #e14e1d;
+  background: #f05a28;
   box-shadow: 0 10px 28px rgba(240, 90, 40, 0.35);
 }
 

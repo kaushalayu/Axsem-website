@@ -80,6 +80,14 @@ const JournayPage = lazy(() => import("./Pages/JournayPage"))
 const Ngo = lazy(() => import("./Pages/Ngo"))
 const Attand = lazy(() => import("./Pages/Attand"))
 const Ofline = lazy(() => import("./Pages/Ofline"))
+const PartnerRegistration = lazy(() => import("./Pages/PartnerRegistration"))
+const PartnerLogin = lazy(() => import("./Pages/PartnerLogin"))
+const PartnerForgot = lazy(() => import("./Pages/PartnerForgot"))
+const PartnerRoutes = lazy(() => import("./Pages/PartnerRoutes"))
+const ClientRegistration = lazy(() => import("./Pages/ClientRegistration"))
+const SupportTicket = lazy(() => import("./Pages/SupportTicket"))
+const EmployeeVerification = lazy(() => import("./Pages/EmployeeVerification"))
+const FAQPage = lazy(() => import("./Pages/FAQPage"))
 // const MarketingSection = lazy(() => import("./Pages/Marketingsection"))
 
 
@@ -304,6 +312,19 @@ function AppContent() {
           {/* Marketing */}
           <Route path="/marketing" element={<MarketingSection />} />
 
+          {/* Partner Registration */}
+          <Route path="/partner/register" element={<PartnerRegistration />} />
+
+          {/* Partner Portal */}
+          <Route path="/partner/login" element={<PartnerLogin />} />
+          <Route path="/partner/forgot-password" element={<PartnerForgot />} />
+          <Route path="/partner/*" element={<PartnerRoutes />} />
+
+          {/* Growth Hub Pages */}
+          <Route path="/client/register" element={<ClientRegistration />} />
+          <Route path="/support/ticket" element={<SupportTicket />} />
+          <Route path="/verify/employee" element={<EmployeeVerification />} />
+          <Route path="/faq" element={<FAQPage />} />
 
           {/* 404 */}
           <Route path="*" element={<TempPage title="404 - Page Not Found" />} />

@@ -2,7 +2,7 @@
 
 .blog-detail-page-modern {
     font-family: "Plus Jakarta Sans", sans-serif;
-    background: #0a0a0f;
+  background: transparent;
     min-height: 100vh;
     position: relative;
 }

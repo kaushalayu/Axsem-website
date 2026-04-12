@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 /* ============================================================
    SERVICE PAGES — SHARED CSS
@@ -34,7 +34,7 @@ body.dark {
 
 /* ── Page base ── */
 .sp-page {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--sp-bg);
   transition: background 0.4s;
 }
@@ -220,7 +220,7 @@ body.dark {
 
 /* Orange top border accent */
 .sp-visual-box::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -300,16 +300,23 @@ body.dark {
 /* ── THE CARD ── */
 .sp-card {
   position: relative;
-  overflow: hidden;
   padding: 28px 26px;
-  border-radius: 16px;
-  border: 1.5px solid var(--sp-border);
+  border-radius: 20px;
+  border: 1.5px solid #ebebf5;
   background: var(--sp-white);
-  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  cursor: pointer;
   transition:
+    border-color 0.3s,
+    color 0.3s,
     transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.3s;
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.dark .sp-card {
+  background: var(--sp-white);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .sp-card:hover {
@@ -320,18 +327,13 @@ body.dark {
 
 /* Shine Effect on Card */
 .sp-card::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
   transition: left 0.6s ease;
   pointer-events: none;
   z-index: 10;
@@ -342,12 +344,12 @@ body.dark {
 }
 
 body.dark .sp-card::after {
-  background: linear-gradient(
+  /* background: linear-gradient(
     90deg,
     transparent,
     rgba(255, 255, 255, 0.1),
     transparent
-  );
+  ); */
 }
 
 /* All card children above the fill */
@@ -439,7 +441,7 @@ body.dark .sp-card::after {
 
 /* Connecting line between steps */
 .sp-steps-grid::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 28px;
   left: calc(100% / 12);
@@ -489,7 +491,7 @@ body.dark .sp-card::after {
 
 /* Left-to-right fill on step hover */
 .sp-step-num::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #f05a28 0%, #2d2d44 100%);
@@ -564,7 +566,7 @@ body.dark .sp-card::after {
 }
 
 .sp-tech-card::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #f05a28 0%, #2d2d44 100%);
@@ -658,7 +660,7 @@ body.dark .sp-card::after {
   background: none;
   border: none;
   cursor: pointer;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14.5px;
   font-weight: 700;
   color: var(--sp-text);
@@ -669,7 +671,7 @@ body.dark .sp-card::after {
 }
 
 .sp-faq-q::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: var(--sp-orange-soft);
@@ -749,7 +751,7 @@ body.dark .sp-card::after {
 }
 
 .sp-stat-card::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #f05a28 0%, #2d2d44 100%);
@@ -816,7 +818,7 @@ body.dark .sp-card::after {
 
 /* Left-to-right dark fill */
 .sp-cta::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #f05a28 0%, #2d2d44 100%);
@@ -860,9 +862,9 @@ body.dark .sp-card::after {
   gap: 8px;
   padding: 13px 28px;
   border-radius: 50px;
-  background: #f05a28;
+  background: var(--sp-orange);
   color: #fff;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -902,9 +904,9 @@ body.dark .sp-card::after {
   gap: 8px;
   padding: 13px 28px;
   border-radius: 50px;
-  background: #f05a28;
+  background: var(--sp-orange);
   color: #fff;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -916,7 +918,7 @@ body.dark .sp-card::after {
   overflow: hidden;
 }
 .sp-btn-inv::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: var(--sp-orange);

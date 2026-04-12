@@ -48,7 +48,7 @@ const NOT = ["Print production / printing", "Packaging design", "Website design"
 export default function BrandIdentityPage() {
     const featRef = useRevealCards()
     const { getPrice } = usePricing()
-    
+
     const PACKAGES = [
         {
             name: "Brand Starter", price: getPrice('branding', 'starter'), per: "one-time", highlight: false,
@@ -63,7 +63,7 @@ export default function BrandIdentityPage() {
             items: ["Everything in Brand Pro", "Brand strategy workshop", "Competitor visual analysis", "3 brand concept directions", "Presentation deck template", "Brand photography moodboard", "Vendor guidelines document", "6-month brand support"]
         },
     ]
-    
+
     const price = getPrice('branding', 'pro')
     return (
         <div className="sp-page dp-page">
@@ -155,8 +155,8 @@ export default function BrandIdentityPage() {
                     <h2 className="sp-cta-title">Ready to Build a Brand That Lasts?</h2>
                     <p className="sp-cta-sub">Book a free brand consultation — 30 minutes, no commitment.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>Start Brand Identity <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Portfolio <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary" >Start Brand Identity <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary" >View Portfolio <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

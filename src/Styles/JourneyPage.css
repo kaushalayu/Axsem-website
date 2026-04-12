@@ -12,13 +12,13 @@
 .jp-page {
   position: relative;
   min-height: 100vh;
-  background: #f0f1fa;
+  background: transparent;
   font-family: "Sora", sans-serif;
   overflow-x: hidden;
   transition: background 0.5s;
 }
 body.dark .jp-page {
-  background: #0d0e1a;
+  background: transparent;
 }
 
 /* ── Particle canvas (fixed, full-page) ── */
@@ -1130,11 +1130,11 @@ body.dark .jp-body {
   height: 20px;
   border-radius: 50%;
   border: 3px solid #f05a28;
-  background: #f0f1fa;
+  background: transparent;
   animation: jOrbPing 3s ease-in-out infinite;
 }
 body.dark .jp-end-orb {
-  background: #0d0e1a;
+  background: transparent;
 }
 @keyframes jOrbPing {
   0%,

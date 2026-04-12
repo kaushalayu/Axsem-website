@@ -94,6 +94,11 @@ export const navMenu = [
     mega: [
       { name: "Marketing Strategy", path: "/marketing" },
       { name: "Product Strategy", path: "/product" },
+      { name: "Partner Registration", path: "/partner/register" },
+      { name: "Partner Login", path: "/partner/login" },
+      { name: "Client Registration", path: "/client/register" },
+      { name: "Employee Verification", path: "/verify/employee" },
+      { name: "Raise Support Ticket", path: "/support/ticket" },
     ],
   },
 ];

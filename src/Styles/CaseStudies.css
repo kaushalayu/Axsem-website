@@ -24,11 +24,11 @@
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: #ffffff;
+  background: #ffffff;
 }
 
 body.dark .case-card {
-    background: #1e2030;
+  background: transparent;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
 }
 

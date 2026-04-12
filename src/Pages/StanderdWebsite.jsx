@@ -94,8 +94,8 @@ export default function StandardWebsitePage() {
                     <h2 className="sp-cta-title">Ready for a Proper Business Website?</h2>
                     <p className="sp-cta-sub">Get in touch — project kickoff within 48 hours of confirmation.</p>
                     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                        <a href="/contact" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>Book Standard Package <FiArrowRight /></a>
-                        <a href="/projects" className="sp-btn-primary" style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)" }}>View Our Work <FiArrowRight /></a>
+                        <a href="/contact" className="sp-btn-primary" >Book Standard Package <FiArrowRight /></a>
+                        <a href="/projects" className="sp-btn-primary" >View Our Work <FiArrowRight /></a>
                     </div>
                 </div>
             </div>

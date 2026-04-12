@@ -146,7 +146,7 @@
 /* LIGHT MODE */
 
 .light .ax-contact-section {
-  background: #f6f7ff;
+  background: transparent;
   color: #333;
 }
 
@@ -164,7 +164,7 @@
 
 .light .ax-contact-form input,
 .light .ax-contact-form textarea {
-  background: #f2f3fb;
+  background: #ffffff;
   color: #111;
 }
 
