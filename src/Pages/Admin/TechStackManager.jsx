@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { FiPlus, FiTrash2, FiEdit, FiSave } from "react-icons/fi"
+import { FiPlus, FiTrash2, FiEdit, FiSave, FiRefreshCw } from "react-icons/fi"
 import { api } from "../../services/api"
 
 const CATEGORIES = ['Frontend', 'Backend', 'Database', 'Cloud', 'DevOps', 'Mobile', 'AI/ML', 'Other']
@@ -9,6 +9,7 @@ export default function TechStackManager() {
   const [loading, setLoading] = useState(true)
   const [editItem, setEditItem] = useState(null)
   const [showForm, setShowForm] = useState(false)
+  const [seeding, setSeeding] = useState(false)
   const [formData, setFormData] = useState({
     name: '', category: 'Frontend', color: '#666', order: 0, isActive: true
   })
@@ -19,6 +20,17 @@ export default function TechStackManager() {
     setTechs(data?.data || data || [])
     setLoading(false)
   }).catch(() => { setTechs([]); setLoading(false) })
+
+  const handleSeed = async () => {
+    if (!confirm('Seed tech stack? This will replace existing data.')) return
+    setSeeding(true)
+    try {
+      await fetch('http://localhost:5000/api/seed/techstack', { method: 'POST' })
+      loadTechs()
+      alert('Tech stack seeded!')
+    } catch (err) { alert('Error: ' + err.message) }
+    setSeeding(false)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -52,9 +64,14 @@ export default function TechStackManager() {
     <div>
       <div className="admin-header">
         <h1>Tech Stack</h1>
-        <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', category: 'Frontend', color: '#666', order: 0, isActive: true }) }}>
-          <FiPlus /> Add Technology
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button className="admin-btn" onClick={handleSeed} disabled={seeding}>
+            <FiRefreshCw /> Seed Data
+          </button>
+          <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', category: 'Frontend', color: '#666', order: 0, isActive: true }) }}>
+            <FiPlus /> Add Technology
+          </button>
+        </div>
       </div>
 
       {showForm && (
@@ -75,7 +92,7 @@ export default function TechStackManager() {
             </div>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button type="submit" className="admin-btn admin-btn-primary"><FiSave /> Save</button>
-              <button type="button" className="admin-btn" onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="button" className="admin-btn" onClick={() => { setShowForm(false); setEditItem(null); setFormData({ name: '', category: 'Frontend', color: '#666', order: 0, isActive: true }) }}>Cancel</button>
             </div>
           </form>
         </div>

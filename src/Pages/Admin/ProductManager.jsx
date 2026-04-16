@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { FiPlus, FiTrash2, FiEdit, FiX, FiSave, FiCpu } from "react-icons/fi"
+import { FiPlus, FiTrash2, FiEdit, FiX, FiSave, FiCpu, FiRefreshCw } from "react-icons/fi"
 import { api } from "../../services/api"
 
 export default function ProductManager() {
@@ -47,13 +47,32 @@ export default function ProductManager() {
     setShowForm(true)
   }
 
+  const [seeding, setSeeding] = useState(false)
+
+  const handleSeed = async () => {
+    if (!confirm('Seed products? This will replace existing data.')) return
+    setSeeding(true)
+    try {
+      const API_URL = 'http://localhost:5000/api'
+      await fetch(`${API_URL}/seed/products`, { method: 'POST' })
+      loadProducts()
+      alert('Products seeded successfully!')
+    } catch (err) { alert('Error: ' + err.message) }
+    setSeeding(false)
+  }
+
   return (
     <div>
       <div className="admin-header">
         <h1>Products</h1>
-        <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', tagline: '', description: '', icon: 'FiCpu', color: '#f05a28', category: 'Business', tag: '', path: '', order: 0, isActive: true }) }}>
-          <FiPlus /> Add Product
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button className="admin-btn" onClick={handleSeed} disabled={seeding}>
+            <FiRefreshCw className={seeding ? 'spinning' : ''} /> Seed Data
+          </button>
+          <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', tagline: '', description: '', icon: 'FiCpu', color: '#f05a28', category: 'Business', tag: '', path: '', order: 0, isActive: true }) }}>
+            <FiPlus /> Add Product
+          </button>
+        </div>
       </div>
 
       {showForm && (
@@ -81,7 +100,7 @@ export default function ProductManager() {
             </div>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button type="submit" className="admin-btn admin-btn-primary"><FiSave /> Save</button>
-              <button type="button" className="admin-btn" onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="button" className="admin-btn" onClick={() => { setShowForm(false); setEditItem(null); setFormData({ name: '', tagline: '', description: '', icon: 'FiCpu', color: '#f05a28', category: 'Business', tag: '', path: '', order: 0, isActive: true }) }}>Cancel</button>
             </div>
           </form>
         </div>

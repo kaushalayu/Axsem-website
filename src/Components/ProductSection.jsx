@@ -1,307 +1,438 @@
 import { useEffect, useRef, useState } from "react"
-import {
-    FiArrowUpRight, FiZap, FiUsers, FiBookOpen, FiShoppingBag,
-    FiHome, FiCoffee, FiMap, FiTrendingUp, FiCpu, FiBarChart2, FiBriefcase,
-} from "react-icons/fi"
+import { FiArrowUpRight, FiBox, FiGrid, FiLayers, FiShield, FiCpu, FiUsers, FiBook, FiShoppingBag, FiHome, FiMap, FiHeart, FiCheck } from "react-icons/fi"
 import { api } from "../services/api"
 import "../Styles/ProductSection.css"
 
-const iconMap = {
-    FiArrowUpRight, FiZap, FiUsers, FiBookOpen, FiShoppingBag,
-    FiHome, FiCoffee, FiMap, FiTrendingUp, FiCpu, FiBarChart2, FiBriefcase
-}
-
-/* ── Scroll reveal ── */
-function useReveal(threshold = 0.1) {
-    const ref = useRef(null)
-    useEffect(() => {
-        const el = ref.current; if (!el) return
-        const obs = new IntersectionObserver(
-            ([e]) => { if (e.isIntersecting) el.classList.add("prd-revealed") },
-            { threshold }
-        )
-        obs.observe(el)
-        return () => obs.disconnect()
-    }, [])
-    return ref
-}
-
-/* ── Products data ── */
-const PRODUCTS = [
-    {
-        id: "tour-travel", name: "TripAxis",
-        tagline: "Complete Tour & Travel Management",
-        desc: "End-to-end booking, itinerary, billing & GST filing for travel agencies.",
-        path: "/products/tour-booking", icon: <FiMap />,
-        color: "#f05a28", category: "Industry", tag: "50+ Agencies",
-    },
-    {
-        id: "ai", name: "AxsemAI",
-        tagline: "AI-Powered Automation Suite",
-        desc: "Automate repetitive tasks, parse documents & generate insights with AI.",
-        path: "/products/ai-solutions", icon: <FiCpu />,
-        color: "#6b3fa0", category: "Business", tag: "30+ Automations",
-    },
-    {
-        id: "school", name: "SchoolAxis",
-        tagline: "Complete School Management System",
-        desc: "Admissions, attendance, fee collection, report cards & parent portal.",
-        path: "/products/school-management", icon: <FiBookOpen />,
-        color: "#0e9e6e", category: "Education", tag: "15k+ Students",
-    },
-    {
-        id: "hr-payroll", name: "PeopleAxis",
-        tagline: "HR & Payroll for Growing Companies",
-        desc: "PF, ESI, TDS auto-calculations with leave & attendance tracking.",
-        path: "/products/hr-payroll", icon: <FiUsers />,
-        color: "#3d3d9e", category: "Business", tag: "50k+ Employees",
-    },
-    {
-        id: "ngo", name: "NGOAxis",
-        tagline: "Management Software for NGOs",
-        desc: "FCRA compliance, donor management, project tracking & fund reporting.",
-        path: "/products/ngo", icon: <FiTrendingUp />,
-        color: "#e63b2a", category: "Industry", tag: "FCRA Compliant",
-    },
-    {
-        id: "hotel", name: "HotelAxis",
-        tagline: "Hotel & Property Management System",
-        desc: "Room booking, housekeeping, billing & OTA channel management in one.",
-        path: "/products/real-estate", icon: <FiHome />,
-        color: "#f5a623", category: "Industry", tag: "40+ Properties",
-    },
-    {
-        id: "food", name: "FoodAxis",
-        tagline: "Restaurant & Food Business Platform",
-        desc: "POS, KOT, table management, delivery integration & GST billing.",
-        path: "/products/ecommerce", icon: <FiCoffee />,
-        color: "#e63b2a", category: "Industry", tag: "60+ Restaurants",
-    },
-    {
-        id: "real-estate", name: "PropAxis",
-        tagline: "Real Estate CRM & Property Software",
-        desc: "Lead tracking, site visits, agreements, registry & payment schedule.",
-        path: "/products/real-estate", icon: <FiBarChart2 />,
-        color: "#3d3d9e", category: "Industry", tag: "₹500Cr+ Properties",
-    },
-    {
-        id: "lms", name: "LearnAxis",
-        tagline: "Learning Management System",
-        desc: "Course builder, live classes, assessments & progress analytics.",
-        path: "/products/lms", icon: <FiBookOpen />,
-        color: "#0e9e6e", category: "Education", tag: "50k+ Students",
-    },
-    {
-        id: "ecommerce", name: "ShopAxis",
-        tagline: "Complete E-Commerce Platform",
-        desc: "Multi-vendor store, payment gateway, shipping & inventory in one.",
-        path: "/products/ecommerce", icon: <FiShoppingBag />,
-        color: "#f05a28", category: "Business", tag: "100+ Stores",
-    },
-    {
-        id: "crm", name: "CRMAxis",
-        tagline: "CRM for Sales Teams",
-        desc: "Pipeline, follow-ups, quotations & performance dashboard for teams.",
-        path: "/products/crm", icon: <FiBriefcase />,
-        color: "#6b3fa0", category: "Business", tag: "300+ Sales Teams",
-    },
-    {
-        id: "hrm", name: "HRMAxis",
-        tagline: "Full Human Resource Management",
-        desc: "Recruitment, onboarding, appraisals & full HRMS for scaling companies.",
-        path: "/products/hrm", icon: <FiZap />,
-        color: "#3d3d9e", category: "Business", tag: "200+ Companies",
-    },
+const DEFAULT_PRODUCTS = [
+  { id: 1, name: "TripAxis", tagline: "Tour & Travel Management", description: "Complete booking, itinerary & GST solution", color: "#f05a28", icon: "FiMap", category: "Business", tag: "50+ Agencies", path: "/products/tour-booking" },
+  { id: 2, name: "AxsemAI", tagline: "AI Automation", description: "Smart automation & AI solutions", color: "#6366f1", icon: "FiCpu", category: "Business", tag: "30+ Automations", path: "/products/ai-solutions" },
+  { id: 3, name: "SchoolAxis", tagline: "School Management", description: "Complete school ERP solution", color: "#10b981", icon: "FiBook", category: "Education", tag: "15k+ Students", path: "/products/school-management" },
+  { id: 4, name: "PeopleAxis", tagline: "HR & Payroll", description: "Human resource management", color: "#8b5cf6", icon: "FiUsers", category: "Business", tag: "50k+ Employees", path: "/products/hr-payroll" },
+  { id: 5, name: "LearnAxis", tagline: "Learning Management", description: "Online courses & assessments", color: "#ec4899", icon: "FiBook", category: "Education", tag: "50k+ Users", path: "/products/lms" },
+  { id: 6, name: "ShopAxis", tagline: "E-Commerce Platform", description: "Multi-vendor marketplace", color: "#f59e0b", icon: "FiShoppingBag", category: "Business", tag: "100+ Stores", path: "/products/ecommerce" },
+  { id: 7, name: "CRMAxis", tagline: "CRM for Sales", description: "Pipeline management", color: "#06b6d4", icon: "FiGrid", category: "Business", tag: "300+ Teams", path: "/products/crm" },
+  { id: 8, name: "HotelAxis", tagline: "Property Management", description: "Hotel & booking system", color: "#84cc16", icon: "FiHome", category: "Business", tag: "40+ Hotels", path: "/products/hotel" },
 ]
 
-const TABS = ["All", "Business", "Industry", "Education"]
+const TABS = ["All", "Business", "Education"]
 
-/* ── Sliding ink tab bar ── */
-function TabBar({ active, onChange }) {
-    const inkRef = useRef(null)
-    const barRef = useRef(null)
-    const btnRefs = useRef([])
+function ProductCard({ product, index }) {
+  const IconComp = {
+    FiMap: FiMap, FiCpu: FiCpu, FiBook: FiBook, FiUsers: FiUsers,
+    FiShoppingBag: FiShoppingBag, FiGrid: FiGrid, FiHome: FiHome, FiHeart: FiHeart
+  }[product.icon] || FiBox
 
-    useEffect(() => {
-        const idx = TABS.indexOf(active)
-        const btn = btnRefs.current[idx]
-        const bar = barRef.current
-        const ink = inkRef.current
-        if (!btn || !bar || !ink) return
-        const bRect = bar.getBoundingClientRect()
-        const bBtn = btn.getBoundingClientRect()
-        ink.style.left = `${bBtn.left - bRect.left}px`
-        ink.style.width = `${bBtn.width}px`
-    }, [active])
-
-    return (
-        <div ref={barRef} className="prd-tabbar">
-            <div ref={inkRef} className="prd-tab-ink" />
-            {TABS.map((t, i) => {
-                const count = t === "All" ? PRODUCTS.length : PRODUCTS.filter(p => p.category === t).length
-                return (
-                    <button
-                        key={t}
-                        ref={el => (btnRefs.current[i] = el)}
-                        className={`prd-tab ${active === t ? "prd-tab-on" : ""}`}
-                        onClick={() => onChange(t)}
-                    >
-                        {t}
-                        <span className="prd-tab-badge">{count}</span>
-                    </button>
-                )
-            })}
+  return (
+    <a 
+      href={product.path} 
+      className="product-card"
+      style={{ 
+        '--p-color': product.color,
+        '-- delay': `${index * 0.1}s`
+      }}
+    >
+      <div className="p-card-glow" />
+      <div className="p-card-header">
+        <div className="p-icon-wrap" style={{ background: `${product.color}20` }}>
+          <IconComp style={{ color: product.color }} />
         </div>
-    )
+        <span className="p-tag" style={{ background: `${product.color}15`, color: product.color }}>{product.tag}</span>
+      </div>
+      <h3 className="p-name">{product.name}</h3>
+      <p className="p-tagline">{product.tagline}</p>
+      <p className="p-desc">{product.desc || product.description}</p>
+      <div className="p-arrow-wrap">
+        <FiArrowUpRight />
+      </div>
+    </a>
+  )
 }
-
-/* ── Product card ── */
-function ProductCard({ p, i }) {
-    const ref = useRef(null)
-    const [vis, setVis] = useState(false)
-
-    useEffect(() => {
-        const el = ref.current; if (!el) return
-        const io = new IntersectionObserver(
-            ([e]) => { if (e.isIntersecting) setVis(true) },
-            { threshold: 0.06 }
-        )
-        io.observe(el)
-        return () => io.disconnect()
-    }, [])
-
-    return (
-        <a
-            ref={ref}
-            href={p.path}
-            className={`prd-card ${vis ? "prd-card-vis" : ""}`}
-            style={{ "--accent": p.color, "--i": i }}
-        >
-            {/* Radial glow — blooms outward on hover */}
-            <div className="prd-glow" />
-
-            {/* Top shimmer line */}
-            <div className="prd-shimmer" />
-
-            {/* Icon */}
-            <div className="prd-icon-wrap">
-                <div className="prd-icon-ring" />
-                <div className="prd-icon-box"><FiZap /></div>
-            </div>
-
-            {/* Text content */}
-            <div className="prd-content">
-                <div className="prd-top-row">
-                    <h3 className="prd-name">{p.name}</h3>
-                    <span className="prd-tag">{p.tag}</span>
-                </div>
-                <p className="prd-tagline">{p.tagline}</p>
-                <p className="prd-desc">{p.desc}</p>
-            </div>
-
-            {/* Arrow */}
-            <div className="prd-arrow">
-                <FiArrowUpRight />
-            </div>
-
-            {/* Bottom bar */}
-            <div className="prd-foot-bar" />
-        </a>
-    )
-}
-
-/* ── Stats ── */
-const STATS = [
-    { val: "12+", lbl: "Software Products" },
-    { val: "500+", lbl: "Businesses Powered" },
-    { val: "6+", lbl: "Years of Development" },
-    { val: "99%", lbl: "Client Retention" },
-]
 
 export default function ProductsSection() {
-    const [tab, setTab] = useState("All")
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-    const headerRef = useReveal()
-    const statsRef = useReveal(0.1)
+  const [tab, setTab] = useState("All")
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const sectionRef = useRef(null)
 
-    useEffect(() => {
-        api.getProducts()
-            .then(data => {
-                if (data?.data) {
-                    setProducts(data.data)
-                } else if (Array.isArray(data)) {
-                    setProducts(data)
-                }
-            })
-            .catch(() => setProducts(PRODUCTS))
-            .finally(() => setLoading(false))
-    }, [])
+  useEffect(() => {
+    api.getProducts()
+      .then(data => {
+        if (data?.data) setProducts(data.data)
+        else if (Array.isArray(data)) setProducts(data)
+      })
+      .catch(() => setProducts(DEFAULT_PRODUCTS))
+      .finally(() => setLoading(false))
+  }, [])
 
-    const productsData = products.length > 0 ? products : PRODUCTS
-    const filtered = tab === "All" ? productsData : productsData.filter(p => p.category === tab)
+  const productsData = products.length > 0 ? products : DEFAULT_PRODUCTS
+  const filtered = tab === "All" ? productsData : productsData.filter(p => p.category === tab)
 
-    return (
-        <section className="prd-section">
+  return (
+    <section className="our-products-section" ref={sectionRef}>
+      <div className="ops-bg">
+        <div className="ops-gradient-1" />
+        <div className="ops-gradient-2" />
+        <div className="ops-dots" />
+      </div>
 
-            <div className="prd-bg" aria-hidden>
-                <div className="prd-orb prd-orb-1" />
-                <div className="prd-orb prd-orb-2" />
-                <div className="prd-orb prd-orb-3" />
-                <div className="prd-grid-lines" />
-            </div>
+      <div className="ops-container">
+        <div className="ops-header">
+          <span className="ops-badge">
+            <FiBox /> Our Products
+          </span>
+          <h2 className="ops-title">
+            Software Built to
+            <span className="ops-highlight"> Scale</span>
+          </h2>
+          <p className="ops-subtitle">
+            Industry-leading solutions designed to transform your business operations and drive measurable growth.
+          </p>
+        </div>
 
-            <div className="prd-container">
+        <div className="ops-filters">
+          {TABS.map(t => (
+            <button
+              key={t}
+              className={`ops-filter ${tab === t ? 'ops-filter-active' : ''}`}
+              onClick={() => setTab(t)}
+            >
+              <span>{t}</span>
+              {tab === t && <FiCheck />}
+            </button>
+          ))}
+        </div>
 
-                {/* Header */}
-                <div className="prd-header" ref={headerRef}>
-                    <div className="prd-eyebrow">
-                        <span className="prd-dot-pulse" />
-                        Our Products
-                        <span className="prd-eyebrow-rule" />
-                    </div>
-                    <h2 className="prd-heading">
-                        Software Built for
-                        <br />
-                        <span className="prd-hl">Every Industry</span>
-                    </h2>
-                    <p className="prd-sub">
-                        12 industry-specific SaaS products — built, deployed, and supported by Axsem Softwares.
-                        Ready to use, or customised to your exact workflow.
-                    </p>
-                </div>
+        <div className="ops-grid">
+          {loading ? (
+            Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="ops-skeleton" />
+            ))
+          ) : (
+            filtered.map((p, i) => (
+              <ProductCard key={p._id || p.id || i} product={p} index={i} />
+            ))
+          )}
+        </div>
 
-                {/* Tabs */}
-                <div className="prd-tab-row">
-                    <TabBar active={tab} onChange={setTab} />
-                </div>
+        <div className="ops-stats">
+          <div className="ops-stat-item">
+            <span className="ops-stat-num">12+</span>
+            <span className="ops-stat-label">Software Products</span>
+          </div>
+          <div className="ops-stat-sep" />
+          <div className="ops-stat-item">
+            <span className="ops-stat-num">500+</span>
+            <span className="ops-stat-label">Businesses</span>
+          </div>
+          <div className="ops-stat-sep" />
+          <div className="ops-stat-item">
+            <span className="ops-stat-num">99%</span>
+            <span className="ops-stat-label">Retention</span>
+          </div>
+        </div>
 
-                {/* Cards */}
-                <div className="prd-grid">
-                    {filtered.map((p, i) => <ProductCard key={p.id} p={p} i={i} />)}
-                </div>
+        <div className="ops-cta">
+          <a href="/contact" className="ops-btn-primary">
+            Get Started <FiArrowUpRight />
+          </a>
+          <a href="/product" className="ops-btn-outline">
+            View All Products
+          </a>
+        </div>
+      </div>
 
-                {/* Stats */}
-                <div className="prd-stats" ref={statsRef}>
-                    {STATS.map((s, i) => (
-                        <div key={s.lbl} className="prd-stat" style={{ "--i": i }}>
-                            <span className="prd-stat-val">{s.val}</span>
-                            <span className="prd-stat-lbl">{s.lbl}</span>
-                        </div>
-                    ))}
-                </div>
-
-                {/* CTA */}
-                <div className="prd-cta">
-                    <a href="/product" className="prd-btn-primary">
-                        Explore the Product Gallery <FiArrowUpRight />
-                    </a>
-                    <a href="/contact" className="prd-btn-ghost">
-                        Request a Demo <FiArrowUpRight />
-                    </a>
-                </div>
-
-            </div>
-        </section>
-    )
+      <style>{`
+        .our-products-section {
+          position: relative;
+          padding: 100px 20px;
+          background: #0f0f0f;
+          overflow: hidden;
+        }
+        .ops-bg {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+        .ops-gradient-1 {
+          position: absolute;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(240,90,40,0.15) 0%, transparent 70%);
+          top: -200px;
+          left: -100px;
+        }
+        .ops-gradient-2 {
+          position: absolute;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+          bottom: -150px;
+          right: -100px;
+        }
+        .ops-dots {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+          background-size: 40px 40px;
+        }
+        .ops-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+        }
+        .ops-header {
+          text-align: center;
+          margin-bottom: 50px;
+        }
+        .ops-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 20px;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 50px;
+          color: #f05a28;
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 20px;
+        }
+        .ops-title {
+          font-size: clamp(38px, 5vw, 58px);
+          font-weight: 700;
+          color: #fff;
+          margin-bottom: 16px;
+          line-height: 1.1;
+        }
+        .ops-highlight {
+          background: linear-gradient(135deg, #f05a28, #ff8a5c);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .ops-subtitle {
+          font-size: 18px;
+          color: #888;
+          max-width: 480px;
+          margin: 0 auto;
+        }
+        .ops-filters {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 40px;
+        }
+        .ops-filter {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 12px 24px;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 10px;
+          color: #888;
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .ops-filter:hover {
+          background: rgba(255,255,255,0.06);
+          color: #fff;
+        }
+        .ops-filter-active {
+          background: rgba(240,90,40,0.1);
+          border-color: #f05a28;
+          color: #f05a28;
+        }
+        .ops-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          margin-bottom: 50px;
+        }
+        .product-card {
+          position: relative;
+          padding: 28px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 20px;
+          text-decoration: none;
+          transition: all 0.4s ease;
+          animation: fadeInUp 0.6s ease forwards;
+          animation-delay: var(--delay);
+          opacity: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 260px;
+        }
+        .product-card:hover {
+          background: rgba(255,255,255,0.04);
+          border-color: var(--p-color);
+          transform: translateY(-8px);
+        }
+        .p-card-glow {
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          background: radial-gradient(circle at top right, var(--p-color), transparent 60%);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+        .product-card:hover .p-card-glow {
+          opacity: 0.08;
+        }
+        .p-card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 20px;
+        }
+        .p-icon-wrap {
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+        }
+        .p-tag {
+          font-size: 11px;
+          font-weight: 600;
+          padding: 6px 10px;
+          border-radius: 8px;
+        }
+        .p-name {
+          font-size: 22px;
+          font-weight: 700;
+          color: #fff;
+          margin-bottom: 6px;
+        }
+        .p-tagline {
+          font-size: 15px;
+          color: #ccc;
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+        .p-desc {
+          font-size: 13px;
+          color: #777;
+          line-height: 1.5;
+          margin-top: auto;
+        }
+        .p-arrow-wrap {
+          position: absolute;
+          bottom: 28px;
+          right: 28px;
+          width: 40px;
+          height: 40px;
+          background: var(--p-color);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          opacity: 0;
+          transform: translate(-10px, 10px);
+          transition: all 0.3s ease;
+        }
+        .product-card:hover .p-arrow-wrap {
+          opacity: 1;
+          transform: translate(0, 0);
+        }
+        .ops-skeleton {
+          height: 260px;
+          background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+          border-radius: 20px;
+          animation: shimmer 1.5s infinite;
+        }
+        .ops-stats {
+          display: flex;
+          justify-content: center;
+          gap: 60px;
+          padding: 40px;
+          background: rgba(255,255,255,0.02);
+          border-radius: 20px;
+          border: 1px solid rgba(255,255,255,0.04);
+          margin-bottom: 40px;
+        }
+        .ops-stat-item {
+          text-align: center;
+        }
+        .ops-stat-num {
+          display: block;
+          font-size: 44px;
+          font-weight: 700;
+          color: #fff;
+        }
+        .ops-stat-label {
+          color: #666;
+          font-size: 14px;
+        }
+        .ops-stat-sep {
+          width: 1px;
+          background: rgba(255,255,255,0.1);
+        }
+        .ops-cta {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+        }
+        .ops-btn-primary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 16px 32px;
+          background: #f05a28;
+          color: #fff;
+          border-radius: 12px;
+          font-size: 16px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        }
+        .ops-btn-primary:hover {
+          background: #e04d1f;
+          transform: translateY(-2px);
+        }
+        .ops-btn-outline {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 16px 32px;
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #fff;
+          border-radius: 12px;
+          font-size: 16px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+        }
+        .ops-btn-outline:hover {
+          border-color: #f05a28;
+          color: #f05a28;
+        }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        @media (max-width: 1024px) {
+          .ops-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+          .ops-grid { grid-template-columns: 1fr; }
+          .ops-stats { gap: 30px; }
+        }
+        @media (max-width: 480px) {
+          .ops-stats { flex-wrap: wrap; gap: 24px; }
+          .ops-stat-sep { display: none; }
+        }
+      `}</style>
+    </section>
+  )
 }

@@ -862,3 +862,217 @@ body.dark {
     grid-column: span 2;
   }
 }
+
+/* Tablet */
+@media (max-width: 992px) {
+  .pr-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .pr-header {
+    padding: 1.5rem;
+  }
+  
+  .pr-form-section {
+    padding: 1.5rem;
+  }
+  
+  .pr-form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .pr-form-group.pr-full,
+  .pr-form-group.pr-otp-group {
+    grid-column: span 1;
+  }
+  
+  .pr-step-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  
+  .pr-step-label {
+    font-size: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .pr-page {
+    padding-bottom: 2rem;
+  }
+  
+  .pr-container {
+    padding: 1rem 0.75rem;
+  }
+  
+  .pr-header {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+  
+  .pr-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .pr-stepper {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .pr-step {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .pr-step-line {
+    display: none;
+  }
+  
+  .pr-form-section {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+  
+  .pr-section-title {
+    font-size: 1.1rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .pr-form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .pr-label {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  
+  .pr-input,
+  .pr-select,
+  .pr-textarea {
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+  
+  .pr-btn-primary {
+    padding: 14px 20px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+  
+  .pr-file-upload {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .pr-file-icon {
+    font-size: 2rem;
+  }
+  
+  .pr-otp-input {
+    width: 40px;
+    height: 48px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+  
+  .pr-success-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+    border-radius: 50%;
+  }
+  
+  .pr-success-title {
+    font-size: 1.5rem;
+  }
+  
+  .pr-success-message {
+    font-size: 14px;
+  }
+  
+  .pr-success-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .pr-success-actions a {
+    width: 100%;
+    text-align: center;
+    padding: 12px 16px;
+  }
+  
+  .pr-footer-links {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .pr-container {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .pr-header {
+    padding: 1rem;
+  }
+  
+  .pr-header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .pr-header p {
+    font-size: 13px;
+  }
+  
+  .pr-form-section {
+    padding: 1rem;
+  }
+  
+  .pr-section-title {
+    font-size: 1rem;
+  }
+  
+  .pr-input,
+  .pr-select,
+  .pr-textarea {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .pr-btn-primary {
+    padding: 12px 16px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .pr-checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .pr-file-preview {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .pr-otp-container {
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .pr-otp-input {
+    width: 36px;
+    height: 44px;
+    font-size: 18px;
+  }
+}

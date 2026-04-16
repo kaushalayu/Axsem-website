@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { FiPlus, FiTrash2, FiEdit, FiSave, FiVideo, FiMessageSquare } from "react-icons/fi"
+import { FiPlus, FiTrash2, FiEdit, FiSave, FiVideo, FiMessageSquare, FiRefreshCw } from "react-icons/fi"
 import { api } from "../../services/api"
 
 export default function TestimonialManager() {
@@ -7,6 +7,7 @@ export default function TestimonialManager() {
   const [loading, setLoading] = useState(true)
   const [editItem, setEditItem] = useState(null)
   const [showForm, setShowForm] = useState(false)
+  const [seeding, setSeeding] = useState(false)
   const [formData, setFormData] = useState({
     name: '', role: '', company: '', color: '#f05a28', rating: 5,
     review: '', type: 'text', videoUrl: '', thumbnail: '', project: '',
@@ -19,6 +20,17 @@ export default function TestimonialManager() {
     setTestimonials(data?.data || data || [])
     setLoading(false)
   }).catch(() => { setTestimonials([]); setLoading(false) })
+
+  const handleSeed = async () => {
+    if (!confirm('Seed testimonials? This will replace existing data.')) return
+    setSeeding(true)
+    try {
+      await fetch('http://localhost:5000/api/seed/testimonials', { method: 'POST' })
+      loadTestimonials()
+      alert('Testimonials seeded!')
+    } catch (err) { alert('Error: ' + err.message) }
+    setSeeding(false)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -52,9 +64,14 @@ export default function TestimonialManager() {
     <div>
       <div className="admin-header">
         <h1>Testimonials</h1>
-        <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', role: '', company: '', color: '#f05a28', rating: 5, review: '', type: 'text', videoUrl: '', thumbnail: '', project: '', location: '', order: 0, isActive: true }) }}>
-          <FiPlus /> Add Testimonial
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button className="admin-btn" onClick={handleSeed} disabled={seeding}>
+            <FiRefreshCw /> Seed Data
+          </button>
+          <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', role: '', company: '', color: '#f05a28', rating: 5, review: '', type: 'text', videoUrl: '', thumbnail: '', project: '', location: '', order: 0, isActive: true }) }}>
+            <FiPlus /> Add Testimonial
+          </button>
+        </div>
       </div>
 
       {showForm && (
@@ -86,7 +103,7 @@ export default function TestimonialManager() {
             </div>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button type="submit" className="admin-btn admin-btn-primary"><FiSave /> Save</button>
-              <button type="button" className="admin-btn" onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="button" className="admin-btn" onClick={() => { setShowForm(false); setEditItem(null); setFormData({ name: '', role: '', company: '', color: '#f05a28', rating: 5, review: '', type: 'text', videoUrl: '', thumbnail: '', project: '', location: '', order: 0, isActive: true }) }}>Cancel</button>
             </div>
           </form>
         </div>

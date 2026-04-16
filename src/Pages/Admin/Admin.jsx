@@ -4,7 +4,7 @@ import {
   FiUsers, FiBriefcase, FiMessageSquare, FiFileText,
   FiHome, FiPlus, FiTrash2, FiEdit, FiX, FiFolder, FiSave,
   FiSettings, FiUpload, FiLogOut, FiDollarSign, FiUser, FiMail, FiPhone, FiCalendar,
-  FiInbox, FiSend, FiTool, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu
+  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool
 } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
@@ -16,7 +16,6 @@ import SupportTicketManager from "./SupportTicketManager"
 import NavbarManager from "./NavbarManager"
 import FooterManager from "./FooterManager"
 import ProductManager from "./ProductManager"
-import TechStackManager from "./TechStackManager"
 import TestimonialManager from "./TestimonialManager"
 
 function Dashboard() {
@@ -24,7 +23,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [unreadContacts, setUnreadContacts] = useState(0)
 
-  const IconMap = { FiFolder, FiUsers, FiBriefcase, FiSend, FiMessageSquare, FiFileText, FiActivity, FiTool, FiCpu }
+  const IconMap = { FiFolder, FiUsers, FiBriefcase, FiSend, FiMessageSquare, FiFileText, FiActivity, FiCpu }
 
   const statCards = [
     { label: 'Total Projects', value: stats.projects, icon: 'FiFolder', color: '#f05a28', bg: '#fff4f0' },
@@ -1581,11 +1580,14 @@ function InquiriesManager() {
 export default function AdminLayout() {
   const location = useLocation()
   const navigate = useNavigate()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleLogout = () => {
     api.logout()
     navigate('/login')
   }
+
+  const toggleSidebar = () => setSidebarOpen(prev => !prev)
 
   const navItems = [
     { path: '/admin', icon: <FiActivity />, label: 'Dashboard' },
@@ -1596,7 +1598,6 @@ export default function AdminLayout() {
     { path: '/admin/navbar', icon: <FiMenu />, label: 'Navbar' },
     { path: '/admin/footer', icon: <FiGlobe />, label: 'Footer' },
     { path: '/admin/products', icon: <FiFolder />, label: 'Products' },
-    { path: '/admin/techstack', icon: <FiTool />, label: 'Tech Stack' },
     { path: '/admin/testimonials', icon: <FiMessageSquare />, label: 'Testimonials' },
     { path: '/admin/company', icon: <FiAward />, label: 'Company Info' },
     { path: '/admin/services', icon: <FiTool />, label: 'Services' },
@@ -1610,7 +1611,13 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-layout">
-      <aside className="admin-sidebar">
+      <button className="admin-sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        ☰
+      </button>
+      <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
+        <button className="admin-sidebar-close" onClick={() => setSidebarOpen(false)}>
+          ✕
+        </button>
         <div className="admin-logo">
           <img src={logo} alt="AXSEM" />
         </div>
@@ -1619,13 +1626,14 @@ export default function AdminLayout() {
             <Link
               key={item.path}
               to={item.path}
+              onClick={() => setSidebarOpen(false)}
               className={`admin-nav-item ${location.pathname === item.path ? 'active' : ''}`}
             >
               {item.icon}
               {item.label}
             </Link>
           ))}
-          <button onClick={handleLogout} className="admin-nav-item admin-logout-btn">
+          <button onClick={() => { handleLogout(); setSidebarOpen(false); }} className="admin-nav-item admin-logout-btn">
             <FiLogOut />
             Logout
           </button>
@@ -1649,7 +1657,6 @@ export default function AdminLayout() {
           <Route path="/admin/navbar" element={<NavbarManager />} />
           <Route path="/admin/footer" element={<FooterManager />} />
           <Route path="/admin/products" element={<ProductManager />} />
-          <Route path="/admin/techstack" element={<TechStackManager />} />
           <Route path="/admin/testimonials" element={<TestimonialManager />} />
           <Route path="/admin/contacts" element={<ContactsManager />} />
           <Route path="/admin/blogs" element={<BlogsManager />} />

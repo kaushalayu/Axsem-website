@@ -24,7 +24,6 @@ const TeamSection = lazy(() => import("../Components/TeamSection"))
 const ContactSection = lazy(() => import("../Components/ContactSection"))
 const ProductSection = lazy(() => import("../Components/ProductSection"))
 const WhyChoose = lazy(() => import("../Components/WhyChoose"))
-const TechStack = lazy(() => import("../Components/TechStack"))
 const Pricing = lazy(() => import("../Components/Pricing"))
 const Portfolio = lazy(() => import("../Components/Portfolio"))
 
@@ -149,9 +148,6 @@ export default function Home() {
             </Suspense>
             <Suspense fallback={<SectionFallback type="cards" />}>
                 <ProductSection />
-            </Suspense>
-            <Suspense fallback={<SectionFallback type="default" />}>
-                <TechStack />
             </Suspense>
             <Suspense fallback={<SectionFallback type="pricing" />}>
                 <Pricing />
