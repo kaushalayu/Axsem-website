@@ -8,7 +8,7 @@ export default function PageLoader() {
             className="page-loader"
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
-            transition={{ delay: 10, duration: 1 }}
+            transition={{ delay: 1.2, duration: 0.3 }}
         >
             <div className="loader-bg">
                 <div className="loader-orb orb-1"></div>
@@ -20,7 +20,7 @@ export default function PageLoader() {
                     className="loader-logo-wrapper"
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                     <div className="loader-logo-ring"></div>
                     <img 
@@ -34,7 +34,7 @@ export default function PageLoader() {
                     className="loader-text-container"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+                    transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                 >
                     <div className="loader-company">
                         <span className="loader-letter">A</span>
@@ -55,19 +55,15 @@ export default function PageLoader() {
                     className="loader-progress-container"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
+                    transition={{ delay: 0.4 }}
                 >
                     <div className="loader-progress-track">
                         <motion.div 
                             className="loader-progress-bar"
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
-                            transition={{ duration: 5, ease: "linear" }}
+                            transition={{ duration: 0.8, ease: "linear" }}
                         />
-                    </div>
-                    <div className="loader-progress-text">
-                        <span>Loading</span>
-                        <span className="loading-dots">...</span>
                     </div>
                 </motion.div>
             </div>

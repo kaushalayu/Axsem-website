@@ -544,6 +544,48 @@ export const api = {
       headers: { Authorization: `Bearer ${token}` },
     });
   },
+
+  // Products (for ProductSection)
+  getProducts: () => fetchWithErrorHandling(`${API_URL}/products`),
+  addProduct: (data) => fetchWithErrorHandling(`${API_URL}/products`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  updateProduct: (id, data) => fetchWithErrorHandling(`${API_URL}/products/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  deleteProduct: (id) => fetchWithErrorHandling(`${API_URL}/products/${id}`, {
+    method: 'DELETE',
+  }),
+
+  // TechStack
+  getTechStack: () => fetchWithErrorHandling(`${API_URL}/techstack`),
+  addTechStack: (data) => fetchWithErrorHandling(`${API_URL}/techstack`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  updateTechStack: (id, data) => fetchWithErrorHandling(`${API_URL}/techstack/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  deleteTechStack: (id) => fetchWithErrorHandling(`${API_URL}/techstack/${id}`, {
+    method: 'DELETE',
+  }),
+
+  // Testimonials
+  getTestimonials: () => fetchWithErrorHandling(`${API_URL}/testimonials`),
+  addTestimonial: (data) => fetchWithErrorHandling(`${API_URL}/testimonials`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  updateTestimonial: (id, data) => fetchWithErrorHandling(`${API_URL}/testimonials/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  deleteTestimonial: (id) => fetchWithErrorHandling(`${API_URL}/testimonials/${id}`, {
+    method: 'DELETE',
+  }),
 };
 
 export { ApiError };

@@ -7,7 +7,6 @@ export const navMenu = [
       { name: "CEO and Founder  ", path: "/about/company" },
       { name: "Our Journey", path: "/about/journay" },
       { name: "Our Team", path: "/about/team" },
-      { name: "Careers", path: "/about/careers" },
     ],
   },
 

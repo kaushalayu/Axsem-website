@@ -1,10 +1,18 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useMemo } from "react"
 import { FiArrowRight, FiCpu } from "react-icons/fi"
 import { FaReact, FaVuejs, FaNodeJs, FaPython, FaDocker, FaAws, FaGoogle, FaGithub, FaSwift, FaAndroid } from "react-icons/fa"
 import { SiFlutter } from "react-icons/si"
 import { DiPostgresql, DiMysql, DiMongodb, DiRedis, DiFirebase } from "react-icons/di"
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiDjango, SiLaravel, SiGo, SiKubernetes, SiTensorflow, SiPytorch, SiLangchain, SiOpenai } from "react-icons/si"
+import { api } from "../services/api"
 import "../Styles/TechStack.css"
+
+const ICON_MAP = {
+    FaReact, FaVuejs, FaNodeJs, FaPython, FaDocker, FaAws, FaGoogle, FaGithub, FaSwift, FaAndroid,
+    SiFlutter, DiPostgresql, DiMysql, DiMongodb, DiRedis, DiFirebase,
+    SiTypescript, SiNextdotjs, SiTailwindcss, SiDjango, SiLaravel, SiGo, SiKubernetes,
+    SiTensorflow, SiPytorch, SiLangchain, SiOpenai
+}
 
 function useReveal(threshold = 0.08) {
     const ref = useRef(null)
@@ -88,10 +96,10 @@ const CATEGORIES = [
 ]
 
 function TechCard({ tech, accent, delay }) {
-    const IconComponent = tech.icon
+    const IconComponent = tech.icon && ICON_MAP[tech.icon] ? ICON_MAP[tech.icon] : FiCpu
     return (
         <div className="ts-tech-chip" style={{ "--accent": accent, "--delay": delay }}>
-            <span className="ts-tech-icon" style={{ color: tech.color }}>
+            <span className="ts-tech-icon" style={{ color: tech.color || '#666' }}>
                 <IconComponent />
             </span>
             <span className="ts-tech-name">{tech.name}</span>
@@ -101,13 +109,42 @@ function TechCard({ tech, accent, delay }) {
 
 export default function TechStackSection() {
     const [active, setActive] = useState(null)
+    const [techData, setTechData] = useState([])
+    const [loading, setLoading] = useState(true)
     const headerRef = useReveal()
     const gridRef = useReveal(0.05)
     const bottomRef = useReveal(0.1)
 
+    useEffect(() => {
+        api.getTechStack()
+            .then(data => {
+                if (data?.data) {
+                    setTechData(data.data)
+                } else if (Array.isArray(data)) {
+                    setTechData(data)
+                }
+            })
+            .catch(() => {})
+            .finally(() => setLoading(false))
+    }, [])
+
+    const categories = useMemo(() => {
+        if (techData.length === 0) return CATEGORIES
+        
+        const grouped = {}
+        techData.forEach(t => {
+            const cat = t.category || 'Other'
+            if (!grouped[cat]) {
+                grouped[cat] = { name: cat, color: t.color || '#666', techs: [] }
+            }
+            grouped[cat].techs.push({ name: t.name, icon: t.icon, color: t.color })
+        })
+        return Object.values(grouped)
+    }, [techData])
+
     const displayed = active
-        ? CATEGORIES.filter(c => c.name === active)
-        : CATEGORIES
+        ? categories.filter(c => c.name === active)
+        : categories
 
     return (
         <section className="ts-section">

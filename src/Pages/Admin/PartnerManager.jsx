@@ -250,11 +250,11 @@ export default function PartnerManager() {
           <table className="admin-table">
             <thead>
               <tr>
-                <th>Partner ID</th>
-                <th>Company</th>
+                <th>Photo</th>
+                <th>Partner</th>
                 <th>Contact</th>
                 <th>Email</th>
-                <th>Business Type</th>
+                <th>Business</th>
                 <th>Status</th>
                 <th>Joined</th>
                 <th>Actions</th>
@@ -263,8 +263,40 @@ export default function PartnerManager() {
             <tbody>
               {partners.map(p => (
                 <tr key={p._id}>
-                  <td><strong>{p.partnerId}</strong></td>
-                  <td>{p.companyName}</td>
+                  <td>
+                    {p.profilePhoto ? (
+                      <img 
+                        src={p.profilePhoto} 
+                        alt={p.contactPerson} 
+                        style={{
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '8px',
+                          objectFit: 'cover'
+                        }}
+                      />
+                    ) : (
+                      <div style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '8px',
+                        background: 'linear-gradient(135deg, #f05a28, #e04a18)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'white',
+                        fontWeight: '600',
+                        fontSize: '14px'
+                      }}>
+                        {p.contactPerson?.charAt(0) || 'P'}
+                      </div>
+                    )}
+                  </td>
+                  <td>
+                    <strong>{p.partnerId}</strong>
+                    <br />
+                    <small style={{color: '#666'}}>{p.companyName}</small>
+                  </td>
                   <td>{p.contactPerson}</td>
                   <td>{p.email}</td>
                   <td>{BUSINESS_TYPES[p.businessType] || p.businessType}</td>
@@ -325,9 +357,34 @@ export default function PartnerManager() {
       {showModal && selectedPartner && (
         <div className="admin-modal">
           <div className="admin-modal-content" style={{ maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto' }}>
-            <div className="admin-modal-header">
-              <h3>Partner: {selectedPartner.companyName}</h3>
-              <button className="admin-modal-close" onClick={() => { setShowModal(false); setSelectedPartner(null) }}>
+            <div className="admin-modal-header" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              {selectedPartner.profilePhoto ? (
+                <img 
+                  src={selectedPartner.profilePhoto} 
+                  alt={selectedPartner.contactPerson}
+                  style={{ width: '50px', height: '50px', borderRadius: '10px', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #f05a28, #e04a18)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: '600',
+                  fontSize: '20px'
+                }}>
+                  {selectedPartner.contactPerson?.charAt(0) || 'P'}
+                </div>
+              )}
+              <div>
+                <h3 style={{ margin: 0 }}>{selectedPartner.companyName}</h3>
+                <small style={{ color: '#666' }}>{selectedPartner.partnerId}</small>
+              </div>
+              <button className="admin-modal-close" onClick={() => { setShowModal(false); setSelectedPartner(null) }} style={{ marginLeft: 'auto' }}>
                 ×
               </button>
             </div>
@@ -346,7 +403,7 @@ export default function PartnerManager() {
                   }}>
                     {selectedPartner.status?.toUpperCase()}
                   </span>
-                  <span style={{ color: '#666' }}>ID: {selectedPartner.partnerId}</span>
+                  <span style={{ color: '#666' }}>Contact: {selectedPartner.contactPerson}</span>
                 </div>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   <button className="admin-btn admin-btn-sm" onClick={() => setShowPasswordModal(true)} style={{ background: '#007bff', color: 'white' }}>

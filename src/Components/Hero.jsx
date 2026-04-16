@@ -1,8 +1,13 @@
-import React, { useEffect, useRef, useState } from "react"
-import { FiArrowRight, FiPlay, FiCode, FiSmartphone, FiCloud, FiLayers } from "react-icons/fi"
+import React, { useEffect, useRef, useState, useMemo } from "react"
+import { FiArrowRight, FiPlay, FiCode, FiSmartphone, FiCloud, FiLayers, FiDatabase, FiShield, FiTarget, FiTrendingUp, FiGlobe, FiShoppingCart, FiBook, FiMail } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
 import { gsap } from "gsap"
+import { api } from "../services/api"
 import "../Styles/Hero.css"
+
+const HERO_ICONS = {
+  FiCode, FiSmartphone, FiCloud, FiLayers, FiDatabase, FiShield, FiTarget, FiTrendingUp, FiGlobe, FiShoppingCart, FiBook, FiMail
+}
 
 function useCounter(target, duration = 1800, started = false) {
     const [count, setCount] = useState(0)
@@ -104,7 +109,28 @@ export default function Hero() {
     const cardsRef = useRef([])
     const statsRef = useRef(null)
     const [statsStarted, setStatsStarted] = useState(false)
+    const [heroServices, setHeroServices] = useState([])
     const heroRef = useRef(null)
+
+    useEffect(() => {
+        api.getServices()
+            .then(data => {
+                const list = Array.isArray(data) ? data.slice(0, 4) : []
+                setHeroServices(list)
+            })
+            .catch(() => setHeroServices([]))
+    }, [])
+
+    const heroServicesData = useMemo(() => {
+        if (heroServices.length > 0) {
+            return heroServices.map((s, i) => ({
+                icon: HERO_ICONS[s.icon] || HERO_ICONS[Object.keys(HERO_ICONS)[i % Object.keys(HERO_ICONS).length]],
+                title: s.title || 'Service',
+                subtitle: s.desc?.substring(0, 20) || ''
+            }))
+        }
+        return null
+    }, [heroServices])
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -246,37 +272,48 @@ export default function Hero() {
                                 </div>
                             </div>
 
-                            <div className="fc fc-1" ref={el => cardsRef.current[0] = el}>
-                                <FiCode className="fc-icon" />
-                                <div>
-                                    <div className="fc-title">Web Dev</div>
-                                    <div className="fc-sub">React · Node · Next</div>
-                                </div>
-                            </div>
-
-                            <div className="fc fc-2" ref={el => cardsRef.current[1] = el}>
-                                <FiSmartphone className="fc-icon" />
-                                <div>
-                                    <div className="fc-title">Mobile</div>
-                                    <div className="fc-sub">Flutter · RN</div>
-                                </div>
-                            </div>
-
-                            <div className="fc fc-3" ref={el => cardsRef.current[2] = el}>
-                                <FiCloud className="fc-icon" />
-                                <div>
-                                    <div className="fc-title">Cloud</div>
-                                    <div className="fc-sub">AWS · Docker</div>
-                                </div>
-                            </div>
-
-                            <div className="fc fc-4" ref={el => cardsRef.current[3] = el}>
-                                <FiLayers className="fc-icon" />
-                                <div>
-                                    <div className="fc-title">UI/UX</div>
-                                    <div className="fc-sub">Figma · Framer</div>
-                                </div>
-                            </div>
+                            {heroServicesData ? (
+                                heroServicesData.map((item, i) => (
+                                    <div key={i} className={`fc fc-${i + 1}`} ref={el => cardsRef.current[i] = el}>
+                                        <span className="fc-icon">{item.icon}</span>
+                                        <div>
+                                            <div className="fc-title">{item.title}</div>
+                                            <div className="fc-sub">{item.subtitle}</div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <>
+                                    <div className="fc fc-1" ref={el => cardsRef.current[0] = el}>
+                                        <FiCode className="fc-icon" />
+                                        <div>
+                                            <div className="fc-title">Web Dev</div>
+                                            <div className="fc-sub">React · Node · Next</div>
+                                        </div>
+                                    </div>
+                                    <div className="fc fc-2" ref={el => cardsRef.current[1] = el}>
+                                        <FiSmartphone className="fc-icon" />
+                                        <div>
+                                            <div className="fc-title">Mobile</div>
+                                            <div className="fc-sub">Flutter · RN</div>
+                                        </div>
+                                    </div>
+                                    <div className="fc fc-3" ref={el => cardsRef.current[2] = el}>
+                                        <FiCloud className="fc-icon" />
+                                        <div>
+                                            <div className="fc-title">Cloud</div>
+                                            <div className="fc-sub">AWS · Docker</div>
+                                        </div>
+                                    </div>
+                                    <div className="fc fc-4" ref={el => cardsRef.current[3] = el}>
+                                        <FiLayers className="fc-icon" />
+                                        <div>
+                                            <div className="fc-title">UI/UX</div>
+                                            <div className="fc-sub">Figma · Framer</div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

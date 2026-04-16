@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiChevronDown, FiMessageCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import "../Styles/FAQ.css";
 
 const faqs = [
@@ -27,6 +29,16 @@ const faqs = [
         question: "Do you provide post-launch support?",
         answer:
             "Yes, we offer continuous support, maintenance, performance optimization, and feature upgrades after deployment."
+    },
+    {
+        question: "What industries do you serve?",
+        answer:
+            "We serve a wide range of industries including healthcare, e-commerce, education, fintech, real estate, and more. Our solutions are tailored to each industry's unique requirements."
+    },
+    {
+        question: "How do you ensure project security?",
+        answer:
+            "We implement industry-standard security practices including SSL encryption, secure authentication, regular security audits, and compliance with data protection regulations."
     }
 ];
 
@@ -39,54 +51,121 @@ const FAQ = () => {
 
     return (
         <section className="faq-section" id="faq">
+            <div className="faq-bg-pattern"></div>
             <div className="faq-container">
+                <div className="faq-header">
+                    <motion.span 
+                        className="faq-badge"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        FAQ's
+                    </motion.span>
+                    <motion.h2
+                        className="faq-title"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                    >
+                        Frequently Asked Questions
+                    </motion.h2>
+                    <motion.p
+                        className="faq-subtitle"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        Everything you need to know about working with AXSEM Softwares
+                    </motion.p>
+                </div>
 
                 <div className="faq-layout">
-
                     {/* LEFT SIDE */}
-                    <div className="faq-left">
-                        <span className="faq-label">Support & Help</span>
-
-                        <h2>
-                            Got Questions?
-                            <br />
-                            We’ve Got Answers.
-                        </h2>
-
-                        <p>
-                            Everything you need to know about working with AXSEM Softwares
-                            and how we build scalable, secure digital products.
-                        </p>
-
-                        <div className="faq-highlight-card">
-                            <h4>Still Need Help?</h4>
-                            <p>Our team is always available to assist you.</p>
-                            <button>Contact Support</button>
+                    <motion.div 
+                        className="faq-left"
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                    >
+                        <div className="faq-info-card">
+                            <div className="faq-info-icon">
+                                <FiMessageCircle />
+                            </div>
+                            <h3>Still have questions?</h3>
+                            <p>Can't find what you're looking for? Our support team is here to help you with any questions.</p>
+                            <Link to="/contact" className="faq-contact-btn">
+                                Contact Support
+                                <FiChevronDown style={{ transform: 'rotate(-90deg)' }} />
+                            </Link>
                         </div>
-                    </div>
+
+                        <div className="faq-stats">
+                            <div className="faq-stat">
+                                <span className="faq-stat-number">500+</span>
+                                <span className="faq-stat-label">Projects Delivered</span>
+                            </div>
+                            <div className="faq-stat">
+                                <span className="faq-stat-number">98%</span>
+                                <span className="faq-stat-label">Client Satisfaction</span>
+                            </div>
+                        </div>
+                    </motion.div>
 
                     {/* RIGHT SIDE */}
-                    <div className="faq-right">
+                    <motion.div 
+                        className="faq-right"
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                    >
                         {faqs.map((faq, index) => (
-                            <div
+                            <motion.div
                                 key={index}
                                 className={`faq-card ${activeIndex === index ? "open" : ""}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.05 }}
                             >
                                 <button
                                     className="faq-question"
                                     onClick={() => toggleFAQ(index)}
                                 >
-                                    <span>{faq.question}</span>
-                                    {activeIndex === index ? <Minus /> : <Plus />}
+                                    <span className="faq-question-text">{faq.question}</span>
+                                    <motion.span 
+                                        className="faq-icon"
+                                        animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <FiChevronDown />
+                                    </motion.span>
                                 </button>
 
-                                <div className="faq-answer">
-                                    <p>{faq.answer}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                <AnimatePresence>
+                                    {activeIndex === index && (
+                                        <motion.div
+                                            className="faq-answer"
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        >
+                                            <div className="faq-answer-content">
+                                                <p>{faq.answer}</p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
 
+                                <div className={`faq-card-accent ${activeIndex === index ? "active" : ""}`}></div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </section>
@@ -94,4 +173,3 @@ const FAQ = () => {
 };
 
 export default FAQ;
-

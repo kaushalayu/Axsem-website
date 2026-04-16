@@ -3,7 +3,13 @@ import {
     FiArrowUpRight, FiZap, FiUsers, FiBookOpen, FiShoppingBag,
     FiHome, FiCoffee, FiMap, FiTrendingUp, FiCpu, FiBarChart2, FiBriefcase,
 } from "react-icons/fi"
+import { api } from "../services/api"
 import "../Styles/ProductSection.css"
+
+const iconMap = {
+    FiArrowUpRight, FiZap, FiUsers, FiBookOpen, FiShoppingBag,
+    FiHome, FiCoffee, FiMap, FiTrendingUp, FiCpu, FiBarChart2, FiBriefcase
+}
 
 /* ── Scroll reveal ── */
 function useReveal(threshold = 0.1) {
@@ -180,7 +186,7 @@ function ProductCard({ p, i }) {
             {/* Icon */}
             <div className="prd-icon-wrap">
                 <div className="prd-icon-ring" />
-                <div className="prd-icon-box">{p.icon}</div>
+                <div className="prd-icon-box"><FiZap /></div>
             </div>
 
             {/* Text content */}
@@ -214,10 +220,26 @@ const STATS = [
 
 export default function ProductsSection() {
     const [tab, setTab] = useState("All")
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
     const headerRef = useReveal()
     const statsRef = useReveal(0.1)
 
-    const filtered = tab === "All" ? PRODUCTS : PRODUCTS.filter(p => p.category === tab)
+    useEffect(() => {
+        api.getProducts()
+            .then(data => {
+                if (data?.data) {
+                    setProducts(data.data)
+                } else if (Array.isArray(data)) {
+                    setProducts(data)
+                }
+            })
+            .catch(() => setProducts(PRODUCTS))
+            .finally(() => setLoading(false))
+    }, [])
+
+    const productsData = products.length > 0 ? products : PRODUCTS
+    const filtered = tab === "All" ? productsData : productsData.filter(p => p.category === tab)
 
     return (
         <section className="prd-section">

@@ -4,7 +4,7 @@ import {
   FiUsers, FiBriefcase, FiMessageSquare, FiFileText,
   FiHome, FiPlus, FiTrash2, FiEdit, FiX, FiFolder, FiSave,
   FiSettings, FiUpload, FiLogOut, FiDollarSign, FiUser, FiMail, FiPhone, FiCalendar,
-  FiInbox, FiSend, FiTool, FiAward, FiMapPin, FiActivity, FiLayers
+  FiInbox, FiSend, FiTool, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu
 } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
@@ -13,13 +13,18 @@ import PricingManager from "./PricingManager"
 import PartnerManager from "./PartnerManager"
 import EmployeeManager from "./EmployeeManager"
 import SupportTicketManager from "./SupportTicketManager"
+import NavbarManager from "./NavbarManager"
+import FooterManager from "./FooterManager"
+import ProductManager from "./ProductManager"
+import TechStackManager from "./TechStackManager"
+import TestimonialManager from "./TestimonialManager"
 
 function Dashboard() {
   const [stats, setStats] = useState({ team: 0, careers: 0, contacts: 0, blogs: 0, projects: 0, inquiries: 0 })
   const [loading, setLoading] = useState(true)
   const [unreadContacts, setUnreadContacts] = useState(0)
 
-  const IconMap = { FiFolder, FiUsers, FiBriefcase, FiSend, FiMessageSquare, FiFileText, FiActivity }
+  const IconMap = { FiFolder, FiUsers, FiBriefcase, FiSend, FiMessageSquare, FiFileText, FiActivity, FiTool, FiCpu }
 
   const statCards = [
     { label: 'Total Projects', value: stats.projects, icon: 'FiFolder', color: '#f05a28', bg: '#fff4f0' },
@@ -1529,7 +1534,8 @@ function InquiriesManager() {
               <tr>
                 <th>Name</th>
                 <th>Contact</th>
-                <th>Service/Subject</th>
+                <th>Services</th>
+                <th>Budget</th>
                 <th>Source</th>
                 <th>Message</th>
                 <th>Date</th>
@@ -1544,9 +1550,18 @@ function InquiriesManager() {
                     <div>{item.mobile || item.phone || '-'}</div>
                     <div style={{ fontSize: '12px', color: '#666' }}>{item.email || '-'}</div>
                   </td>
-                  <td>{item.serviceInterest || item.service || item.subject || '-'}</td>
+                  <td style={{ maxWidth: '150px' }}>
+                    {(item.services && item.services.length > 0) ? 
+                      item.services.slice(0, 2).map((s, i) => (
+                        <span key={i} style={{ display: 'inline-block', background: '#e8f4fd', color: '#0066cc', padding: '2px 6px', borderRadius: '3px', fontSize: '10px', marginRight: '3px', marginBottom: '3px' }}>{s}</span>
+                      )) : 
+                      <span>{item.service || item.serviceInterest || '-'}</span>
+                    }
+                    {(item.services && item.services.length > 2) && <span style={{ fontSize: '10px', color: '#666' }}>+{item.services.length - 2} more</span>}
+                  </td>
+                  <td>{item.budget || '-'}</td>
                   <td>{getSourceBadge(item.source)}</td>
-                  <td style={{ maxWidth: '200px' }}>{item.message?.substring(0, 50)}{item.message?.length > 50 ? '...' : ''}</td>
+                  <td style={{ maxWidth: '150px' }}>{item.message?.substring(0, 40)}{item.message?.length > 40 ? '...' : ''}</td>
                   <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                   <td>
                     <button className="admin-btn admin-btn-danger admin-btn-sm" onClick={() => handleDelete(item._id)}>
@@ -1578,6 +1593,11 @@ export default function AdminLayout() {
     { path: '/admin/partners', icon: <FiUsers />, label: 'Partners' },
     { path: '/admin/employees', icon: <FiUser />, label: 'Employees' },
     { path: '/admin/support-tickets', icon: <FiInbox />, label: 'Support Tickets' },
+    { path: '/admin/navbar', icon: <FiMenu />, label: 'Navbar' },
+    { path: '/admin/footer', icon: <FiGlobe />, label: 'Footer' },
+    { path: '/admin/products', icon: <FiFolder />, label: 'Products' },
+    { path: '/admin/techstack', icon: <FiTool />, label: 'Tech Stack' },
+    { path: '/admin/testimonials', icon: <FiMessageSquare />, label: 'Testimonials' },
     { path: '/admin/company', icon: <FiAward />, label: 'Company Info' },
     { path: '/admin/services', icon: <FiTool />, label: 'Services' },
     { path: '/admin/projects', icon: <FiFolder />, label: 'Projects' },
@@ -1626,6 +1646,11 @@ export default function AdminLayout() {
           <Route path="/admin/inquiries" element={<InquiriesManager />} />
           <Route path="/admin/employees" element={<EmployeeManager />} />
           <Route path="/admin/support-tickets" element={<SupportTicketManager />} />
+          <Route path="/admin/navbar" element={<NavbarManager />} />
+          <Route path="/admin/footer" element={<FooterManager />} />
+          <Route path="/admin/products" element={<ProductManager />} />
+          <Route path="/admin/techstack" element={<TechStackManager />} />
+          <Route path="/admin/testimonials" element={<TestimonialManager />} />
           <Route path="/admin/contacts" element={<ContactsManager />} />
           <Route path="/admin/blogs" element={<BlogsManager />} />
         </Routes>

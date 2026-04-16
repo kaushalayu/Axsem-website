@@ -11,8 +11,8 @@ import PartnerDashboard, {
 
 export default function PartnerRoutes() {
   return (
-    <PartnerDashboard>
-      <Routes>
+    <Routes>
+      <Route path="/" element={<PartnerDashboard />}>
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
@@ -21,7 +21,7 @@ export default function PartnerRoutes() {
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="tickets" element={<TicketsPage />} />
         <Route path="settings" element={<SettingsPage />} />
-      </Routes>
-    </PartnerDashboard>
+      </Route>
+    </Routes>
   )
 }

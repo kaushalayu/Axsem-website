@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import {
     FiPhone, FiMail, FiMapPin, FiClock, FiGlobe,
     FiChevronRight, FiHeart, FiMessageCircle,
@@ -13,8 +13,9 @@ import { MdOutlineLocationOn, MdOutlineAccessTime } from "react-icons/md"
 import "../Styles/Footer.css"
 import { Link } from "react-router-dom"
 import { useCompany } from "../contexts/CompanyContext"
+import { useFooter } from "../contexts/FooterContext"
 
-const NAV_COLS = [
+const STATIC_NAV_COLS = [
     {
         title: "Services",
         links: [
@@ -48,6 +49,7 @@ const NAV_COLS = [
             { label: "Our Team", href: "/about/team" },
             { label: "Our Journey", href: "/about/journay" },
             { label: "Careers", href: "/about/careers" },
+            { label: "Testimonials", href: "/testimonials" },
             { label: "Our Clients", href: "/portfolio/clients" },
             { label: "Projects", href: "/portfolio" },
             { label: "Blogs", href: "/blogs" },
@@ -58,6 +60,7 @@ const NAV_COLS = [
         title: "Quick Links",
         links: [
             { label: "Contact Us", href: "/contact" },
+            { label: "Careers", href: "/about/careers" },
             { label: "Partner Login", href: "/partner/login" },
             { label: "Client Registration", href: "/client/register" },
             { label: "Employee Verification", href: "/verify/employee" },
@@ -69,8 +72,41 @@ const NAV_COLS = [
     },
 ]
 
+const CATEGORY_ORDER = ['Services', 'Products', 'Company', 'Support', 'Legal', 'Quick Links']
+
 export default function AxsemFooter() {
     const { companyInfo } = useCompany()
+    const { footerLinks } = useFooter()
+    
+    const NAV_COLS = useMemo(() => {
+        if (!footerLinks || footerLinks.length === 0) {
+            return STATIC_NAV_COLS
+        }
+        
+        const grouped = {}
+        footerLinks.forEach(link => {
+            if (!grouped[link.category]) {
+                grouped[link.category] = []
+            }
+            grouped[link.category].push({
+                label: link.title,
+                href: link.url
+            })
+        })
+        
+        const cols = []
+        CATEGORY_ORDER.forEach(category => {
+            if (grouped[category] && grouped[category].length > 0) {
+                cols.push({
+                    title: category,
+                    links: grouped[category].sort((a, b) => a.order - b.order)
+                })
+            }
+        })
+        
+        return cols.length > 0 ? cols : STATIC_NAV_COLS
+    }, [footerLinks])
+    
     const SOCIALS = [
         { icon: <FaLinkedinIn />, href: companyInfo.linkedin || "https://linkedin.com/company/axsem", label: "LinkedIn" },
         { icon: <FaInstagram />, href: companyInfo.instagram || "https://instagram.com/axsem", label: "Instagram" },

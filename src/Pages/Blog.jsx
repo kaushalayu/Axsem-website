@@ -24,15 +24,21 @@ const BlogFallback = () => (
                 key={i}
                 className="blog-card-modern"
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 0.3, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
             >
-                <div className="blog-card-image-modern" style={{ background: 'rgba(255,255,255,0.05)' }} />
+                <div className="blog-card-image-modern" style={{ background: 'linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s ease-in-out infinite' }} />
                 <div className="blog-card-body-modern">
-                    <div className="blog-card-meta-modern" style={{ width: '50%', height: '12px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px' }} />
-                    <h3 style={{ width: '90%', height: '24px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', margin: '12px 0' }} />
-                    <p style={{ width: '100%', height: '40px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px' }} />
+                    <div className="blog-card-meta-modern" style={{ width: '50%', height: '12px', background: '#f3f4f6', borderRadius: '4px' }} />
+                    <h3 style={{ width: '90%', height: '24px', background: '#f3f4f6', borderRadius: '4px', margin: '12px 0' }} />
+                    <p style={{ width: '100%', height: '40px', background: '#f3f4f6', borderRadius: '4px' }} />
                 </div>
+                <style>{`
+                    @keyframes shimmer {
+                        0% { background-position: 200% 0; }
+                        100% { background-position: -200% 0; }
+                    }
+                `}</style>
             </motion.div>
         ))}
     </div>

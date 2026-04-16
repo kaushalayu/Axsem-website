@@ -13,10 +13,13 @@ import Footer from './Components/Footer'
 import InquiryModal from './Components/InquiryModal'
 import { ToastProvider } from './Components/Toast'
 import { CompanyProvider } from './contexts/CompanyContext'
+import { NavbarProvider } from './contexts/NavbarContext'
+import { FooterProvider } from './contexts/FooterContext'
 import { api } from './services/api'
 import './Styles/Toast.css'
 import MarketingSection from './Pages/Marketingsection'
 import ProductShowcasePage from './Pages/ProductShow'
+import Testimonials from './Pages/Testimonials'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -129,7 +132,11 @@ function App() {
         <ErrorBoundary>
           <ToastProvider>
             <CompanyProvider>
-              <AppContent />
+              <NavbarProvider>
+                <FooterProvider>
+                  <AppContent />
+                </FooterProvider>
+              </NavbarProvider>
             </CompanyProvider>
           </ToastProvider>
         </ErrorBoundary>
@@ -144,6 +151,8 @@ function AppContent() {
   const isLoginRoute = location.pathname === "/admin/login"
   const isNewLoginRoute = location.pathname === "/login"
   const isLoginPage = isLoginRoute || isNewLoginRoute
+  const isPartnerDashboard = location.pathname.startsWith("/partner/") && 
+    !['/partner/login', '/partner/register', '/partner/forgot-password'].includes(location.pathname)
   const isHomePage = location.pathname === "/"
   const [showLoader, setShowLoader] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -175,7 +184,7 @@ function AppContent() {
         const timer = setTimeout(() => {
           setPageTransition(false)
           setPrevPath(location.pathname)
-        }, 500)
+        }, 300)
         return () => clearTimeout(timer)
       }
     }
@@ -185,11 +194,7 @@ function AppContent() {
     if (!isAdminRoute) {
       setShowLoader(true)
       if (isHomePage) {
-        const timer = setTimeout(() => {
-          setShowLoader(false)
-          setTimeout(() => setShowModal(true), 400)
-        }, 5500)
-        return () => clearTimeout(timer)
+        setShowLoader(false)
       } else {
         setShowLoader(false)
       }
@@ -226,11 +231,10 @@ function AppContent() {
 
   return (
     <>
-      {!isAdminRoute && !isLoginPage && <PageTransitionLoader isLoading={pageTransition} />}
-      {!isAdminRoute && showLoader && <PageLoader />}
-      <TopHeader />
-      <Navbar />
-      {!isAdminRoute && isHomePage && showModal && <InquiryModal />}
+      {!isAdminRoute && !isLoginPage && !isPartnerDashboard && <PageTransitionLoader isLoading={pageTransition} />}
+      {!isPartnerDashboard && <TopHeader />}
+      {!isPartnerDashboard && <Navbar />}
+      {!isAdminRoute && isHomePage && <InquiryModal />}
 
       <Suspense fallback={<SectionFallback />}>
         <Routes>
@@ -325,15 +329,16 @@ function AppContent() {
           <Route path="/support/ticket" element={<SupportTicket />} />
           <Route path="/verify/employee" element={<EmployeeVerification />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/testimonials" element={<Testimonials />} />
 
           {/* 404 */}
           <Route path="*" element={<TempPage title="404 - Page Not Found" />} />
         </Routes>
       </Suspense>
 
-      <FloatingButtons />
-      <BackToTop />
-      <Footer />
+      {!isPartnerDashboard && <FloatingButtons />}
+      {!isPartnerDashboard && <BackToTop />}
+      {!isPartnerDashboard && <Footer />}
     </>
   )
 }

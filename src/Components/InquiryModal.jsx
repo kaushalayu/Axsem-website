@@ -3,6 +3,29 @@ import { FiX, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import { useCompany } from '../contexts/CompanyContext';
 import { api } from '../services/api';
 
+const SERVICE_OPTIONS = [
+  'Website Development',
+  'Mobile App Development',
+  'SEO Services',
+  'Digital Marketing',
+  'Graphic Design',
+  'UI/UX Design',
+  'Software Development',
+  'E-Commerce',
+  'Content Marketing',
+  'Social Media Marketing'
+];
+
+const BUDGET_OPTIONS = [
+  { value: '', label: 'Select Budget' },
+  { value: '5000-10000', label: '₹5,000 - ₹10,000' },
+  { value: '10000-25000', label: '₹10,000 - ₹25,000' },
+  { value: '25000-50000', label: '₹25,000 - ₹50,000' },
+  { value: '50000-100000', label: '₹50,000 - ₹1,00,000' },
+  { value: '100000-250000', label: '₹1,00,000 - ₹2,50,000' },
+  { value: '250000+', label: '₹2,50,000+' }
+];
+
 const InquiryModal = () => {
   const { services } = useCompany();
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +33,8 @@ const InquiryModal = () => {
     name: '',
     mobile: '',
     email: '',
-    service: '',
+    budget: '',
+    services: [],
     message: ''
   });
   const [loading, setLoading] = useState(false);
@@ -21,19 +45,51 @@ const InquiryModal = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+    return () => { 
+      document.body.style.overflow = ''; 
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [isOpen]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleServiceToggle = (service) => {
+    setFormData(prev => {
+      const currentServices = prev.services || [];
+      if (currentServices.includes(service)) {
+        return { ...prev, services: currentServices.filter(s => s !== service) };
+      } else {
+        return { ...prev, services: [...currentServices, service] };
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.addInquiry(formData);
+      const inquiryData = {
+        ...formData,
+        service: formData.services.join(', ')
+      };
+      await api.addInquiry(inquiryData);
       setNotification({ type: 'success', message: 'Thank you! We will contact you soon.' });
       setTimeout(() => {
         setIsOpen(false);
-        setFormData({ name: '', mobile: '', email: '', service: '', message: '' });
+        setFormData({ name: '', mobile: '', email: '', budget: '', services: [], message: '' });
         setNotification(null);
       }, 2000);
     } catch (err) {
@@ -42,31 +98,64 @@ const InquiryModal = () => {
     setLoading(false);
   };
 
+  const allServiceOptions = [...SERVICE_OPTIONS, ...services.map(s => typeof s.title === 'string' ? s.title : 'Service').filter(s => !SERVICE_OPTIONS.includes(s))];
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setIsOpen(false);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0,0,0,0.5)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 9999,
-      padding: '20px'
-    }} onClick={() => setIsOpen(false)}>
-      <div style={{
-        backgroundColor: '#fff',
-        borderRadius: '16px',
-        padding: '36px',
-        maxWidth: '520px',
-        width: '100%',
-        position: 'relative',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.2)'
-      }} onClick={(e) => e.stopPropagation()}>
+    <div 
+      className="inquiry-modal-wrapper"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 9999,
+        padding: '10px',
+        overflow: 'hidden'
+      }}
+      onClick={handleOverlayClick}
+    >
+      <style>{`
+        .inquiry-modal-wrapper {
+          touch-action: none !important;
+        }
+        .inquiry-modal-wrapper * {
+          touch-action: none !important;
+        }
+        .inquiry-modal-form {
+          touch-action: pan-y !important;
+          -webkit-overflow-scrolling: touch;
+        }
+        .inquiry-modal-form input, .inquiry-modal-form select, .inquiry-modal-form textarea, .inquiry-modal-form button {
+          touch-action: manipulation !important;
+        }
+      `}</style>
+      <div 
+        className="inquiry-modal-form"
+        style={{
+          backgroundColor: '#fff',
+          borderRadius: '16px',
+          padding: '24px',
+          maxWidth: '700px',
+          width: '100%',
+          position: 'relative',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+          margin: '10px 0'
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={() => setIsOpen(false)}
           style={{
@@ -128,7 +217,7 @@ const InquiryModal = () => {
         )}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '18px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <input
               type="text"
               name="name"
@@ -138,16 +227,16 @@ const InquiryModal = () => {
               required
               style={{
                 width: '100%',
-                padding: '14px 18px',
+                padding: '10px 14px',
                 border: '1px solid #ddd',
-                borderRadius: '10px',
-                fontSize: '15px',
+                borderRadius: '8px',
+                fontSize: '13px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <div style={{ marginBottom: '18px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <input
               type="tel"
               name="mobile"
@@ -157,16 +246,16 @@ const InquiryModal = () => {
               required
               style={{
                 width: '100%',
-                padding: '14px 18px',
+                padding: '10px 14px',
                 border: '1px solid #ddd',
-                borderRadius: '10px',
-                fontSize: '15px',
+                borderRadius: '8px',
+                fontSize: '13px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <div style={{ marginBottom: '18px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <input
               type="email"
               name="email"
@@ -175,56 +264,88 @@ const InquiryModal = () => {
               onChange={handleChange}
               style={{
                 width: '100%',
-                padding: '14px 18px',
+                padding: '10px 14px',
                 border: '1px solid #ddd',
-                borderRadius: '10px',
-                fontSize: '15px',
+                borderRadius: '8px',
+                fontSize: '13px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <div style={{ marginBottom: '18px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <select
-              name="service"
-              value={formData.service}
+              name="budget"
+              value={formData.budget}
               onChange={handleChange}
               required
               style={{
                 width: '100%',
-                padding: '14px 18px',
+                padding: '10px 14px',
                 border: '1px solid #ddd',
-                borderRadius: '10px',
-                fontSize: '15px',
+                borderRadius: '8px',
+                fontSize: '13px',
                 boxSizing: 'border-box',
                 backgroundColor: '#fff'
               }}
             >
-              <option value="">Select Service</option>
-              {services.map((service, index) => {
-                const title = typeof service.title === 'string' ? service.title : 'Service';
-                return (
-                  <option key={service._id || title || index} value={title}>
-                    {title}
-                  </option>
-                );
-              })}
+              {BUDGET_OPTIONS.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
 
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '10px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500', color: '#333', fontSize: '13px' }}>
+              Which Service You Want
+            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px' }}>
+              {allServiceOptions.map((service, index) => (
+                <label
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '6px 4px',
+                    border: formData.services.includes(service) ? '2px solid #f05a28' : '1px solid #ddd',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    backgroundColor: formData.services.includes(service) ? '#fff5f0' : '#fff'
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={formData.services.includes(service)}
+                    onChange={() => handleServiceToggle(service)}
+                    style={{
+                      marginRight: '8px',
+                      width: '16px',
+                      height: '16px',
+                      accentColor: '#f05a28'
+                    }}
+                  />
+                  <span style={{ fontSize: '11px' }}>{service}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '16px' }}>
             <textarea
               name="message"
-              placeholder="Your Message"
+              placeholder="Description"
               value={formData.message}
               onChange={handleChange}
-              rows="4"
+              rows="3"
               style={{
                 width: '100%',
-                padding: '14px 18px',
+                padding: '10px 14px',
                 border: '1px solid #ddd',
-                borderRadius: '10px',
-                fontSize: '15px',
+                borderRadius: '8px',
+                fontSize: '13px',
                 boxSizing: 'border-box',
                 resize: 'vertical'
               }}

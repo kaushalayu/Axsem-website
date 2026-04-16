@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import { FiStar, FiChevronLeft, FiChevronRight, FiMessageSquare } from "react-icons/fi"
+import { FiStar, FiChevronLeft, FiChevronRight, FiMessageSquare, FiPlay } from "react-icons/fi"
+import { api } from "../services/api"
 import "../Styles/ClientReviews.css"
 
 function useReveal(threshold = 0.1) {
@@ -99,23 +100,38 @@ function StarRating({ count = 5 }) {
 export default function ClientReviews() {
     const [active, setActive] = useState(0)
     const [paused, setPaused] = useState(false)
+    const [testimonials, setTestimonials] = useState([])
+    const [loading, setLoading] = useState(true)
     const headerRef = useReveal()
     const bodyRef = useReveal(0.08)
     const timerRef = useRef(null)
 
-    const total = reviews.length
+    useEffect(() => {
+        api.getTestimonials()
+            .then(data => {
+                if (data?.data) {
+                    setTestimonials(data.data)
+                } else if (Array.isArray(data)) {
+                    setTestimonials(data)
+                }
+            })
+            .catch(() => {})
+            .finally(() => setLoading(false))
+    }, [])
+
+    const reviewsData = testimonials.length > 0 ? testimonials : reviews
+    const total = reviewsData.length
 
     const next = () => setActive(p => (p + 1) % total)
     const prev = () => setActive(p => (p - 1 + total) % total)
 
-    // Auto-play
     useEffect(() => {
         if (paused) return
         timerRef.current = setInterval(next, 4500)
         return () => clearInterval(timerRef.current)
-    }, [paused, active])
+    }, [paused, active, total])
 
-    const current = reviews[active]
+    const current = reviewsData[active]
 
     return (
         <section className="rev-section">
@@ -161,14 +177,25 @@ export default function ClientReviews() {
                 >
 
                     {/* Featured card */}
-                    <div className="rev-featured" key={active} style={{ "--rev-color": current.color }}>
-                        <div className="rev-quote-mark">"</div>
-                        <StarRating count={current.rating} />
-                        <p className="rev-text">{current.review}</p>
+                    <div className="rev-featured" key={active} style={{ "--rev-color": current.color || '#f05a28' }}>
+                        {current.type === 'video' && current.videoUrl ? (
+                            <div className="rev-video-container" style={{ marginBottom: '20px' }}>
+                                <video 
+                                    src={current.videoUrl} 
+                                    controls 
+                                    poster={current.thumbnail}
+                                    style={{ width: '100%', borderRadius: '12px', maxHeight: '250px' }}
+                                />
+                            </div>
+                        ) : (
+                            <div className="rev-quote-mark">"</div>
+                        )}
+                        <StarRating count={current.rating || 5} />
+                        {current.review && <p className="rev-text">{current.review}</p>}
 
                         <div className="rev-author">
-                            <div className="rev-avatar" style={{ background: current.color }}>
-                                {current.avatar}
+                            <div className="rev-avatar" style={{ background: current.color || '#f05a28' }}>
+                                {current.avatar || current.name?.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
                             </div>
                             <div className="rev-author-info">
                                 <span className="rev-name">{current.name}</span>
