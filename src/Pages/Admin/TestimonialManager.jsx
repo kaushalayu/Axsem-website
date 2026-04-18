@@ -1,50 +1,88 @@
 import { useState, useEffect } from "react"
-import { FiPlus, FiTrash2, FiEdit, FiSave, FiVideo, FiMessageSquare, FiRefreshCw } from "react-icons/fi"
+import { FiPlus, FiTrash2, FiEdit, FiSave, FiVideo, FiMessageSquare, FiX, FiUpload } from "react-icons/fi"
 import { api } from "../../services/api"
+
+const BASE_URL = "http://localhost:5000"
+
+const emptyText = { name: '', role: '', color: '#f05a28', review: '', location: '', order: 0, isActive: true, type: 'text' }
+const emptyVideo = { name: '', role: '', color: '#f05a28', review: '', location: '', order: 0, isActive: true, type: 'video', videoUrl: '', thumbnail: '' }
 
 export default function TestimonialManager() {
   const [testimonials, setTestimonials] = useState([])
   const [loading, setLoading] = useState(true)
-  const [editItem, setEditItem] = useState(null)
+  const [tab, setTab] = useState('text') // 'text' | 'video'
   const [showForm, setShowForm] = useState(false)
-  const [seeding, setSeeding] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '', role: '', company: '', color: '#f05a28', rating: 5,
-    review: '', type: 'text', videoUrl: '', thumbnail: '', project: '',
-    location: '', order: 0, isActive: true
-  })
+  const [editItem, setEditItem] = useState(null)
+  const [formData, setFormData] = useState(emptyText)
+  const [videoFile, setVideoFile] = useState(null)
+  const [uploading, setUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState('')
 
   useEffect(() => { loadTestimonials() }, [])
 
-  const loadTestimonials = () => api.getTestimonials().then(data => {
-    setTestimonials(data?.data || data || [])
-    setLoading(false)
-  }).catch(() => { setTestimonials([]); setLoading(false) })
+  const loadTestimonials = () => {
+    api.getTestimonials().then(data => {
+      setTestimonials(data?.data || data || [])
+      setLoading(false)
+    }).catch(() => { setTestimonials([]); setLoading(false) })
+  }
 
-  const handleSeed = async () => {
-    if (!confirm('Seed testimonials? This will replace existing data.')) return
-    setSeeding(true)
+  const openAdd = () => {
+    setEditItem(null)
+    setFormData(tab === 'text' ? { ...emptyText } : { ...emptyVideo })
+    setVideoFile(null)
+    setUploadProgress('')
+    setShowForm(true)
+  }
+
+  const openEdit = (t) => {
+    setEditItem(t)
+    setFormData({ ...t })
+    setVideoFile(null)
+    setUploadProgress('')
+    setTab(t.type === 'video' ? 'video' : 'text')
+    setShowForm(true)
+  }
+
+  const closeForm = () => { setShowForm(false); setEditItem(null); setVideoFile(null); setUploadProgress('') }
+
+  const handleVideoUpload = async () => {
+    if (!videoFile) return formData.videoUrl
+    setUploading(true)
+    setUploadProgress('Uploading...')
     try {
-      await fetch('http://localhost:5000/api/seed/testimonials', { method: 'POST' })
-      loadTestimonials()
-      alert('Testimonials seeded!')
-    } catch (err) { alert('Error: ' + err.message) }
-    setSeeding(false)
+      const fd = new FormData()
+      fd.append('video', videoFile)
+      const res = await fetch(`${BASE_URL}/api/upload/video`, { method: 'POST', body: fd })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.message)
+      setUploadProgress('✅ Uploaded!')
+      return data.url
+    } catch (err) {
+      setUploadProgress('❌ Upload failed: ' + err.message)
+      throw err
+    } finally {
+      setUploading(false)
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      if (editItem?._id) {
-        await api.updateTestimonial(editItem._id, formData)
-      } else {
-        await api.addTestimonial(formData)
+      let finalData = { ...formData }
+      if (tab === 'video' && videoFile) {
+        finalData.videoUrl = await handleVideoUpload()
       }
-      setShowForm(false)
-      setEditItem(null)
-      setFormData({ name: '', role: '', company: '', color: '#f05a28', rating: 5, review: '', type: 'text', videoUrl: '', thumbnail: '', project: '', location: '', order: 0, isActive: true })
+      if (editItem?._id) {
+        await api.updateTestimonial(editItem._id, finalData)
+      } else {
+        await api.addTestimonial(finalData)
+      }
+      closeForm()
       loadTestimonials()
-    } catch (err) { alert('Error: ' + err.message) }
+    } catch (err) {
+      if (!uploadProgress.includes('failed')) alert('Error: ' + err.message)
+    }
   }
 
   const handleDelete = async (id) => {
@@ -54,95 +92,154 @@ export default function TestimonialManager() {
     }
   }
 
-  const handleEdit = (t) => {
-    setEditItem(t)
-    setFormData({ ...t })
-    setShowForm(true)
-  }
+  const set = (key, val) => setFormData(p => ({ ...p, [key]: val }))
+
+  const filtered = testimonials.filter(t => (tab === 'video' ? t.type === 'video' : t.type !== 'video'))
+
+  const inputStyle = { padding: '9px 12px', border: '1px solid #ddd', borderRadius: '6px', width: '100%', boxSizing: 'border-box' }
+  const gridStyle = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '12px' }
 
   return (
     <div>
       <div className="admin-header">
         <h1>Testimonials</h1>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <button className="admin-btn" onClick={handleSeed} disabled={seeding}>
-            <FiRefreshCw /> Seed Data
-          </button>
-          <button className="admin-btn admin-btn-primary" onClick={() => { setShowForm(true); setEditItem(null); setFormData({ name: '', role: '', company: '', color: '#f05a28', rating: 5, review: '', type: 'text', videoUrl: '', thumbnail: '', project: '', location: '', order: 0, isActive: true }) }}>
-            <FiPlus /> Add Testimonial
-          </button>
-        </div>
+        <button className="admin-btn admin-btn-primary" onClick={openAdd}><FiPlus /> Add {tab === 'text' ? 'Text' : 'Video'}</button>
       </div>
 
+      {/* Tabs */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
+        <button
+          className={`admin-btn ${tab === 'text' ? 'admin-btn-primary' : ''}`}
+          onClick={() => { setTab('text'); setShowForm(false) }}
+          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+        >
+          <FiMessageSquare /> Text Reviews ({testimonials.filter(t => t.type !== 'video').length})
+        </button>
+        <button
+          className={`admin-btn ${tab === 'video' ? 'admin-btn-primary' : ''}`}
+          onClick={() => { setTab('video'); setShowForm(false) }}
+          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+        >
+          <FiVideo /> Video Testimonials ({testimonials.filter(t => t.type === 'video').length})
+        </button>
+      </div>
+
+      {/* Form */}
       {showForm && (
         <div className="admin-card" style={{ marginBottom: '20px' }}>
-          <h3>{editItem?._id ? 'Edit Testimonial' : 'Add New Testimonial'}</h3>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <h3 style={{ margin: 0 }}>{editItem ? 'Edit' : 'Add'} {tab === 'text' ? 'Text Review' : 'Video Testimonial'}</h3>
+            <button className="admin-btn" onClick={closeForm}><FiX /></button>
+          </div>
           <form onSubmit={handleSubmit}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
-              <input type="text" placeholder="Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }} />
-              <input type="text" placeholder="Role (e.g. CEO, Company Name)" value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }} />
-              <input type="text" placeholder="Color (e.g. #f05a28)" value={formData.color} onChange={e => setFormData({...formData, color: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }} />
-              <select value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }}>
-                <option value="text">Text Review</option>
-                <option value="video">Video Testimonial</option>
-              </select>
-              {formData.type === 'video' && (
-                <>
-                  <input type="text" placeholder="Video URL (mp4 link)" value={formData.videoUrl} onChange={e => setFormData({...formData, videoUrl: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px', gridColumn: 'span 2' }} />
-                  <input type="text" placeholder="Thumbnail URL" value={formData.thumbnail} onChange={e => setFormData({...formData, thumbnail: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px', gridColumn: 'span 2' }} />
-                </>
-              )}
-              <textarea placeholder="Review Text" value={formData.review} onChange={e => setFormData({...formData, review: e.target.value})} rows="3" style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px', gridColumn: 'span 2' }} />
-              <input type="text" placeholder="Project" value={formData.project} onChange={e => setFormData({...formData, project: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }} />
-              <input type="text" placeholder="Location" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }} />
-              <input type="number" placeholder="Order" value={formData.order} onChange={e => setFormData({...formData, order: parseInt(e.target.value)})} style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '6px' }} />
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input type="checkbox" checked={formData.isActive} onChange={e => setFormData({...formData, isActive: e.target.checked})} />
+            <div style={gridStyle}>
+              <input style={inputStyle} placeholder="Name *" value={formData.name} onChange={e => set('name', e.target.value)} required />
+              <input style={inputStyle} placeholder="Role (e.g. CEO, Company Name)" value={formData.role} onChange={e => set('role', e.target.value)} />
+              <input style={inputStyle} placeholder="Location" value={formData.location} onChange={e => set('location', e.target.value)} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <label style={{ fontSize: '13px', color: '#666' }}>Color:</label>
+                <input type="color" value={formData.color} onChange={e => set('color', e.target.value)} style={{ width: '50px', height: '36px', border: 'none', cursor: 'pointer' }} />
+                <input style={{ ...inputStyle, flex: 1 }} placeholder="#f05a28" value={formData.color} onChange={e => set('color', e.target.value)} />
+              </div>
+              <input type="number" style={inputStyle} placeholder="Order" value={formData.order} onChange={e => set('order', parseInt(e.target.value) || 0)} />
+            </div>
+
+            <textarea
+              style={{ ...inputStyle, marginBottom: '12px', resize: 'vertical' }}
+              placeholder="Review text..."
+              value={formData.review}
+              onChange={e => set('review', e.target.value)}
+              rows={3}
+            />
+
+            {/* Video specific fields */}
+            {tab === 'video' && (
+              <div style={{ background: '#f8f4ff', border: '1px solid #e0d4ff', borderRadius: '8px', padding: '14px', marginBottom: '12px' }}>
+                <p style={{ margin: '0 0 10px', fontWeight: '600', color: '#6b21a8', fontSize: '14px' }}>📹 Video Upload</p>
+                <div style={{ marginBottom: '10px' }}>
+                  <label style={{ fontSize: '13px', color: '#555', display: 'block', marginBottom: '6px' }}>Upload Video File (mp4, webm, mov — max 100MB)</label>
+                  <input
+                    type="file"
+                    accept="video/mp4,video/webm,video/quicktime,video/avi"
+                    onChange={e => { setVideoFile(e.target.files[0]); setUploadProgress('') }}
+                    style={{ ...inputStyle, padding: '6px' }}
+                  />
+                  {videoFile && <p style={{ margin: '4px 0 0', fontSize: '12px', color: '#6b21a8' }}>Selected: {videoFile.name} ({(videoFile.size / 1024 / 1024).toFixed(1)} MB)</p>}
+                  {uploadProgress && <p style={{ margin: '4px 0 0', fontSize: '12px', color: uploadProgress.includes('❌') ? 'red' : '#0e9e6e' }}>{uploadProgress}</p>}
+                </div>
+                {!videoFile && (
+                  <div>
+                    <label style={{ fontSize: '13px', color: '#555', display: 'block', marginBottom: '6px' }}>Or paste Video URL</label>
+                    <input style={inputStyle} placeholder="https://... (existing video URL)" value={formData.videoUrl} onChange={e => set('videoUrl', e.target.value)} />
+                  </div>
+                )}
+                <div style={{ marginTop: '10px' }}>
+                  <label style={{ fontSize: '13px', color: '#555', display: 'block', marginBottom: '6px' }}>Thumbnail URL (optional)</label>
+                  <input style={inputStyle} placeholder="https://... thumbnail image" value={formData.thumbnail} onChange={e => set('thumbnail', e.target.value)} />
+                </div>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <button type="submit" className="admin-btn admin-btn-primary" disabled={uploading}>
+                {uploading ? <><FiUpload /> Uploading...</> : <><FiSave /> Save</>}
+              </button>
+              <button type="button" className="admin-btn" onClick={closeForm}>Cancel</button>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', cursor: 'pointer' }}>
+                <input type="checkbox" checked={formData.isActive} onChange={e => set('isActive', e.target.checked)} />
                 Active
               </label>
-            </div>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button type="submit" className="admin-btn admin-btn-primary"><FiSave /> Save</button>
-              <button type="button" className="admin-btn" onClick={() => { setShowForm(false); setEditItem(null); setFormData({ name: '', role: '', company: '', color: '#f05a28', rating: 5, review: '', type: 'text', videoUrl: '', thumbnail: '', project: '', location: '', order: 0, isActive: true }) }}>Cancel</button>
             </div>
           </form>
         </div>
       )}
 
+      {/* List */}
       <div className="admin-card">
-        {loading ? <div className="admin-empty">Loading...</div> : testimonials.length === 0 ? (
-          <div className="admin-empty">No testimonials yet</div>
+        {loading ? (
+          <div className="admin-empty">Loading...</div>
+        ) : filtered.length === 0 ? (
+          <div className="admin-empty">No {tab === 'text' ? 'text reviews' : 'video testimonials'} yet</div>
         ) : (
           <table className="admin-table">
-            <thead><tr><th>Name</th><th>Type</th><th>Review</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>{tab === 'video' ? 'Video' : 'Review'}</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
             <tbody>
-              {testimonials.map(t => (
+              {filtered.map(t => (
                 <tr key={t._id}>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ width: '36px', height: '36px', borderRadius: '50%', background: t.color || '#f05a28', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', fontSize: '14px' }}>{t.name?.slice(0,2).toUpperCase()}</span>
+                      <span style={{ width: '36px', height: '36px', borderRadius: '50%', background: t.color || '#f05a28', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', fontSize: '14px', flexShrink: 0 }}>
+                        {t.name?.slice(0, 2).toUpperCase()}
+                      </span>
                       <div>
-                        <strong>{t.name}</strong><br/>
-                        <small>{t.role}</small>
+                        <strong>{t.name}</strong><br />
+                        <small style={{ color: '#666' }}>{t.role}</small>
                       </div>
                     </div>
                   </td>
-                  <td>
-                    {t.type === 'video' ? (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '4px 8px', borderRadius: '4px', background: '#ede9fe', color: '#6b21a8' }}>
-                        <FiVideo size={14} /> Video
-                      </span>
+                  <td style={{ maxWidth: '250px' }}>
+                    {tab === 'video' ? (
+                      t.videoUrl ? (
+                        <video src={t.videoUrl} style={{ width: '120px', height: '70px', objectFit: 'cover', borderRadius: '4px', background: '#000' }} controls={false} muted />
+                      ) : <span style={{ color: '#999', fontSize: '13px' }}>No video</span>
                     ) : (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '4px 8px', borderRadius: '4px', background: '#d1fae5', color: '#065f46' }}>
-                        <FiMessageSquare size={14} /> Text
-                      </span>
+                      <span style={{ fontSize: '13px', color: '#444' }}>{t.review?.slice(0, 80)}{t.review?.length > 80 ? '...' : ''}</span>
                     )}
                   </td>
-                  <td style={{ maxWidth: '200px' }}>{t.review?.slice(0, 60)}{t.review?.length > 60 ? '...' : ''}</td>
-                  <td>{t.order}</td>
-                  <td><span style={{ padding: '3px 8px', borderRadius: '4px', background: t.isActive ? '#d4edda' : '#f8d7da', color: t.isActive ? '#155724' : '#721c24' }}>{t.isActive ? 'Active' : 'Inactive'}</span></td>
                   <td>
-                    <button className="admin-btn" onClick={() => handleEdit(t)}><FiEdit /></button>
+                    <span style={{ padding: '3px 8px', borderRadius: '4px', fontSize: '12px', background: t.isActive ? '#d4edda' : '#f8d7da', color: t.isActive ? '#155724' : '#721c24' }}>
+                      {t.isActive ? 'Active' : 'Inactive'}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="admin-btn" onClick={() => openEdit(t)}><FiEdit /></button>
                     <button className="admin-btn admin-btn-danger" onClick={() => handleDelete(t._id)}><FiTrash2 /></button>
                   </td>
                 </tr>

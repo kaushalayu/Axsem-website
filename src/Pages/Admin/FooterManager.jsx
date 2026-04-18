@@ -52,7 +52,7 @@ export default function FooterManager() {
     try {
       setLoading(true)
       setError(null)
-      const response = await fetch(`${API_URL}/api/footer/all`)
+      const response = await fetch(`${API_URL}/footer/all`)
       if (!response.ok) throw new Error('Failed to load links')
       const data = await response.json()
       setLinks(data)
@@ -69,8 +69,8 @@ export default function FooterManager() {
       setSaving(true)
       
       const url = editId 
-        ? `${API_URL}/api/footer/${editId}`
-        : `${API_URL}/api/footer`
+        ? `${API_URL}/footer/${editId}`
+        : `${API_URL}/footer`
       
       const method = editId ? 'PUT' : 'POST'
       
@@ -95,7 +95,7 @@ export default function FooterManager() {
     if (!confirm('Delete this link?')) return
     
     try {
-      const response = await fetch(`${API_URL}/api/footer/${id}`, {
+      const response = await fetch(`${API_URL}/footer/${id}`, {
         method: 'DELETE'
       })
       

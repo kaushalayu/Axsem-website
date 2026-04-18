@@ -423,6 +423,7 @@ export const api = {
     const token = localStorage.getItem('partnerToken');
     if (!token) return Promise.resolve({ success: false });
     return fetchWithErrorHandling(`${API_URL}/partners/verify`, {
+      method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
     });
   },

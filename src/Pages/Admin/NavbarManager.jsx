@@ -81,7 +81,7 @@ export default function NavbarManager() {
     try {
       setLoading(true)
       setError(null)
-      const response = await fetch(`${API_URL}/api/navbar/all`)
+      const response = await fetch(`${API_URL}/navbar/all`)
       if (!response.ok) throw new Error('Failed to load links')
       const data = await response.json()
       setLinks(data)
@@ -98,8 +98,8 @@ export default function NavbarManager() {
       setSaving(true)
       
       const url = editId 
-        ? `${API_URL}/api/navbar/${editId}`
-        : `${API_URL}/api/navbar`
+        ? `${API_URL}/navbar/${editId}`
+        : `${API_URL}/navbar`
       
       const method = editId ? 'PUT' : 'POST'
       
@@ -124,7 +124,7 @@ export default function NavbarManager() {
     if (!confirm('Delete this link? It will also delete any child links.')) return
     
     try {
-      const response = await fetch(`${API_URL}/api/navbar/${id}`, {
+      const response = await fetch(`${API_URL}/navbar/${id}`, {
         method: 'DELETE'
       })
       
