@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import "../styles/CompanyOverview.css"
+import "../Styles/CompanyOverview.css"
 import PageHero from "../Components/PageHero"
 import CEO from "../assets/CEO_SURAJ.webp"
 import about from "../assets/about-team.webp";
