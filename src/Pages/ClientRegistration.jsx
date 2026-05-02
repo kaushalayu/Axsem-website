@@ -10,9 +10,6 @@ import { useToast } from "../Components/Toast"
 import PageHero from "../Components/PageHero"
 import "../Styles/ClientRegistration.css"
 
-export default function ClientRegistration() {
-  const { addToast } = useToast()
-
 const SERVICE_INTERESTS = [
   { value: "web_development", label: "Web Development" },
   { value: "mobile_apps", label: "Mobile App Development" },
@@ -35,6 +32,7 @@ const BUDGET_RANGES = [
 ]
 
 export default function ClientRegistration() {
+  const { addToast } = useToast()
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
