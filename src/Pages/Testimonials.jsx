@@ -17,7 +17,7 @@ export default function TestimonialsPage() {
                     setTestimonials(data)
                 }
             })
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => setLoading(false))
     }, [])
 
@@ -31,7 +31,7 @@ export default function TestimonialsPage() {
                     Video <span style={{ color: '#f05a28' }}>Testimonials</span>
                 </h1>
                 <p style={{ color: '#888', textAlign: 'center', marginBottom: '50px', fontSize: '18px' }}>
-                    Hear from our happy clients about their experience with AXSEM
+                    Hear from our happy clients about their experience with Axsem
                 </p>
 
                 {loading ? (
@@ -44,11 +44,11 @@ export default function TestimonialsPage() {
                     <>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px', marginBottom: '60px' }}>
                             {videoTestimonials.map((t, i) => (
-                                <div 
+                                <div
                                     key={i}
-                                    style={{ 
-                                        background: '#1a1a1a', 
-                                        borderRadius: '16px', 
+                                    style={{
+                                        background: '#1a1a1a',
+                                        borderRadius: '16px',
                                         overflow: 'hidden',
                                         cursor: 'pointer',
                                         transition: 'transform 0.3s',
@@ -59,25 +59,25 @@ export default function TestimonialsPage() {
                                         {t.thumbnail ? (
                                             <img src={t.thumbnail} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         ) : null}
-                                        <div style={{ 
-                                            position: 'absolute', 
-                                            background: 'rgba(240,90,40,0.9)', 
-                                            borderRadius: '50%', 
-                                            width: '60px', 
-                                            height: '60px', 
-                                            display: 'flex', 
-                                            alignItems: 'center', 
-                                            justifyContent: 'center' 
+                                        <div style={{
+                                            position: 'absolute',
+                                            background: 'rgba(240,90,40,0.9)',
+                                            borderRadius: '50%',
+                                            width: '60px',
+                                            height: '60px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
                                         }}>
                                             <FiPlay style={{ color: '#fff', fontSize: '24px', marginLeft: '4px' }} />
                                         </div>
                                     </div>
                                     <div style={{ padding: '20px' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                                            <div style={{ 
-                                                width: '40px', 
-                                                height: '40px', 
-                                                borderRadius: '50%', 
+                                            <div style={{
+                                                width: '40px',
+                                                height: '40px',
+                                                borderRadius: '50%',
                                                 background: t.color || '#f05a28',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -116,10 +116,10 @@ export default function TestimonialsPage() {
                                             </div>
                                             <p style={{ color: '#ccc', fontSize: '16px', lineHeight: '1.6', marginBottom: '20px' }}>"{t.review}"</p>
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                                <div style={{ 
-                                                    width: '48px', 
-                                                    height: '48px', 
-                                                    borderRadius: '50%', 
+                                                <div style={{
+                                                    width: '48px',
+                                                    height: '48px',
+                                                    borderRadius: '50%',
                                                     background: t.color || '#f05a28',
                                                     display: 'flex',
                                                     alignItems: 'center',
@@ -143,7 +143,7 @@ export default function TestimonialsPage() {
                 )}
 
                 {activeVideo && (
-                    <div 
+                    <div
                         style={{
                             position: 'fixed',
                             top: 0,
@@ -159,9 +159,9 @@ export default function TestimonialsPage() {
                         onClick={() => setActiveVideo(null)}
                     >
                         <div style={{ maxWidth: '900px', width: '100%', padding: '20px' }} onClick={e => e.stopPropagation()}>
-                            <video 
-                                src={activeVideo.videoUrl} 
-                                controls 
+                            <video
+                                src={activeVideo.videoUrl}
+                                controls
                                 autoPlay
                                 style={{ width: '100%', borderRadius: '16px' }}
                             />

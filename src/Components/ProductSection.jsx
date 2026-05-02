@@ -23,10 +23,10 @@ function ProductCard({ product, index }) {
   }[product.icon] || FiBox
 
   return (
-    <a 
-      href={product.path} 
+    <a
+      href={product.path}
       className="product-card"
-      style={{ 
+      style={{
         '--p-color': product.color,
         '-- delay': `${index * 0.1}s`
       }}
@@ -145,8 +145,12 @@ export default function ProductsSection() {
         .our-products-section {
           position: relative;
           padding: 100px 20px;
-          background: #0f0f0f;
+          background: var(--ops-bg, #f8f8ff);
           overflow: hidden;
+          transition: background 0.4s;
+        }
+        body.dark .our-products-section {
+          --ops-bg: #0f0f0f;
         }
         .ops-bg {
           position: absolute;
@@ -172,8 +176,11 @@ export default function ProductsSection() {
         .ops-dots {
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(61,61,158,0.06) 1px, transparent 1px);
           background-size: 40px 40px;
+        }
+        body.dark .ops-dots {
+          background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
         }
         .ops-container {
           max-width: 1200px;
@@ -190,20 +197,28 @@ export default function ProductsSection() {
           align-items: center;
           gap: 8px;
           padding: 10px 20px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: rgba(240,90,40,0.08);
+          border: 1px solid rgba(240,90,40,0.2);
           border-radius: 50px;
           color: #f05a28;
           font-size: 14px;
           font-weight: 500;
           margin-bottom: 20px;
         }
+        body.dark .ops-badge {
+          background: rgba(255,255,255,0.04);
+          border-color: rgba(255,255,255,0.08);
+        }
         .ops-title {
           font-size: clamp(38px, 5vw, 58px);
           font-weight: 700;
-          color: #fff;
+          color: #1a1a2e;
           margin-bottom: 16px;
           line-height: 1.1;
+          transition: color 0.4s;
+        }
+        body.dark .ops-title {
+          color: #fff;
         }
         .ops-highlight {
           background: linear-gradient(135deg, #f05a28, #ff8a5c);
@@ -213,9 +228,13 @@ export default function ProductsSection() {
         }
         .ops-subtitle {
           font-size: 18px;
-          color: #888;
+          color: #5a5a7a;
           max-width: 480px;
           margin: 0 auto;
+          transition: color 0.4s;
+        }
+        body.dark .ops-subtitle {
+          color: #888;
         }
         .ops-filters {
           display: flex;
@@ -228,23 +247,32 @@ export default function ProductsSection() {
           align-items: center;
           gap: 6px;
           padding: 12px 24px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: rgba(61,61,158,0.04);
+          border: 1px solid rgba(61,61,158,0.1);
           border-radius: 10px;
-          color: #888;
+          color: #5a5a7a;
           font-size: 14px;
           font-weight: 500;
           cursor: pointer;
           transition: all 0.3s ease;
         }
+        body.dark .ops-filter {
+          background: rgba(255,255,255,0.03);
+          border-color: rgba(255,255,255,0.08);
+          color: #888;
+        }
         .ops-filter:hover {
+          background: rgba(61,61,158,0.08);
+          color: #1a1a2e;
+        }
+        body.dark .ops-filter:hover {
           background: rgba(255,255,255,0.06);
           color: #fff;
         }
         .ops-filter-active {
-          background: rgba(240,90,40,0.1);
-          border-color: #f05a28;
-          color: #f05a28;
+          background: rgba(240,90,40,0.1) !important;
+          border-color: #f05a28 !important;
+          color: #f05a28 !important;
         }
         .ops-grid {
           display: grid;
@@ -255,8 +283,8 @@ export default function ProductsSection() {
         .product-card {
           position: relative;
           padding: 28px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: rgba(255,255,255,0.9);
+          border: 1px solid rgba(61,61,158,0.1);
           border-radius: 20px;
           text-decoration: none;
           transition: all 0.4s ease;
@@ -266,11 +294,22 @@ export default function ProductsSection() {
           display: flex;
           flex-direction: column;
           min-height: 260px;
+          box-shadow: 0 4px 20px rgba(61,61,158,0.06);
+        }
+        body.dark .product-card {
+          background: rgba(255,255,255,0.02);
+          border-color: rgba(255,255,255,0.06);
+          box-shadow: none;
         }
         .product-card:hover {
-          background: rgba(255,255,255,0.04);
+          background: #fff;
           border-color: var(--p-color);
           transform: translateY(-8px);
+          box-shadow: 0 20px 56px rgba(61,61,158,0.12);
+        }
+        body.dark .product-card:hover {
+          background: rgba(255,255,255,0.04);
+          box-shadow: 0 20px 56px rgba(0,0,0,0.4);
         }
         .p-card-glow {
           position: absolute;
@@ -307,20 +346,32 @@ export default function ProductsSection() {
         .p-name {
           font-size: 22px;
           font-weight: 700;
-          color: #fff;
+          color: #1a1a2e;
           margin-bottom: 6px;
+          transition: color 0.4s;
+        }
+        body.dark .p-name {
+          color: #fff;
         }
         .p-tagline {
           font-size: 15px;
-          color: #ccc;
+          color: #5a5a7a;
           margin-bottom: 8px;
           font-weight: 500;
+          transition: color 0.4s;
+        }
+        body.dark .p-tagline {
+          color: #ccc;
         }
         .p-desc {
           font-size: 13px;
-          color: #777;
+          color: #9090b0;
           line-height: 1.5;
           margin-top: auto;
+          transition: color 0.4s;
+        }
+        body.dark .p-desc {
+          color: #777;
         }
         .p-arrow-wrap {
           position: absolute;
@@ -344,19 +395,29 @@ export default function ProductsSection() {
         }
         .ops-skeleton {
           height: 260px;
-          background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+          background: linear-gradient(90deg, rgba(61,61,158,0.04), rgba(61,61,158,0.08), rgba(61,61,158,0.04));
           border-radius: 20px;
           animation: shimmer 1.5s infinite;
+          background-size: 200% 100%;
+        }
+        body.dark .ops-skeleton {
+          background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+          background-size: 200% 100%;
         }
         .ops-stats {
           display: flex;
           justify-content: center;
           gap: 60px;
           padding: 40px;
-          background: rgba(255,255,255,0.02);
+          background: rgba(61,61,158,0.03);
           border-radius: 20px;
-          border: 1px solid rgba(255,255,255,0.04);
+          border: 1px solid rgba(61,61,158,0.08);
           margin-bottom: 40px;
+          transition: background 0.4s, border-color 0.4s;
+        }
+        body.dark .ops-stats {
+          background: rgba(255,255,255,0.02);
+          border-color: rgba(255,255,255,0.04);
         }
         .ops-stat-item {
           text-align: center;
@@ -365,14 +426,26 @@ export default function ProductsSection() {
           display: block;
           font-size: 44px;
           font-weight: 700;
+          color: #1a1a2e;
+          transition: color 0.4s;
+        }
+        body.dark .ops-stat-num {
           color: #fff;
         }
         .ops-stat-label {
-          color: #666;
+          color: #9090b0;
           font-size: 14px;
+          transition: color 0.4s;
+        }
+        body.dark .ops-stat-label {
+          color: #666;
         }
         .ops-stat-sep {
           width: 1px;
+          background: rgba(61,61,158,0.1);
+          transition: background 0.4s;
+        }
+        body.dark .ops-stat-sep {
           background: rgba(255,255,255,0.1);
         }
         .ops-cta {
@@ -402,12 +475,16 @@ export default function ProductsSection() {
           gap: 8px;
           padding: 16px 32px;
           background: transparent;
-          border: 1px solid rgba(255,255,255,0.2);
-          color: #fff;
+          border: 1px solid rgba(61,61,158,0.2);
+          color: #1a1a2e;
           border-radius: 12px;
           font-size: 16px;
           font-weight: 500;
           transition: all 0.3s ease;
+        }
+        body.dark .ops-btn-outline {
+          border-color: rgba(255,255,255,0.2);
+          color: #fff;
         }
         .ops-btn-outline:hover {
           border-color: #f05a28;

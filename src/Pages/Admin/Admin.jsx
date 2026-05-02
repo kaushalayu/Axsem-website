@@ -4,7 +4,7 @@ import {
   FiUsers, FiBriefcase, FiMessageSquare, FiFileText,
   FiHome, FiPlus, FiTrash2, FiEdit, FiX, FiFolder, FiSave,
   FiSettings, FiUpload, FiLogOut, FiDollarSign, FiUser, FiMail, FiPhone, FiCalendar,
-  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool
+  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool, FiTarget
 } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
@@ -15,8 +15,11 @@ import EmployeeManager from "./EmployeeManager"
 import SupportTicketManager from "./SupportTicketManager"
 import NavbarManager from "./NavbarManager"
 import FooterManager from "./FooterManager"
+import PageBuilder from "./PageBuilder"
 import ProductManager from "./ProductManager"
 import TestimonialManager from "./TestimonialManager"
+import AboutSectionManager from "./AboutSectionManager"
+import PortfolioManager from "./PortfolioManager"
 
 function Dashboard() {
   const [stats, setStats] = useState({ team: 0, careers: 0, contacts: 0, blogs: 0, projects: 0, inquiries: 0 })
@@ -687,7 +690,7 @@ function BlogsManager() {
                 <th>Actions</th>
               </tr>
             </thead>
-              <tbody>
+            <tbody>
               {blogs.map(b => (
                 <tr key={b._id}>
                   <td>{b.title}</td>
@@ -833,13 +836,13 @@ function ProjectsManager() {
         role: form.testimonialRole
       } : null
     }
-    
+
     if (editId) {
       await api.updateProject(editId, data, galleryFiles)
     } else {
       await api.addProject(data, galleryFiles)
     }
-    
+
     setShowModal(false)
     setEditId(null)
     setGalleryFiles([])
@@ -1459,19 +1462,19 @@ function InquiriesManager() {
 
   const loadInquiries = () => api.getInquiries().then(data => {
     let list = data?.data || data || []
-    
+
     if (filter.source) {
       list = list.filter(i => i.source === filter.source)
     }
     if (filter.search) {
       const s = filter.search.toLowerCase()
-      list = list.filter(i => 
+      list = list.filter(i =>
         i.name?.toLowerCase().includes(s) ||
         i.email?.toLowerCase().includes(s) ||
         i.mobile?.includes(s)
       )
     }
-    
+
     setInquiries(list)
     setLoading(false)
   }).catch(err => {
@@ -1550,10 +1553,10 @@ function InquiriesManager() {
                     <div style={{ fontSize: '12px', color: '#666' }}>{item.email || '-'}</div>
                   </td>
                   <td style={{ maxWidth: '150px' }}>
-                    {(item.services && item.services.length > 0) ? 
+                    {(item.services && item.services.length > 0) ?
                       item.services.slice(0, 2).map((s, i) => (
                         <span key={i} style={{ display: 'inline-block', background: '#e8f4fd', color: '#0066cc', padding: '2px 6px', borderRadius: '3px', fontSize: '10px', marginRight: '3px', marginBottom: '3px' }}>{s}</span>
-                      )) : 
+                      )) :
                       <span>{item.service || item.serviceInterest || '-'}</span>
                     }
                     {(item.services && item.services.length > 2) && <span style={{ fontSize: '10px', color: '#666' }}>+{item.services.length - 2} more</span>}
@@ -1597,9 +1600,12 @@ export default function AdminLayout() {
     { path: '/admin/support-tickets', icon: <FiInbox />, label: 'Support Tickets' },
     { path: '/admin/navbar', icon: <FiMenu />, label: 'Navbar' },
     { path: '/admin/footer', icon: <FiGlobe />, label: 'Footer' },
+    { path: '/admin/pages', icon: <FiFileText />, label: 'Pages' },
     { path: '/admin/products', icon: <FiFolder />, label: 'Products' },
     { path: '/admin/testimonials', icon: <FiMessageSquare />, label: 'Testimonials' },
     { path: '/admin/company', icon: <FiAward />, label: 'Company Info' },
+    { path: '/admin/about', icon: <FiTarget />, label: 'About Section' },
+    { path: '/admin/portfolio', icon: <FiLayers />, label: 'Portfolio' },
     { path: '/admin/services', icon: <FiTool />, label: 'Services' },
     { path: '/admin/projects', icon: <FiFolder />, label: 'Projects' },
     { path: '/admin/team', icon: <FiLayers />, label: 'Team' },
@@ -1614,12 +1620,13 @@ export default function AdminLayout() {
       <button className="admin-sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
         ☰
       </button>
+      <div className={`admin-sidebar-overlay ${sidebarOpen ? 'open' : ''}`} onClick={() => setSidebarOpen(false)} />
       <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
         <button className="admin-sidebar-close" onClick={() => setSidebarOpen(false)}>
           ✕
         </button>
         <div className="admin-logo">
-          <img src={logo} alt="AXSEM" />
+          <img src={logo} alt="Axsem" />
         </div>
         <nav>
           {navItems.map(item => (
@@ -1647,6 +1654,8 @@ export default function AdminLayout() {
           <Route path="/admin/pricing" element={<PricingManager />} />
           <Route path="/admin/partners" element={<PartnerManager />} />
           <Route path="/admin/company" element={<CompanyInfoManager />} />
+          <Route path="/admin/about" element={<AboutSectionManager />} />
+          <Route path="/admin/portfolio" element={<PortfolioManager />} />
           <Route path="/admin/services" element={<ServicesManager />} />
           <Route path="/admin/projects" element={<ProjectsManager />} />
           <Route path="/admin/team" element={<TeamManager />} />
@@ -1656,6 +1665,7 @@ export default function AdminLayout() {
           <Route path="/admin/support-tickets" element={<SupportTicketManager />} />
           <Route path="/admin/navbar" element={<NavbarManager />} />
           <Route path="/admin/footer" element={<FooterManager />} />
+          <Route path="/admin/pages" element={<PageBuilder />} />
           <Route path="/admin/products" element={<ProductManager />} />
           <Route path="/admin/testimonials" element={<TestimonialManager />} />
           <Route path="/admin/contacts" element={<ContactsManager />} />

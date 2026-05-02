@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { api } from "../services/api";
+import { useToast } from "./Toast";
 import "../Styles/ContactSection.css";
 
 const ContactSection = () => {
+    const { addToast } = useToast()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -24,8 +26,10 @@ const ContactSection = () => {
             await api.addContact(formData)
             setStatus("success")
             setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
+            addToast("Message sent! We'll get back to you soon.", "success")
         } catch (error) {
             setStatus("error")
+            addToast(error.message || "Failed to send message.", "error")
         }
     }
     return (
@@ -54,7 +58,7 @@ const ContactSection = () => {
                             <Mail />
                             <div>
                                 <h5>Email Us</h5>
-                                <p>support@axsemsoftwares.com</p>
+                                <p>support@Axsemsoftwares.com</p>
                             </div>
                         </div>
 
@@ -80,35 +84,35 @@ const ContactSection = () => {
 
                         <form onSubmit={handleSubmit}>
                             <div className="ax-form-row">
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     name="name"
-                                    placeholder="Your Name" 
+                                    placeholder="Your Name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    required 
+                                    required
                                 />
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     name="email"
-                                    placeholder="Email Address" 
+                                    placeholder="Email Address"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    required 
+                                    required
                                 />
                             </div>
 
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 name="subject"
-                                placeholder="Subject" 
+                                placeholder="Subject"
                                 value={formData.subject}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
 
-                            <textarea 
-                                rows="4" 
+                            <textarea
+                                rows="4"
                                 name="message"
                                 placeholder="Tell us about your project..."
                                 value={formData.message}
@@ -126,7 +130,7 @@ const ContactSection = () => {
                     {/* MAP */}
                     <div className="ax-contact-map">
                         <iframe
-                            title="AXSEM Office Location"
+                            title="Axsem Office Location"
                             src="https://www.google.com/maps?q=Indira%20Nagar%20Lucknow&output=embed"
                             loading="lazy"
                         ></iframe>

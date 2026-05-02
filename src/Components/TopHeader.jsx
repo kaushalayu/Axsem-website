@@ -32,14 +32,14 @@ export default function TopHeader() {
             <FaPhone className="top-header-icon" />
             <span>{companyInfo.phone || "+91 7860291285"}</span>
           </a>
-          <a href={`mailto:${companyInfo.email || 'info@axsemsoftwares.com'}`} className="top-header-item">
+          <a href={`mailto:${companyInfo.email || 'info@Axsemsoftwares.com'}`} className="top-header-item">
             <FaEnvelope className="top-header-icon" />
-            <span>{companyInfo.email || "info@axsemsoftwares.com"}</span>
+            <span>{companyInfo.email || "info@Axsemsoftwares.com"}</span>
           </a>
-          <a 
-            href="https://www.google.com/maps/search/?api=1&query=12%2F2+Near+Central+Academy+Sector+12+Indira+Nagar+Lucknow+Uttar+Pradesh+226016" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=12%2F2+Near+Central+Academy+Sector+12+Indira+Nagar+Lucknow+Uttar+Pradesh+226016"
+            target="_blank"
+            rel="noopener noreferrer"
             className="top-header-item"
             title="View on Google Maps"
           >

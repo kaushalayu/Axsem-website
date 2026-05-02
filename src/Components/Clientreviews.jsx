@@ -26,7 +26,7 @@ const reviews = [
         avatar: "RS",
         color: "#f05a28",
         rating: 5,
-        review: "AXSEM completely transformed our operations. The ERP system they built reduced our billing time by 60% and gave us real-time visibility across all 12 stores. Truly outstanding team.",
+        review: "Axsem completely transformed our operations. The ERP system they built reduced our billing time by 60% and gave us real-time visibility across all 12 stores. Truly outstanding team.",
         project: "ERP System",
         location: "Delhi, India",
     },
@@ -37,7 +37,7 @@ const reviews = [
         avatar: "PM",
         color: "#3d3d9e",
         rating: 5,
-        review: "We launched our delivery app in just 3 months — on time, within budget, and with zero critical bugs. The Flutter app performs flawlessly on both iOS and Android. Highly recommend AXSEM.",
+        review: "We launched our delivery app in just 3 months — on time, within budget, and with zero critical bugs. The Flutter app performs flawlessly on both iOS and Android. Highly recommend Axsem.",
         project: "Mobile App",
         location: "Mumbai, India",
     },
@@ -59,7 +59,7 @@ const reviews = [
         avatar: "SJ",
         color: "#e63b2a",
         rating: 5,
-        review: "AXSEM delivered our multi-vendor marketplace in record time. Their attention to UI detail and performance optimization is remarkable. Our conversion rate increased by 35% post-launch.",
+        review: "Axsem delivered our multi-vendor marketplace in record time. Their attention to UI detail and performance optimization is remarkable. Our conversion rate increased by 35% post-launch.",
         project: "E-Commerce",
         location: "London, UK",
     },
@@ -81,7 +81,7 @@ const reviews = [
         avatar: "NG",
         color: "#3d3d9e",
         rating: 5,
-        review: "Working with AXSEM felt like having a co-founder who understood both tech and business. They proactively suggested features we hadn't even thought of — and they were all game-changing.",
+        review: "Working with Axsem felt like having a co-founder who understood both tech and business. They proactively suggested features we hadn't even thought of — and they were all game-changing.",
         project: "EdTech Platform",
         location: "Hyderabad, India",
     },
@@ -115,7 +115,7 @@ export default function ClientReviews() {
                     setTestimonials(data)
                 }
             })
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => setLoading(false))
     }, [])
 
@@ -180,9 +180,9 @@ export default function ClientReviews() {
                     <div className="rev-featured" key={active} style={{ "--rev-color": current.color || '#f05a28' }}>
                         {current.type === 'video' && current.videoUrl ? (
                             <div className="rev-video-container" style={{ marginBottom: '20px' }}>
-                                <video 
-                                    src={current.videoUrl} 
-                                    controls 
+                                <video
+                                    src={current.videoUrl}
+                                    controls
                                     poster={current.thumbnail}
                                     style={{ width: '100%', borderRadius: '12px', maxHeight: '250px' }}
                                 />

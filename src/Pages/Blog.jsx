@@ -9,18 +9,18 @@ import "../Styles/BlogPage.css"
 import { Link } from "react-router-dom"
 
 const normalizeBlog = (blog) => ({
-  ...blog,
-  title: normalizeText(blog.title),
-  excerpt: normalizeText(blog.excerpt),
-  content: normalizeText(blog.content),
-  author: normalizeText(blog.author),
-  category: normalizeText(blog.category),
+    ...blog,
+    title: normalizeText(blog.title),
+    excerpt: normalizeText(blog.excerpt),
+    content: normalizeText(blog.content),
+    author: normalizeText(blog.author),
+    category: normalizeText(blog.category),
 });
 
 const BlogFallback = () => (
     <div className="blog-grid-modern">
         {[1, 2, 3, 4, 5, 6].map(i => (
-            <motion.div 
+            <motion.div
                 key={i}
                 className="blog-card-modern"
                 initial={{ opacity: 0, y: 30 }}
@@ -46,7 +46,7 @@ const BlogFallback = () => (
 
 const BlogCard = memo(function BlogCard({ blog, index, onClick }) {
     const ref = useRef(null)
-    
+
     useEffect(() => {
         const el = ref.current
         if (!el) return
@@ -68,7 +68,7 @@ const BlogCard = memo(function BlogCard({ blog, index, onClick }) {
     }
 
     return (
-        <motion.div 
+        <motion.div
             ref={ref}
             className="blog-card-modern"
             style={{ "--delay": `${index * 0.1}s` }}
@@ -80,32 +80,32 @@ const BlogCard = memo(function BlogCard({ blog, index, onClick }) {
             onClick={() => onClick(blog)}
         >
             <div className="blog-card-image-modern">
-                <img 
-                    src={blog.image || 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800'} 
-                    alt={blog.title} 
-                    loading="lazy" 
+                <img
+                    src={blog.image || 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800'}
+                    alt={blog.title}
+                    loading="lazy"
                 />
                 <div className="blog-card-image-overlay" />
                 <span className="blog-card-category">{blog.category || 'General'}</span>
             </div>
-            
+
             <div className="blog-card-body-modern">
                 <div className="blog-card-meta-modern">
                     <span><FiCalendar /> {formatDate(blog.createdAt) || blog.date}</span>
                     <span><FiClock /> 5 min read</span>
                 </div>
-                
+
                 <h3>{typeof blog.title === 'string' ? blog.title : 'Untitled'}</h3>
                 <p>{typeof blog.excerpt === 'string' ? blog.excerpt : ''}</p>
-                
+
                 <div className="blog-card-footer-modern">
                     <div className="blog-card-author">
                         <div className="blog-card-avatar">
                             <FiUser />
                         </div>
-                        <span>{blog.author || 'AXSEM Team'}</span>
+                        <span>{blog.author || 'Axsem Team'}</span>
                     </div>
-                    <motion.span 
+                    <motion.span
                         className="blog-card-readmore"
                         whileHover={{ x: 5 }}
                     >
@@ -161,13 +161,13 @@ export default function BlogPage() {
     }, [])
 
     const filteredBlogs = blogs?.filter(blog => {
-        const matchesSearch = !searchQuery || 
+        const matchesSearch = !searchQuery ||
             blog.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             blog.excerpt?.toLowerCase().includes(searchQuery.toLowerCase())
-        
-        const matchesCategory = selectedCategory === "All" || 
+
+        const matchesCategory = selectedCategory === "All" ||
             blog.category?.toLowerCase() === selectedCategory.toLowerCase()
-        
+
         return matchesSearch && matchesCategory
     }) || []
 
@@ -185,7 +185,7 @@ export default function BlogPage() {
                     </>
                 }
                 subtitle="Insights, lessons, and perspectives from building modern software products."
-                tag="AXSEM Blog"
+                tag="Axsem Blog"
             />
 
             <section className="blog-section-modern">
@@ -233,16 +233,16 @@ export default function BlogPage() {
                 ) : filteredBlogs.length > 0 ? (
                     <div className="blog-grid-modern" ref={gridRef}>
                         {filteredBlogs.map((b, i) => (
-                            <BlogCard 
-                                key={b._id || b.slug || i} 
-                                blog={b} 
+                            <BlogCard
+                                key={b._id || b.slug || i}
+                                blog={b}
                                 index={i}
                                 onClick={(blog) => window.location.href = `/blog-detail/${blog.slug}`}
                             />
                         ))}
                     </div>
                 ) : (
-                    <motion.div 
+                    <motion.div
                         className="blog-empty"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -257,7 +257,7 @@ export default function BlogPage() {
                 )}
 
                 {/* Newsletter CTA */}
-                <motion.div 
+                <motion.div
                     className="blog-newsletter"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}

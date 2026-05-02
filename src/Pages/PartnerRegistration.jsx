@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import { FiArrowLeft, FiArrowRight, FiCheck, FiSend, FiUpload, FiX, FiFile, FiAlertCircle } from "react-icons/fi"
 import { api } from "../services/api"
+import { useToast } from "../Components/Toast"
 import PageHero from "../Components/PageHero"
 import OtpModal from "../Components/OtpModal"
 import FileUpload from "../Components/FileUpload"
@@ -37,7 +38,7 @@ const STEPS = [
 ]
 
 export default function PartnerRegistration() {
-  const [currentStep, setCurrentStep] = useState(1)
+  const { addToast } = useToast()
   const [formData, setFormData] = useState({
     companyName: "",
     contactPerson: "",
@@ -152,7 +153,7 @@ export default function PartnerRegistration() {
     if (!validateStep(5)) return
 
     setIsSubmitting(true)
-    
+
     try {
       const submitData = {
         companyName: formData.companyName,
@@ -171,16 +172,19 @@ export default function PartnerRegistration() {
         message: formData.message,
         documents: formData.documents.map(d => ({ name: d.name, url: d.url || '', type: d.type, size: d.size }))
       }
-      
+
       const response = await api.partnerRegister(submitData)
-      
+
       if (response.success) {
         setSubmitSuccess(true)
+        addToast("Registration submitted! We'll verify and contact you soon.", "success")
       } else {
         setErrors({ submit: response.message || "Registration failed" })
+        addToast(response.message || "Registration failed", "error")
       }
     } catch (error) {
       setErrors({ submit: error.message || "Failed to submit. Please try again." })
+      addToast(error.message || "Failed to submit. Please try again.", "error")
     } finally {
       setIsSubmitting(false)
     }
@@ -226,14 +230,14 @@ export default function PartnerRegistration() {
         {/* Progress Steps */}
         <div className="pr-progress">
           <div className="pr-progress-bar">
-            <div 
-              className="pr-progress-fill" 
+            <div
+              className="pr-progress-fill"
               style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
             />
           </div>
           <div className="pr-steps">
             {STEPS.map((step) => (
-              <div 
+              <div
                 key={step.id}
                 className={`pr-step ${currentStep >= step.id ? 'active' : ''} ${currentStep > step.id ? 'completed' : ''}`}
               >
@@ -248,7 +252,7 @@ export default function PartnerRegistration() {
 
         {/* Form */}
         <form className="pr-form" ref={formRef}>
-          
+
           {/* Step 1: Basic Info */}
           {currentStep === 1 && (
             <div className="pr-step-content">
@@ -290,8 +294,8 @@ export default function PartnerRegistration() {
                       onChange={(e) => updateField('mobile', e.target.value.replace(/\D/g, '').slice(0, 10))}
                       className={errors.mobile ? 'error' : ''}
                     />
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       className="pr-otp-btn"
                       onClick={() => handleSendOtp('mobile')}
                       disabled={!formData.mobile || formData.mobile.length !== 10}
@@ -312,8 +316,8 @@ export default function PartnerRegistration() {
                       onChange={(e) => updateField('email', e.target.value)}
                       className={errors.email ? 'error' : ''}
                     />
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       className="pr-otp-btn"
                       onClick={() => handleSendOtp('email')}
                       disabled={!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
@@ -610,15 +614,15 @@ export default function PartnerRegistration() {
                 <FiArrowLeft /> Previous
               </button>
             )}
-            
+
             {currentStep < 5 ? (
               <button type="button" className="pr-btn-primary" onClick={handleNext}>
                 Next <FiArrowRight />
               </button>
             ) : (
-              <button 
-                type="button" 
-                className="pr-btn-submit" 
+              <button
+                type="button"
+                className="pr-btn-submit"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
               >

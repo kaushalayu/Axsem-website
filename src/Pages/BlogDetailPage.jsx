@@ -8,12 +8,12 @@ import { normalizeText } from "../utils/textUtils"
 import "../Styles/BlogDetailPage.css"
 
 const normalizeBlog = (b) => ({
-  ...b,
-  title: normalizeText(b.title),
-  excerpt: normalizeText(b.excerpt),
-  content: normalizeText(b.content),
-  author: normalizeText(b.author),
-  category: normalizeText(b.category),
+    ...b,
+    title: normalizeText(b.title),
+    excerpt: normalizeText(b.excerpt),
+    content: normalizeText(b.content),
+    author: normalizeText(b.author),
+    category: normalizeText(b.category),
 });
 
 export default function BlogDetailPage() {
@@ -117,7 +117,7 @@ export default function BlogDetailPage() {
                     title="Blog Post Not Found"
                     subtitle="The blog post you're looking for doesn't exist."
                 />
-                <motion.div 
+                <motion.div
                     className="blog-detail-notfound"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -141,14 +141,14 @@ export default function BlogDetailPage() {
     return (
         <div className="blog-detail-page-modern">
             {/* Hero Image */}
-            <motion.div 
+            <motion.div
                 className="blog-detail-hero"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
             >
-                <img 
-                    src={blog.image || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600"} 
+                <img
+                    src={blog.image || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600"}
                     alt={safeTitle}
                 />
                 <div className="blog-detail-hero-overlay" />
@@ -165,7 +165,7 @@ export default function BlogDetailPage() {
 
             {/* Content */}
             <section className="blog-detail-content-modern">
-                <motion.div 
+                <motion.div
                     className="blog-detail-main"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function BlogDetailPage() {
                     </div>
 
                     {/* Title */}
-                    <motion.h1 
+                    <motion.h1
                         className="blog-detail-title"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -191,7 +191,7 @@ export default function BlogDetailPage() {
                     </motion.h1>
 
                     {/* Author Card */}
-                    <motion.div 
+                    <motion.div
                         className="blog-detail-author-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -201,7 +201,7 @@ export default function BlogDetailPage() {
                             <FiUser size={20} />
                         </div>
                         <div className="blog-detail-author-info">
-                            <span className="blog-detail-author-name">{blog.author || 'AXSEM Team'}</span>
+                            <span className="blog-detail-author-name">{blog.author || 'Axsem Team'}</span>
                             <span className="blog-detail-author-date">
                                 <FiCalendar /> {formatDate(blog.createdAt)}
                             </span>
@@ -213,7 +213,7 @@ export default function BlogDetailPage() {
 
                     {/* Excerpt */}
                     {typeof blog.excerpt === 'string' && blog.excerpt && (
-                        <motion.blockquote 
+                        <motion.blockquote
                             className="blog-detail-excerpt"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -224,7 +224,7 @@ export default function BlogDetailPage() {
                     )}
 
                     {/* Article Content */}
-                    <motion.article 
+                    <motion.article
                         className="blog-detail-article"
                         ref={contentRef}
                         initial={{ opacity: 0 }}
@@ -235,7 +235,7 @@ export default function BlogDetailPage() {
 
                     {/* Tags */}
                     {blog.tags && blog.tags.length > 0 && (
-                        <motion.div 
+                        <motion.div
                             className="blog-detail-tags"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -249,7 +249,7 @@ export default function BlogDetailPage() {
                     )}
 
                     {/* Navigation */}
-                    <motion.div 
+                    <motion.div
                         className="blog-detail-nav"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -263,7 +263,7 @@ export default function BlogDetailPage() {
 
                 {/* Related Articles */}
                 {relatedBlogs.length > 0 && (
-                    <motion.div 
+                    <motion.div
                         className="blog-detail-related"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -272,15 +272,15 @@ export default function BlogDetailPage() {
                         <h2>Related Articles</h2>
                         <div className="blog-detail-related-grid">
                             {relatedBlogs.map((rb, i) => (
-                                <Link 
-                                    key={i} 
+                                <Link
+                                    key={i}
                                     to={`/blog-detail/${rb.slug}`}
                                     className="blog-detail-related-card"
                                 >
                                     <div className="blog-detail-related-image">
-                                        <img 
-                                            src={rb.image || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400"} 
-                                            alt={typeof rb.title === 'string' ? rb.title : 'Blog Post'} 
+                                        <img
+                                            src={rb.image || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400"}
+                                            alt={typeof rb.title === 'string' ? rb.title : 'Blog Post'}
                                         />
                                     </div>
                                     <div className="blog-detail-related-content">

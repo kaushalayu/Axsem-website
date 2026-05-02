@@ -5,11 +5,11 @@ import { api } from "../services/api"
 import { normalizeText } from "../utils/textUtils"
 
 const normalizeBlog = (blog) => ({
-  ...blog,
-  title: normalizeText(blog.title),
-  excerpt: normalizeText(blog.excerpt),
-  content: normalizeText(blog.content),
-  author: normalizeText(blog.author),
+    ...blog,
+    title: normalizeText(blog.title),
+    excerpt: normalizeText(blog.excerpt),
+    content: normalizeText(blog.content),
+    author: normalizeText(blog.author),
 });
 
 const BlogFallback = () => (
@@ -31,7 +31,7 @@ const BlogCard = memo(function BlogCard({ blog }) {
             </div>
             <div className="strip-content">
                 <div className="blog-meta">
-                    <span>{blog.author || 'AXSEM'}</span>
+                    <span>{blog.author || 'Axsem'}</span>
                     <span>•</span>
                     <span>{blog.createdAt ? new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</span>
                 </div>
@@ -67,7 +67,7 @@ const BlogSection = () => {
                     <h2>From Our Engineering Journal</h2>
                     <p>
                         Deep technical insights, architectural decisions, and product thinking
-                        from the AXSEM engineering team.
+                        from the Axsem engineering team.
                     </p>
                 </div>
 
@@ -81,7 +81,7 @@ const BlogSection = () => {
                             </div>
                             <div className="featured-content">
                                 <div className="blog-meta">
-                                    <span>{featuredBlog.author || 'AXSEM Engineering'}</span>
+                                    <span>{featuredBlog.author || 'Axsem Engineering'}</span>
                                     <span>•</span>
                                     <span>{featuredBlog.createdAt ? new Date(featuredBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</span>
                                 </div>

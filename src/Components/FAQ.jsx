@@ -6,9 +6,9 @@ import "../Styles/FAQ.css";
 
 const faqs = [
     {
-        question: "What services does AXSEM Softwares provide?",
+        question: "What services does Axsem Softwares provide?",
         answer:
-            "AXSEM Softwares offers end-to-end software solutions including web development, mobile applications, custom software development, UI/UX design, ERP & CRM systems, cloud solutions, and API integrations."
+            "Axsem Softwares offers end-to-end software solutions including web development, mobile applications, custom software development, UI/UX design, ERP & CRM systems, cloud solutions, and API integrations."
     },
     {
         question: "Which technologies do you specialize in?",
@@ -54,7 +54,7 @@ const FAQ = () => {
             <div className="faq-bg-pattern"></div>
             <div className="faq-container">
                 <div className="faq-header">
-                    <motion.span 
+                    <motion.span
                         className="faq-badge"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -78,13 +78,13 @@ const FAQ = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        Everything you need to know about working with AXSEM Softwares
+                        Everything you need to know about working with Axsem Softwares
                     </motion.p>
                 </div>
 
                 <div className="faq-layout">
                     {/* LEFT SIDE */}
-                    <motion.div 
+                    <motion.div
                         className="faq-left"
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -116,7 +116,7 @@ const FAQ = () => {
                     </motion.div>
 
                     {/* RIGHT SIDE */}
-                    <motion.div 
+                    <motion.div
                         className="faq-right"
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -137,7 +137,7 @@ const FAQ = () => {
                                     onClick={() => toggleFAQ(index)}
                                 >
                                     <span className="faq-question-text">{faq.question}</span>
-                                    <motion.span 
+                                    <motion.span
                                         className="faq-icon"
                                         animate={{ rotate: activeIndex === index ? 180 : 0 }}
                                         transition={{ duration: 0.3 }}

@@ -29,21 +29,21 @@ export default function EmployeeManager() {
       if (filter.status) params.append('status', filter.status)
       if (filter.department) params.append('department', filter.department)
       if (filter.search) params.append('search', filter.search)
-      
+
       const response = await api.getEmployees()
       let data = response.data || []
-      
+
       if (filter.status) data = data.filter(e => e.status === filter.status)
       if (filter.department) data = data.filter(e => e.department === filter.department)
       if (filter.search) {
         const s = filter.search.toLowerCase()
-        data = data.filter(e => 
-          e.name?.toLowerCase().includes(s) || 
+        data = data.filter(e =>
+          e.name?.toLowerCase().includes(s) ||
           e.employeeId?.toLowerCase().includes(s) ||
           e.email?.toLowerCase().includes(s)
         )
       }
-      
+
       setEmployees(data)
     } catch (err) {
       console.error(err)
@@ -66,7 +66,7 @@ export default function EmployeeManager() {
       alert("Please fill required fields")
       return
     }
-    
+
     try {
       await api.addEmployee(form)
       alert("Employee added!")
@@ -270,7 +270,7 @@ export default function EmployeeManager() {
                     type="email"
                     value={form.email}
                     onChange={e => setForm({ ...form, email: e.target.value })}
-                    placeholder="email@axsem.com"
+                    placeholder="email@Axsem.com"
                   />
                 </div>
                 <div className="admin-form-group">
@@ -352,7 +352,7 @@ export default function EmployeeManager() {
                   <span style={{ color: '#666' }}>{selectedEmployee.employeeId}</span>
                 </div>
               </div>
-              
+
               <div style={{ display: 'grid', gap: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#666' }}>Designation:</span>

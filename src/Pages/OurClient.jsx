@@ -42,7 +42,7 @@ const clients = [
 ]
 
 const testimonials = [
-    { quote: "AXSEM didn't just build software — they understood our business and delivered exactly what we needed. ROI was visible within the first quarter.", author: "Rajesh Mehta", role: "CEO, RetailFlow Pvt. Ltd.", initial: "R" },
+    { quote: "Axsem didn't just build software — they understood our business and delivered exactly what we needed. ROI was visible within the first quarter.", author: "Rajesh Mehta", role: "CEO, RetailFlow Pvt. Ltd.", initial: "R" },
     { quote: "The app transformed how we operate. Our customers love the live tracking and our team finally has full visibility.", author: "Priya Sharma", role: "COO, SwiftDeliver Logistics", initial: "P" },
     { quote: "We went from Notion chaos to a proper hiring pipeline in one afternoon. It's exactly what a growing startup needs.", author: "Ankita Joshi", role: "Head of People, HireBoard", initial: "A" },
     { quote: "Our old website felt like a bazaar stall. Now it feels like a luxury boutique — and the conversion numbers prove it.", author: "Sneha Kapoor", role: "Founder, LuxCart India", initial: "S" },
@@ -167,7 +167,7 @@ export default function OurClientsPage() {
                 <div className="sp-cta sp-anim">
                     <h2 className="sp-cta-title">Ready to Join Our Client List?</h2>
                     <p className="sp-cta-sub">Tell us about your project and let's build something great together.</p>
-                <Link to="/contact" className="sp-btn-primary">Start a Conversation <FiArrowRight /></Link>
+                    <Link to="/contact" className="sp-btn-primary">Start a Conversation <FiArrowRight /></Link>
                 </div>
 
             </div>

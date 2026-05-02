@@ -1,13 +1,17 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { 
-  FiArrowLeft, FiArrowRight, FiCheck, FiUser, FiMail, FiPhone, 
-  FiBriefcase, FiMessageSquare, FiAlertCircle, FiZap, FiClock, 
+import {
+  FiArrowLeft, FiArrowRight, FiCheck, FiUser, FiMail, FiPhone,
+  FiBriefcase, FiMessageSquare, FiAlertCircle, FiZap, FiClock,
   FiStar, FiGift, FiChevronRight, FiSend
 } from "react-icons/fi"
 import { api } from "../services/api"
+import { useToast } from "../Components/Toast"
 import PageHero from "../Components/PageHero"
 import "../Styles/ClientRegistration.css"
+
+export default function ClientRegistration() {
+  const { addToast } = useToast()
 
 const SERVICE_INTERESTS = [
   { value: "web_development", label: "Web Development" },
@@ -90,11 +94,13 @@ export default function ClientRegistration() {
         message: formData.message,
         source: 'client_registration'
       }
-      
+
       await api.addInquiry(submitData)
       setSubmitSuccess(true)
+      addToast("Registration submitted! Our team will contact you soon.", "success")
     } catch (error) {
       setErrors({ submit: "Submission failed. Please try again." })
+      addToast(error.message || "Submission failed. Please try again.", "error")
     } finally {
       setIsSubmitting(false)
     }
@@ -306,7 +312,7 @@ export default function ClientRegistration() {
         <div className="cr-info-section">
           <div className="cr-info-card">
             <h3>Why Register?</h3>
-            
+
             <div className="cr-benefits">
               <div className="cr-benefit">
                 <div className="cr-benefit-icon">
@@ -317,7 +323,7 @@ export default function ClientRegistration() {
                   <p>Get personalized quotes within 24 hours</p>
                 </div>
               </div>
-              
+
               <div className="cr-benefit">
                 <div className="cr-benefit-icon">
                   <FiStar />
@@ -327,7 +333,7 @@ export default function ClientRegistration() {
                   <p>Dedicated account manager for you</p>
                 </div>
               </div>
-              
+
               <div className="cr-benefit">
                 <div className="cr-benefit-icon">
                   <FiClock />
@@ -337,7 +343,7 @@ export default function ClientRegistration() {
                   <p>30-minute free consultation included</p>
                 </div>
               </div>
-              
+
               <div className="cr-benefit">
                 <div className="cr-benefit-icon">
                   <FiGift />

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { FiX, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import { useCompany } from '../contexts/CompanyContext';
 import { api } from '../services/api';
+import { useToast } from './Toast';
 
 const SERVICE_OPTIONS = [
   'Website Development',
@@ -28,6 +29,7 @@ const BUDGET_OPTIONS = [
 
 const InquiryModal = () => {
   const { services } = useCompany();
+  const { addToast } = useToast()
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -86,7 +88,7 @@ const InquiryModal = () => {
         service: formData.services.join(', ')
       };
       await api.addInquiry(inquiryData);
-      setNotification({ type: 'success', message: 'Thank you! We will contact you soon.' });
+      addToast("Thank you! We will contact you soon.", "success")
       setTimeout(() => {
         setIsOpen(false);
         setFormData({ name: '', mobile: '', email: '', budget: '', services: [], message: '' });
@@ -94,6 +96,7 @@ const InquiryModal = () => {
       }, 2000);
     } catch (err) {
       setNotification({ type: 'error', message: 'Failed to submit. Please try again.' });
+      addToast(err.message || "Failed to submit. Please try again.", "error")
     }
     setLoading(false);
   };

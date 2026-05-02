@@ -1,5 +1,5 @@
 /* ============================================================
-   PORTFOLIO SECTION — AXSEM SOFTWARES
+   PORTFOLIO SECTION — Axsem SOFTWARES
    Bento grid layout · filter tabs · card hover effects
 ============================================================ */
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
@@ -552,6 +552,29 @@ body.dark .pf-cta-outline {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: #fff;
+}
+
+/* Skeleton loader */
+.pf-skeleton {
+  height: 320px;
+  border-radius: 20px;
+  background: linear-gradient(90deg,
+    rgba(61,61,158,0.04) 0%,
+    rgba(61,61,158,0.08) 50%,
+    rgba(61,61,158,0.04) 100%);
+  background-size: 200% 100%;
+  animation: pfShimmer 1.5s infinite;
+}
+body.dark .pf-skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0.03) 100%);
+  background-size: 200% 100%;
+}
+@keyframes pfShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* Responsive */

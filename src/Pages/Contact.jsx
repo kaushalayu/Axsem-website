@@ -37,7 +37,7 @@ export default function ContactPage() {
                     </>
                 }
                 subtitle="Have a project, idea, or collaboration in mind? Reach out — our team usually responds within 24 hours."
-                tag="Contact · AXSEM Softwares"
+                tag="Contact · Axsem Softwares"
             />
 
             {/* MAIN CONTACT SECTION */}
@@ -58,7 +58,7 @@ export default function ContactPage() {
                         </div>
                         <div className="contact-info-item">
                             <FiMail />
-                            <span>info@axsemsoftwares.com</span>
+                            <span>info@Axsemsoftwares.com</span>
                         </div>
                         <div className="contact-info-item">
                             <FiMapPin />

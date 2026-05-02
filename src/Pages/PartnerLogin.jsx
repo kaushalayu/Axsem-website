@@ -6,6 +6,7 @@ import {
   FiCheck, FiUser, FiUsers, FiCalendar, FiMapPin, FiPhone, FiAward
 } from "react-icons/fi"
 import { api } from "../services/api"
+import { useToast } from "../Components/Toast"
 import "../Styles/PartnerLogin.css"
 
 export default function PartnerLogin() {
@@ -18,6 +19,7 @@ export default function PartnerLogin() {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const { addToast } = useToast()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -55,9 +57,11 @@ export default function PartnerLogin() {
       if (response.success && response.token) {
         localStorage.setItem("partnerToken", response.token)
         localStorage.setItem("partnerUser", JSON.stringify(response.data))
-        navigate("/partner/dashboard")
+        addToast("Login successful! Welcome back.", "success")
+        setTimeout(() => navigate("/partner/dashboard"), 500)
       } else {
         setError(response.message || "Login failed")
+        addToast(response.message || "Login failed", "error")
       }
     } catch (err) {
       setError(err.message || "Login failed. Please try again.")

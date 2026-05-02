@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { 
-  FiSearch, FiCheck, FiX, FiUser, FiMail, FiAlertCircle, 
-  FiShield, FiBriefcase, FiCalendar, FiTrendingUp, 
+import {
+  FiSearch, FiCheck, FiX, FiUser, FiMail, FiAlertCircle,
+  FiShield, FiBriefcase, FiCalendar, FiTrendingUp,
   FiAlertTriangle, FiPhone, FiFileText, FiAward, FiUsers, FiClock
 } from "react-icons/fi"
 import { api } from "../services/api"
+import { useToast } from "../Components/Toast"
 import PageHero from "../Components/PageHero"
 import "../Styles/EmployeeVerification.css"
 
 export default function EmployeeVerification() {
+  const { addToast } = useToast()
   const [searchData, setSearchData] = useState({
     employeeId: "",
     email: "",
@@ -24,7 +26,7 @@ export default function EmployeeVerification() {
       if (res.data) {
         setStats({ total: res.data.total || 0, active: res.data.active || 0 })
       }
-    }).catch(() => {})
+    }).catch(() => { })
   }, [])
 
   const updateField = (field, value) => {
@@ -36,14 +38,14 @@ export default function EmployeeVerification() {
 
   const validateSearch = () => {
     const newErrors = {}
-    
+
     if (!searchData.employeeId.trim() && !searchData.email.trim()) {
       newErrors.employeeId = "Enter Employee ID or Email"
       newErrors.email = "Enter Employee ID or Email"
     } else if (searchData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(searchData.email)) {
       newErrors.email = "Enter a valid email address"
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -54,20 +56,23 @@ export default function EmployeeVerification() {
 
     setIsSearching(true)
     setVerificationResult(null)
-    
+
     try {
       const response = await api.verifyEmployee(
         searchData.employeeId.trim() || null,
         searchData.email.trim() || null
       )
-      
+
       if (response.success && response.found) {
         setVerificationResult({ found: true, employee: response.employee })
+        addToast("Employee verified successfully!", "success")
       } else {
         setVerificationResult({ found: false })
+        addToast("No matching employee found.", "error")
       }
     } catch (error) {
       setErrors({ submit: "Verification failed. Please try again." })
+      addToast(error.message, "error")
     } finally {
       setIsSearching(false)
     }
@@ -117,11 +122,11 @@ export default function EmployeeVerification() {
                     className={errors.employeeId ? 'ev-error' : ''}
                   />
                 </div>
-                
+
                 <div className="ev-divider-text">
                   <span>or</span>
                 </div>
-                
+
                 <div className="ev-input-card">
                   <div className="ev-input-icon"><FiMail /></div>
                   <input
@@ -173,8 +178,8 @@ export default function EmployeeVerification() {
                 </div>
                 <div className="ev-result-text">
                   <h3>{verificationResult.found ? 'Employee Verified!' : 'Not Found'}</h3>
-                  <p>{verificationResult.found 
-                    ? 'This person is a verified Axsem employee.' 
+                  <p>{verificationResult.found
+                    ? 'This person is a verified Axsem employee.'
                     : 'No matching employee found.'}</p>
                 </div>
               </div>
@@ -265,7 +270,7 @@ export default function EmployeeVerification() {
             </div>
             <h3>Why Verify Employees?</h3>
             <p className="ev-info-desc">Protect your business from fraud and verify that individuals claiming to represent Axsem Softwares are genuinely part of our team.</p>
-            
+
             <div className="ev-benefits-list">
               <div className="ev-benefit-item">
                 <div className="ev-benefit-icon">
@@ -276,7 +281,7 @@ export default function EmployeeVerification() {
                   <p>Avoid scams from people pretending to be Axsem employees</p>
                 </div>
               </div>
-              
+
               <div className="ev-benefit-item">
                 <div className="ev-benefit-icon">
                   <FiCheck />
@@ -286,7 +291,7 @@ export default function EmployeeVerification() {
                   <p>Confirm if someone is a legitimate Axsem team member</p>
                 </div>
               </div>
-              
+
               <div className="ev-benefit-item">
                 <div className="ev-benefit-icon">
                   <FiUsers />

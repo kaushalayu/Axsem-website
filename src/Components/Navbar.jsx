@@ -33,7 +33,7 @@ import {
   FiSearch,
 } from "react-icons/fi"
 
-import logo from "../assets/axsem.jpg"
+import logo from "../assets/Axsem.jpg"
 import { navMenu } from "../data/navData"
 import { useCompany } from "../contexts/CompanyContext"
 import { useNavbar } from "../contexts/NavbarContext"
@@ -118,7 +118,7 @@ export default function Navbar() {
 
       // Check if any link has parent (sub-item)
       const parentLinks = sortedLinks.filter(l => !l.parentId)
-      const hasChildren = parentLinks.some(p => 
+      const hasChildren = parentLinks.some(p =>
         sortedLinks.some(l => l.parentId === p._id)
       )
 
@@ -134,7 +134,7 @@ export default function Navbar() {
             })
           }
         })
-        
+
         if (groups.length > 0) {
           menu.push({
             name: category,
@@ -153,7 +153,7 @@ export default function Navbar() {
     // Add static routes that might not be in DB
     const staticRoutes = ['/blogs', '/contact', '/partner/register']
     const hasStaticRoutes = navLinks.some(l => staticRoutes.includes(l.url))
-    
+
     if (!hasStaticRoutes) {
       menu.push({ name: "Blogs", path: "/blogs" })
       menu.push({ name: "Contact Us", path: "/contact" })
@@ -210,7 +210,7 @@ export default function Navbar() {
         <div className="navbar-inner">
 
           {/* LOGO */}
-          <img src={logo} alt="AXSEM" className="nav-logo" />
+          <img src={logo} alt="Axsem" className="nav-logo" />
 
           {/* DESKTOP MENU */}
           <div className="desktop-menu">
@@ -389,7 +389,7 @@ export default function Navbar() {
 
         {/* Header */}
         <div className="mobile-header">
-          <img src={logo} alt="AXSEM" />
+          <img src={logo} alt="Axsem" />
           <FiX onClick={closeMenu} />
         </div>
 

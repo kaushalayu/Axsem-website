@@ -4,10 +4,10 @@ import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaReact, FaNodeJs, FaP
 import "../Styles/PageHero.css"
 
 const SOCIALS = [
-    { icon: <FaLinkedinIn />, href: "https://linkedin.com/company/axsem", label: "LinkedIn" },
-    { icon: <FaXTwitter />, href: "https://twitter.com/axsem", label: "Twitter" },
-    { icon: <FaGithub />, href: "https://github.com/axsem", label: "GitHub" },
-    { icon: <FaInstagram />, href: "https://instagram.com/axsem", label: "Instagram" },
+    { icon: <FaLinkedinIn />, href: "https://linkedin.com/company/Axsem", label: "LinkedIn" },
+    { icon: <FaXTwitter />, href: "https://twitter.com/Axsem", label: "Twitter" },
+    { icon: <FaGithub />, href: "https://github.com/Axsem", label: "GitHub" },
+    { icon: <FaInstagram />, href: "https://instagram.com/Axsem", label: "Instagram" },
 ]
 
 /* ─────────────────────────────────────────────────
@@ -86,7 +86,7 @@ const Visuals = {
                     <rect x="28" y="60" width="180" height="12" fill="url(#webG)" opacity=".9" />
                     <circle cx="46" cy="55" r="5" fill="#ff5f57" /><circle cx="60" cy="55" r="5" fill="#febc2e" /><circle cx="74" cy="55" r="5" fill="#28c840" />
                     <rect x="84" y="48" width="90" height="14" rx="7" fill="var(--ph-glass)" opacity=".45" />
-                    <text x="92" y="59" fontSize="7" fill="var(--ph-text-dim)" fontFamily="monospace">axsemsoftwares.com</text>
+                    <text x="92" y="59" fontSize="7" fill="var(--ph-text-dim)" fontFamily="monospace">Axsemsoftwares.com</text>
                     <rect x="42" y="84" width="56" height="8" rx="4" fill="var(--ph-line)" opacity=".7" />
                     <rect x="42" y="97" width="92" height="6" rx="3" fill="var(--ph-line)" opacity=".45" />
                     <rect x="42" y="109" width="74" height="6" rx="3" fill="var(--ph-line)" opacity=".35" />
@@ -591,7 +591,7 @@ const Visuals = {
 ───────────────────────────────────────────────── */
 function renderTitle(title) {
     if (!title) return null;
-    
+
     if (Array.isArray(title)) {
         return title.map((part, i) => {
             if (part.gradient) {
@@ -600,7 +600,7 @@ function renderTitle(title) {
             return <span key={i}>{part.text}</span>;
         });
     }
-    
+
     return title;
 }
 

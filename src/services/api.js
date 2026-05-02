@@ -72,6 +72,17 @@ export const api = {
       body: formData,
     });
   },
+  updateAboutSection: (aboutData, imageFile = null) => {
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+    formData.append('data', JSON.stringify(aboutData));
+    return fetchFormData(`${API_URL}/companyinfo/about`, {
+      method: 'PUT',
+      body: formData,
+    });
+  },
 
   // Services
   getServices: () => fetchWithErrorHandling(`${API_URL}/services`),
@@ -557,6 +568,21 @@ export const api = {
     body: JSON.stringify(data),
   }),
   deleteProduct: (id) => fetchWithErrorHandling(`${API_URL}/products/${id}`, {
+    method: 'DELETE',
+  }),
+
+  // Portfolio
+  getPortfolio: () => fetchWithErrorHandling(`${API_URL}/portfolio`),
+  getPortfolioById: (id) => fetchWithErrorHandling(`${API_URL}/portfolio/${id}`),
+  addPortfolio: (data) => fetchWithErrorHandling(`${API_URL}/portfolio`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  updatePortfolio: (id, data) => fetchWithErrorHandling(`${API_URL}/portfolio/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  deletePortfolio: (id) => fetchWithErrorHandling(`${API_URL}/portfolio/${id}`, {
     method: 'DELETE',
   }),
 

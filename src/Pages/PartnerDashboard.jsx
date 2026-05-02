@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react"
 import { Link, useNavigate, useLocation, Outlet } from "react-router-dom"
-import { 
-  FiHome, FiUser, FiUsers, FiDollarSign, FiFile, 
+import {
+  FiHome, FiUser, FiUsers, FiDollarSign, FiFile,
   FiMessageSquare, FiSettings, FiLogOut, FiMenu, FiX,
   FiSun, FiMoon, FiUserPlus, FiClock, FiBell, FiPlus, FiEye, FiEyeOff,
   FiCamera, FiUpload
 } from "react-icons/fi"
 import { api } from "../services/api"
+import { useToast } from "../Components/Toast"
 import "./PartnerDashboard.css"
 
 const NAV_ITEMS = [
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
 ]
 
 export default function PartnerDashboard() {
+  const { addToast } = useToast()
   const navigate = useNavigate()
   const location = useLocation()
   const fileInputRef = useRef(null)
@@ -40,7 +42,7 @@ export default function PartnerDashboard() {
       navigate("/partner/login")
       return
     }
-    
+
     api.partnerVerify().then(response => {
       if (response.success && response.data) {
         setPartner(response.data)
@@ -78,25 +80,25 @@ export default function PartnerDashboard() {
   const handlePhotoUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
-    
+
     if (!file.type.startsWith('image/')) {
-      alert('Please select an image file')
+      addToast('Please select an image file', 'error')
       return
     }
-    
+
     if (file.size > 5 * 1024 * 1024) {
-      alert('Image size must be less than 5MB')
+      addToast('Image size must be less than 5MB', 'error')
       return
     }
-    
+
     setUploading(true)
-    
+
     try {
       const reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onload = async () => {
         const base64Image = reader.result
-        
+
         const response = await api.partnerUpdatePhoto(base64Image)
         if (response.success) {
           setPartner(prev => ({ ...prev, profilePhoto: base64Image }))
@@ -105,11 +107,11 @@ export default function PartnerDashboard() {
         setUploading(false)
       }
       reader.onerror = () => {
-        alert('Error reading file')
+        addToast('Error reading file', 'error')
         setUploading(false)
       }
     } catch (err) {
-      alert('Error uploading photo')
+      addToast('Error uploading photo', 'error')
       setUploading(false)
     }
   }
@@ -178,8 +180,8 @@ export default function PartnerDashboard() {
         </button>
         <Link to="/partner/dashboard" className="pd-mobile-logo">
           {partner?.profilePhoto ? (
-            <img src={partner.profilePhoto} alt="" style={{width: 32, height: 32, borderRadius: 6, objectFit: 'cover'}} />
-          ) : 'AXSEM'}
+            <img src={partner.profilePhoto} alt="" style={{ width: 32, height: 32, borderRadius: 6, objectFit: 'cover' }} />
+          ) : 'Axsem'}
         </Link>
         <button className="pd-icon-btn">
           <FiBell />
@@ -210,13 +212,13 @@ export default function PartnerDashboard() {
                 {partner?.contactPerson?.charAt(0) || partner?.companyName?.charAt(0) || 'P'}
               </div>
             )}
-            <button 
-              className="pd-avatar-upload" 
+            <button
+              className="pd-avatar-upload"
               onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
             >
               {uploading ? (
-                <div className="pd-spinner" style={{width: 14, height: 14}}></div>
+                <div className="pd-spinner" style={{ width: 14, height: 14 }}></div>
               ) : (
                 <FiCamera />
               )}
@@ -365,7 +367,7 @@ export function ClientsPage() {
 
   const handleAdd = async () => {
     if (!form.clientName || !form.email) {
-      alert('Please fill required fields')
+      addToast('Please fill required fields', 'error')
       return
     }
     try {
@@ -373,9 +375,9 @@ export function ClientsPage() {
       await loadClients()
       setShowModal(false)
       setForm({ clientName: "", companyName: "", email: "", mobile: "", product: "", notes: "" })
-      alert('Client added successfully!')
+      addToast('Client added successfully!', 'success')
     } catch (err) {
-      alert(err.message || 'Error adding client')
+      addToast(err.message || 'Error adding client', 'error')
     }
   }
 
@@ -434,30 +436,30 @@ export function ClientsPage() {
               <div className="pd-form-row">
                 <div className="pd-form-group">
                   <label>Client Name *</label>
-                  <input value={form.clientName} onChange={e => setForm({...form, clientName: e.target.value})} placeholder="Enter client name" />
+                  <input value={form.clientName} onChange={e => setForm({ ...form, clientName: e.target.value })} placeholder="Enter client name" />
                 </div>
                 <div className="pd-form-group">
                   <label>Company Name</label>
-                  <input value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} placeholder="Enter company name" />
+                  <input value={form.companyName} onChange={e => setForm({ ...form, companyName: e.target.value })} placeholder="Enter company name" />
                 </div>
               </div>
               <div className="pd-form-row">
                 <div className="pd-form-group">
                   <label>Email *</label>
-                  <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} placeholder="email@example.com" />
+                  <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="email@example.com" />
                 </div>
                 <div className="pd-form-group">
                   <label>Phone</label>
-                  <input value={form.mobile} onChange={e => setForm({...form, mobile: e.target.value})} placeholder="9876543210" />
+                  <input value={form.mobile} onChange={e => setForm({ ...form, mobile: e.target.value })} placeholder="9876543210" />
                 </div>
               </div>
               <div className="pd-form-group">
                 <label>Product</label>
-                <input value={form.product} onChange={e => setForm({...form, product: e.target.value})} placeholder="Product/Service" />
+                <input value={form.product} onChange={e => setForm({ ...form, product: e.target.value })} placeholder="Product/Service" />
               </div>
               <div className="pd-form-group">
                 <label>Notes</label>
-                <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} rows={3} placeholder="Additional notes" />
+                <textarea value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} rows={3} placeholder="Additional notes" />
               </div>
             </div>
             <div className="pd-modal-footer">
@@ -473,7 +475,7 @@ export function ClientsPage() {
 
 export function ProfilePage() {
   const location = useLocation()
-  const { partner, setPartner } = location.pathname.includes('/partner') ? { partner: JSON.parse(localStorage.getItem('partnerUser') || '{}'), setPartner: () => {} } : { partner: {}, setPartner: () => {} }
+  const { partner, setPartner } = location.pathname.includes('/partner') ? { partner: JSON.parse(localStorage.getItem('partnerUser') || '{}'), setPartner: () => { } } : { partner: {}, setPartner: () => { } }
   const [form, setForm] = useState({
     companyName: partner?.companyName || '',
     contactPerson: partner?.contactPerson || '',
@@ -508,11 +510,11 @@ export function ProfilePage() {
         <div className="pd-form-row">
           <div className="pd-form-group">
             <label>Company Name</label>
-            <input value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} />
+            <input value={form.companyName} onChange={e => setForm({ ...form, companyName: e.target.value })} />
           </div>
           <div className="pd-form-group">
             <label>Contact Person</label>
-            <input value={form.contactPerson} onChange={e => setForm({...form, contactPerson: e.target.value})} />
+            <input value={form.contactPerson} onChange={e => setForm({ ...form, contactPerson: e.target.value })} />
           </div>
         </div>
         <div className="pd-form-row">
@@ -522,22 +524,22 @@ export function ProfilePage() {
           </div>
           <div className="pd-form-group">
             <label>Phone</label>
-            <input value={form.mobile} onChange={e => setForm({...form, mobile: e.target.value})} />
+            <input value={form.mobile} onChange={e => setForm({ ...form, mobile: e.target.value })} />
           </div>
         </div>
         <div className="pd-form-row">
           <div className="pd-form-group">
             <label>City</label>
-            <input value={form.city} onChange={e => setForm({...form, city: e.target.value})} />
+            <input value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} />
           </div>
           <div className="pd-form-group">
             <label>State</label>
-            <input value={form.state} onChange={e => setForm({...form, state: e.target.value})} />
+            <input value={form.state} onChange={e => setForm({ ...form, state: e.target.value })} />
           </div>
         </div>
         <div className="pd-form-group">
           <label>Website</label>
-          <input value={form.website} onChange={e => setForm({...form, website: e.target.value})} placeholder="https://example.com" />
+          <input value={form.website} onChange={e => setForm({ ...form, website: e.target.value })} placeholder="https://example.com" />
         </div>
         <button className="pd-btn-primary" onClick={handleSave} disabled={saving}>
           {saving ? 'Saving...' : 'Save Changes'}
@@ -660,7 +662,7 @@ export function TicketsPage() {
 
   const handleSubmit = async () => {
     if (!form.subject || !form.description) {
-      alert('Please fill all fields')
+      addToast('Please fill all fields', 'error')
       return
     }
     try {
@@ -668,9 +670,9 @@ export function TicketsPage() {
       await loadTickets()
       setShowModal(false)
       setForm({ subject: "", description: "", category: "technical" })
-      alert('Ticket created successfully!')
+      addToast('Ticket created successfully!', 'success')
     } catch (err) {
-      alert(err.message || 'Error creating ticket')
+      addToast(err.message || 'Error creating ticket', 'error')
     }
   }
 
@@ -717,7 +719,7 @@ export function TicketsPage() {
             <div className="pd-modal-body">
               <div className="pd-form-group">
                 <label>Category</label>
-                <select value={form.category} onChange={e => setForm({...form, category: e.target.value})}>
+                <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}>
                   <option value="technical">Technical</option>
                   <option value="payment">Payment</option>
                   <option value="account">Account</option>
@@ -726,11 +728,11 @@ export function TicketsPage() {
               </div>
               <div className="pd-form-group">
                 <label>Subject *</label>
-                <input value={form.subject} onChange={e => setForm({...form, subject: e.target.value})} placeholder="Brief summary" />
+                <input value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} placeholder="Brief summary" />
               </div>
               <div className="pd-form-group">
                 <label>Description *</label>
-                <textarea value={form.description} onChange={e => setForm({...form, description: e.target.value})} rows={4} placeholder="Describe your issue" />
+                <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} rows={4} placeholder="Describe your issue" />
               </div>
             </div>
             <div className="pd-modal-footer">
@@ -804,7 +806,7 @@ export function SettingsPage() {
               <div className="pd-form-group">
                 <label>Current Password</label>
                 <div className="pd-password-input">
-                  <input type={showCurrent ? 'text' : 'password'} value={passwords.currentPassword} onChange={e => setPasswords({...passwords, currentPassword: e.target.value})} />
+                  <input type={showCurrent ? 'text' : 'password'} value={passwords.currentPassword} onChange={e => setPasswords({ ...passwords, currentPassword: e.target.value })} />
                   <button type="button" onClick={() => setShowCurrent(!showCurrent)}>
                     {showCurrent ? <FiEyeOff /> : <FiEye />}
                   </button>
@@ -813,7 +815,7 @@ export function SettingsPage() {
               <div className="pd-form-group">
                 <label>New Password</label>
                 <div className="pd-password-input">
-                  <input type={showNew ? 'text' : 'password'} value={passwords.newPassword} onChange={e => setPasswords({...passwords, newPassword: e.target.value})} />
+                  <input type={showNew ? 'text' : 'password'} value={passwords.newPassword} onChange={e => setPasswords({ ...passwords, newPassword: e.target.value })} />
                   <button type="button" onClick={() => setShowNew(!showNew)}>
                     {showNew ? <FiEyeOff /> : <FiEye />}
                   </button>

@@ -24,8 +24,8 @@ const normalizeCompanyInfo = (info) => {
 
 export function CompanyProvider({ children }) {
   const [companyInfo, setCompanyInfo] = useState({
-    companyName: 'AXSEM Softwares',
-    email: 'info@axsemsoftwares.com',
+    companyName: 'Axsem Softwares',
+    email: 'info@Axsemsoftwares.com',
     phone: '+91 7860291285',
     address: 'New Delhi, India',
     facebook: '',

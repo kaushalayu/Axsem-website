@@ -6,18 +6,18 @@ import { normalizeText } from "../utils/textUtils"
 import "../Styles/Team.css"
 
 const normalizeTeamMember = (member) => ({
-  ...member,
-  name: normalizeText(member.name),
-  role: normalizeText(member.role),
-  bio: normalizeText(member.bio),
-  quote: normalizeText(member.quote),
-  description: normalizeText(member.description),
-  department: normalizeText(member.department),
+    ...member,
+    name: normalizeText(member.name),
+    role: normalizeText(member.role),
+    bio: normalizeText(member.bio),
+    quote: normalizeText(member.quote),
+    description: normalizeText(member.description),
+    department: normalizeText(member.department),
 });
 
 const INTRO_CONTENT = {
     title: "Meet Our Team",
-    subtitle: "The brilliant minds behind AXSEM's success. We're a diverse group of innovators, problem-solvers, and tech enthusiasts dedicated to transforming ideas into powerful digital solutions.",
+    subtitle: "The brilliant minds behind Axsem's success. We're a diverse group of innovators, problem-solvers, and tech enthusiasts dedicated to transforming ideas into powerful digital solutions.",
     stats: [
         { icon: <FiUsers />, number: 15, label: "Team Members", color: "#f05a28" },
         { icon: <FiAward />, number: 5, label: "Years Experience", color: "#3d3d9e" },
@@ -32,12 +32,12 @@ const DEPARTMENTS = ["All", "Leadership", "Engineering", "Design", "Marketing", 
 function useReveal(threshold = 0.1) {
     const ref = useRef(null)
     const [isVisible, setIsVisible] = useState(false)
-    
+
     useEffect(() => {
         const el = ref.current
         if (!el) return
         const obs = new IntersectionObserver(
-            ([entry]) => { 
+            ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true)
                     el.classList.add("revealed")
@@ -54,7 +54,7 @@ function useReveal(threshold = 0.1) {
 /* ── Intro Section ── */
 function TeamIntro() {
     const { ref } = useReveal()
-    
+
     return (
         <div className="team-intro" ref={ref}>
             <div className="team-intro-content">
@@ -99,9 +99,9 @@ function DepartmentFilter({ active, onChange }) {
 /* ── Team Member Card ── */
 function TeamMemberCard({ member, onSelect }) {
     const { ref } = useReveal()
-    
+
     return (
-        <div 
+        <div
             className="team-member-card"
             ref={ref}
             onClick={() => onSelect(member)}
@@ -109,8 +109,8 @@ function TeamMemberCard({ member, onSelect }) {
         >
             <div className="member-card-inner">
                 <div className="member-image-container">
-                    <img 
-                        src={typeof member.image === 'string' ? member.image : `https://ui-avatars.com/api/?name=${encodeURIComponent(typeof member.name === 'string' ? member.name : 'Team')}&background=f05a28&color=fff&size=300`} 
+                    <img
+                        src={typeof member.image === 'string' ? member.image : `https://ui-avatars.com/api/?name=${encodeURIComponent(typeof member.name === 'string' ? member.name : 'Team')}&background=f05a28&color=fff&size=300`}
                         alt={typeof member.name === 'string' ? member.name : 'Team Member'}
                         className="member-card-image"
                     />
@@ -134,20 +134,20 @@ function TeamMemberCard({ member, onSelect }) {
 /* ── Member Detail Modal ── */
 function MemberDetail({ member, onClose }) {
     const { ref } = useReveal()
-    
+
     if (!member) return null
-    
+
     return (
         <div className="team-modal-overlay" onClick={onClose}>
             <div className="team-modal" onClick={e => e.stopPropagation()}>
                 <button className="modal-close" onClick={onClose}>
                     <FiX />
                 </button>
-                
+
                 <div className="modal-header">
                     <div className="modal-image-wrapper">
-                        <img 
-                            src={typeof member.image === 'string' ? member.image : `https://ui-avatars.com/api/?name=${encodeURIComponent(typeof member.name === 'string' ? member.name : 'Team')}&background=f05a28&color=fff&size=400`} 
+                        <img
+                            src={typeof member.image === 'string' ? member.image : `https://ui-avatars.com/api/?name=${encodeURIComponent(typeof member.name === 'string' ? member.name : 'Team')}&background=f05a28&color=fff&size=400`}
                             alt={typeof member.name === 'string' ? member.name : 'Team Member'}
                             className="modal-image"
                         />
@@ -180,7 +180,7 @@ function MemberDetail({ member, onClose }) {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="modal-body">
                     {member.bio && (
                         <div className="modal-section">
@@ -188,7 +188,7 @@ function MemberDetail({ member, onClose }) {
                             <p className="modal-bio">{typeof member.bio === 'string' ? member.bio : ''}</p>
                         </div>
                     )}
-                    
+
                     {member.quote && (
                         <div className="modal-section">
                             <blockquote className="modal-quote">
@@ -197,7 +197,7 @@ function MemberDetail({ member, onClose }) {
                             </blockquote>
                         </div>
                     )}
-                    
+
                     {member.description && (
                         <div className="modal-section">
                             <h4>Description</h4>
@@ -237,7 +237,7 @@ export default function TeamPage() {
     const [selectedMember, setSelectedMember] = useState(null)
 
     const FALLBACK_TEAM = [
-        { _id: "1", name: "Arjun Sharma", role: "Founder & CEO", department: "Leadership", quote: "Building software that solves real Indian problems.", bio: "With over 10 years of experience in software development, Arjun leads AXSEM with a vision to democratize enterprise-grade solutions.", skills: ["Leadership", "Strategy", "React", "Node.js"], image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" },
+        { _id: "1", name: "Arjun Sharma", role: "Founder & CEO", department: "Leadership", quote: "Building software that solves real Indian problems.", bio: "With over 10 years of experience in software development, Arjun leads Axsem with a vision to democratize enterprise-grade solutions.", skills: ["Leadership", "Strategy", "React", "Node.js"], image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" },
         { _id: "2", name: "Priya Nair", role: "CTO", department: "Engineering", quote: "Clean code is not a luxury, it's a discipline.", bio: "Priya brings 8+ years of technical expertise and leads our engineering team with passion for clean architecture.", skills: ["System Design", "Python", "AWS", "DevOps"], image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" },
         { _id: "3", name: "Rohan Gupta", role: "Lead Designer", department: "Design", quote: "Design is the silent ambassador of your brand.", bio: "Rohan is an award-winning designer with a passion for creating intuitive and beautiful user experiences.", skills: ["UI/UX", "Figma", "Adobe XD", "Animation"], image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop" },
         { _id: "4", name: "Sarah Johnson", role: "Senior Developer", department: "Engineering", quote: "Every bug is an opportunity to learn.", bio: "Sarah specializes in full-stack development and has delivered 20+ projects across various domains.", skills: ["React", "Node.js", "MongoDB", "TypeScript"], image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop" },
@@ -247,7 +247,7 @@ export default function TeamPage() {
     useEffect(() => {
         api.getTeam()
             .then(data => {
-                const teamData = Array.isArray(data) && data.length > 0 
+                const teamData = Array.isArray(data) && data.length > 0
                     ? data.map((m, i) => ({ ...normalizeTeamMember(m), index: i }))
                     : FALLBACK_TEAM.map((m, i) => ({ ...m, index: i }))
                 setMembers(teamData)
@@ -258,8 +258,8 @@ export default function TeamPage() {
             .finally(() => setLoading(false))
     }, [])
 
-    const filteredMembers = activeDept === "All" 
-        ? members 
+    const filteredMembers = activeDept === "All"
+        ? members
         : members.filter(m => m.department?.toLowerCase() === activeDept.toLowerCase())
 
     return (
@@ -281,7 +281,7 @@ export default function TeamPage() {
             />
 
             <TeamIntro />
-            
+
             <DepartmentFilter active={activeDept} onChange={setActiveDept} />
 
             <div className="team-content">
@@ -292,8 +292,8 @@ export default function TeamPage() {
                 ) : filteredMembers.length > 0 ? (
                     <div className="team-grid">
                         {filteredMembers.map((member, i) => (
-                            <TeamMemberCard 
-                                key={member._id || member.id || i} 
+                            <TeamMemberCard
+                                key={member._id || member.id || i}
                                 member={member}
                                 onSelect={setSelectedMember}
                             />
@@ -309,9 +309,9 @@ export default function TeamPage() {
             <TeamCTA />
 
             {selectedMember && (
-                <MemberDetail 
-                    member={selectedMember} 
-                    onClose={() => setSelectedMember(null)} 
+                <MemberDetail
+                    member={selectedMember}
+                    onClose={() => setSelectedMember(null)}
                 />
             )}
         </div>

@@ -7,12 +7,12 @@ import { normalizeText } from "../utils/textUtils"
 import "../Styles/ApplyJobPage.css"
 
 const normalizeJob = (job) => ({
-  ...job,
-  title: normalizeText(job.title),
-  description: normalizeText(job.description),
-  type: normalizeText(job.type),
-  location: normalizeText(job.location),
-  role: normalizeText(job.role),
+    ...job,
+    title: normalizeText(job.title),
+    description: normalizeText(job.description),
+    type: normalizeText(job.type),
+    location: normalizeText(job.location),
+    role: normalizeText(job.role),
 });
 
 export default function ApplyJobPage() {
@@ -60,7 +60,7 @@ export default function ApplyJobPage() {
                     </>
                 }
                 subtitle="Fill out the form below. Our hiring team reviews every application carefully."
-                tag="AXSEM Careers"
+                tag="Axsem Careers"
             />
 
             {/* MAIN SECTION */}
@@ -97,22 +97,22 @@ export default function ApplyJobPage() {
 
                         <div className="apply-field">
                             <label><FiUser /> Full Name</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 placeholder="Enter your full name"
                                 value={formData.name}
-                                onChange={e => setFormData({...formData, name: e.target.value})}
+                                onChange={e => setFormData({ ...formData, name: e.target.value })}
                                 required
                             />
                         </div>
 
                         <div className="apply-field">
                             <label><FiMail /> Email Address</label>
-                            <input 
-                                type="email" 
+                            <input
+                                type="email"
                                 placeholder="you@example.com"
                                 value={formData.email}
-                                onChange={e => setFormData({...formData, email: e.target.value})}
+                                onChange={e => setFormData({ ...formData, email: e.target.value })}
                                 required
                             />
                         </div>
@@ -128,7 +128,7 @@ export default function ApplyJobPage() {
                                 rows="4"
                                 placeholder="Tell us why you're a good fit for this role"
                                 value={formData.message}
-                                onChange={e => setFormData({...formData, message: e.target.value})}
+                                onChange={e => setFormData({ ...formData, message: e.target.value })}
                             />
                         </div>
 

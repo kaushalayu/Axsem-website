@@ -91,6 +91,7 @@ const ClientRegistration = lazy(() => import("./Pages/ClientRegistration"))
 const SupportTicket = lazy(() => import("./Pages/SupportTicket"))
 const EmployeeVerification = lazy(() => import("./Pages/EmployeeVerification"))
 const FAQPage = lazy(() => import("./Pages/FAQPage"))
+const DynamicPageRenderer = lazy(() => import("./Pages/DynamicPageRenderer"))
 // const MarketingSection = lazy(() => import("./Pages/Marketingsection"))
 
 
@@ -330,6 +331,9 @@ function AppContent() {
           <Route path="/verify/employee" element={<EmployeeVerification />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/testimonials" element={<Testimonials />} />
+
+          {/* Dynamic Pages - Always at the end, catches unmatched routes */}
+          <Route path="/:slug" element={<DynamicPageRenderer />} />
 
           {/* 404 */}
           <Route path="*" element={<TempPage title="404 - Page Not Found" />} />

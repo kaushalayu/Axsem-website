@@ -62,7 +62,7 @@ const faqs = [
     { q: "Can you work with our existing brand guidelines?", a: "Absolutely. We adapt to your existing brand identity, colour palette, and typography. If you don't have guidelines, we can create a brand style guide as part of the engagement." },
     { q: "Do you do UX only, or visual design too?", a: "Both. We offer end-to-end design: UX research → wireframes → visual UI design → interactive prototypes → dev handoff. Or just one phase if you need it." },
     { q: "How do you handle design revisions?", a: "Every project includes 2 rounds of revisions per milestone. We present designs with a clear rationale — changes that go outside the agreed scope are handled via a simple change request process." },
-    { q: "Can your developers also build what you design?", a: "Yes. AXSEM is a full-service agency. If you want both design and development, we offer a seamless end-to-end engagement with zero handoff friction." },
+    { q: "Can your developers also build what you design?", a: "Yes. Axsem is a full-service agency. If you want both design and development, we offer a seamless end-to-end engagement with zero handoff friction." },
 ]
 
 export default function UiUxDesignPage() {

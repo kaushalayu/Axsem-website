@@ -64,21 +64,21 @@ const roles = [
         title: "Frontend Developer",
         desc: "Build modern, performant interfaces using React, Tailwind, and animation-driven UX.",
         type: "Full Time · Remote / Hybrid",
-        applyLink: "mailto:careers@axsemsoftwares.com?subject=Frontend Developer Application"
+        applyLink: "mailto:careers@Axsemsoftwares.com?subject=Frontend Developer Application"
     },
     {
         icon: <FiLayers />,
         title: "Backend Developer",
         desc: "Design scalable APIs, databases, and secure backend systems for real-world products.",
         type: "Full Time · Onsite",
-        applyLink: "mailto:careers@axsemsoftwares.com?subject=Backend Developer Application"
+        applyLink: "mailto:careers@Axsemsoftwares.com?subject=Backend Developer Application"
     },
     {
         icon: <FiCpu />,
         title: "AI / Automation Engineer",
         desc: "Work on AI-driven tools, automation pipelines, and next-gen SaaS products.",
         type: "Intern / Full Time",
-        applyLink: "mailto:careers@axsemsoftwares.com?subject=AI Engineer Application"
+        applyLink: "mailto:careers@Axsemsoftwares.com?subject=AI Engineer Application"
     }
 ]
 
@@ -97,7 +97,7 @@ export default function CareersPage() {
                     { label: "About", href: "/about" },
                     { label: "Careers" }
                 ]}
-                pill="Join AXSEM"
+                pill="Join Axsem"
                 pillIcon={<FiBriefcase />}
                 title={
                     <>
@@ -106,7 +106,7 @@ export default function CareersPage() {
                     </>
                 }
                 subtitle="We’re building a team of curious, driven, and kind people who want to create meaningful technology and grow together."
-                tag="Careers · AXSEM Softwares"
+                tag="Careers · Axsem Softwares"
             />
 
             <div className="mv-body">
@@ -184,7 +184,7 @@ export default function CareersPage() {
                 <section className="mv-section mv-promises-section">
                     <div className="mv-promises-inner mv-anim" ref={perksRef}>
                         <div className="mv-promises-text">
-                            <span className="mv-section-pill"><FiCheckCircle /> Why AXSEM</span>
+                            <span className="mv-section-pill"><FiCheckCircle /> Why Axsem</span>
                             <h2 className="mv-section-title">
                                 What You <span className="mv-accent">Get</span>
                             </h2>
@@ -228,7 +228,7 @@ export default function CareersPage() {
                         </p>
                         <div className="mv-cta-actions">
                             <a
-                                href="mailto:careers@axsemsoftwares.com"
+                                href="mailto:careers@Axsemsoftwares.com"
                                 className="mv-btn-primary"
                             >
                                 Send Resume <FiArrowRight />

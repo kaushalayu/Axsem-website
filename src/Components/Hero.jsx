@@ -6,7 +6,7 @@ import { api } from "../services/api"
 import "../Styles/Hero.css"
 
 const HERO_ICONS = {
-  FiCode, FiSmartphone, FiCloud, FiLayers, FiDatabase, FiShield, FiTarget, FiTrendingUp, FiGlobe, FiShoppingCart, FiBook, FiMail
+    FiCode, FiSmartphone, FiCloud, FiLayers, FiDatabase, FiShield, FiTarget, FiTrendingUp, FiGlobe, FiShoppingCart, FiBook, FiMail
 }
 
 function useCounter(target, duration = 1800, started = false) {
@@ -150,11 +150,20 @@ export default function Hero() {
     }, [])
 
     useEffect(() => {
+        // Start counter immediately if stats row is already visible (e.g. large screens)
+        // or as soon as even 1px of it enters the viewport
         const obs = new IntersectionObserver(
             ([e]) => { if (e.isIntersecting) setStatsStarted(true) },
-            { threshold: 0.3 }
+            { threshold: 0, rootMargin: "0px 0px -50px 0px" }
         )
-        if (statsRef.current) obs.observe(statsRef.current)
+        if (statsRef.current) {
+            obs.observe(statsRef.current)
+            // Also check immediately in case it's already in view
+            const rect = statsRef.current.getBoundingClientRect()
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                setStatsStarted(true)
+            }
+        }
         return () => obs.disconnect()
     }, [])
 
@@ -221,7 +230,7 @@ export default function Hero() {
                                     <span className="dot dot-red" />
                                     <span className="dot dot-yellow" />
                                     <span className="dot dot-green" />
-                                    <span className="card-fname">axsem-project.jsx</span>
+                                    <span className="card-fname">Axsem-project.jsx</span>
                                 </div>
 
                                 <div className="card-body">
@@ -229,7 +238,7 @@ export default function Hero() {
                                         <span className="c-purple">import</span>
                                         <span className="c-white"> &#123; Solution &#125; </span>
                                         <span className="c-purple">from</span>
-                                        <span className="c-orange"> 'axsem'</span>
+                                        <span className="c-orange"> 'Axsem'</span>
                                     </div>
                                     <div className="cl mt">
                                         <span className="c-blue">const</span>

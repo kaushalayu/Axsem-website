@@ -85,7 +85,7 @@ export default function WhyChooseUs() {
                     </div>
 
                     <h2 className="wcu-title">
-                        The AXSEM <span>Difference</span>
+                        The Axsem <span>Difference</span>
                     </h2>
 
                     <p className="wcu-sub">
@@ -99,7 +99,7 @@ export default function WhyChooseUs() {
                     {REASONS.map(r => (
                         <div key={r.title} className="wcu-card-wrap">
 
-                <div className="wcu-outside">
+                            <div className="wcu-outside">
                                 <h3>{typeof r.title === 'string' ? r.title : 'Untitled'}</h3>
                                 <span>{typeof r.short === 'string' ? r.short : ''}</span>
                             </div>

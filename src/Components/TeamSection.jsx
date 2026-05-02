@@ -7,14 +7,14 @@ import { normalizeText } from "../utils/textUtils";
 import "../Styles/TeamSection.css";
 
 const normalizeTeamMember = (member) => ({
-  ...member,
-  name: normalizeText(member.name),
-  role: normalizeText(member.role),
-  bio: normalizeText(member.bio),
-  quote: normalizeText(member.quote),
-  description: normalizeText(member.description),
-  experience: normalizeText(member.experience),
-  department: normalizeText(member.department),
+    ...member,
+    name: normalizeText(member.name),
+    role: normalizeText(member.role),
+    bio: normalizeText(member.bio),
+    quote: normalizeText(member.quote),
+    description: normalizeText(member.description),
+    experience: normalizeText(member.experience),
+    department: normalizeText(member.department),
 });
 
 const TeamFallback = () => (
@@ -52,7 +52,7 @@ const TeamSection = () => {
                 {/* HEADER */}
                 <div className="team-header">
                     <span className="team-label">OUR TEAM</span>
-                    <h2>Meet the People Behind AXSEM</h2>
+                    <h2>Meet the People Behind Axsem</h2>
                     <p>
                         A team of senior engineers and designers building scalable,
                         secure, enterprise-grade software products.
@@ -71,42 +71,42 @@ const TeamSection = () => {
                     <div className="team-slider-wrapper">
                         <div className="team-slider">
                             {teamData.map((member, index) => (
-                            <div
-                                className="team-card"
-                                key={index}
-                                onClick={() => setActiveMember(member)}
-                            >
-                                <div className="team-image">
-                                    <img src={typeof member.image === 'string' ? member.image : ''} alt={typeof member.name === 'string' ? member.name : 'Team Member'} />
-                                    
-                                    {member.video && (
-                                        <video 
-                                            src={member.video} 
-                                            muted 
-                                            loop 
-                                            playsInline
-                                            preload="none"
-                                        />
-                                    )}
+                                <div
+                                    className="team-card"
+                                    key={index}
+                                    onClick={() => setActiveMember(member)}
+                                >
+                                    <div className="team-image">
+                                        <img src={typeof member.image === 'string' ? member.image : ''} alt={typeof member.name === 'string' ? member.name : 'Team Member'} />
 
-                                    {/* PLAY ICON */}
-                                    <div className="team-play">
-                                        <Play size={20} />
-                                    </div>
+                                        {member.video && (
+                                            <video
+                                                src={member.video}
+                                                muted
+                                                loop
+                                                playsInline
+                                                preload="none"
+                                            />
+                                        )}
 
-                                    {/* HOVER OVERLAY */}
-                                    <div className="team-overlay">
-                                        <div className="team-overlay-info">
-                                    <h4>{typeof member.name === 'string' ? member.name : 'Team Member'}</h4>
-                                            <p>{typeof member.role === 'string' ? member.role : ''}</p>
-                                            <span>{typeof member.experience === 'string' ? member.experience : ''}</span>
+                                        {/* PLAY ICON */}
+                                        <div className="team-play">
+                                            <Play size={20} />
+                                        </div>
+
+                                        {/* HOVER OVERLAY */}
+                                        <div className="team-overlay">
+                                            <div className="team-overlay-info">
+                                                <h4>{typeof member.name === 'string' ? member.name : 'Team Member'}</h4>
+                                                <p>{typeof member.role === 'string' ? member.role : ''}</p>
+                                                <span>{typeof member.experience === 'string' ? member.experience : ''}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
                 ) : (
                     <div style={{ textAlign: 'center', padding: '40px', color: 'rgba(255,255,255,0.5)' }}>
                         <p>No team members available</p>

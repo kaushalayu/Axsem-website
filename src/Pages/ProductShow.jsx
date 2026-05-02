@@ -67,7 +67,7 @@ const PRODUCTS = [
         ],
     },
     {
-        id: "axsemai", name: "AxsemAI", short: "AI Suite",
+        id: "Axsemai", name: "AxsemAI", short: "AI Suite",
         category: "AI & Automation",
         tagline: "AI-Powered Business Automation Platform",
         about: "AxsemAI is a no-code automation platform that helps Indian businesses automate data entry, document parsing, customer support, and internal workflows using custom-trained AI models.",
@@ -595,7 +595,7 @@ export default function ProductShowcasePage() {
     const getDynamicPricing = (productId) => {
         const pricingMap = {
             tripaxis: { starter: 'hospital', growth: 'hospital', enterprise: 'hospital' },
-            axsemai: { starter: 'aiAutomation', growth: 'aiAutomation', enterprise: 'aiAutomation' },
+            Axsemai: { starter: 'aiAutomation', growth: 'aiAutomation', enterprise: 'aiAutomation' },
             eduschool: { starter: 'school', growth: 'school', premium: 'school' },
             hrmpro: { starter: 'hr', growth: 'hr', enterprise: 'hr' },
             safal: { starter: 'ngo', growth: 'ngo', premium: 'ngo' },
@@ -604,10 +604,10 @@ export default function ProductShowcasePage() {
             propcare: { starter: 'realEstate', growth: 'realEstate', enterprise: 'realEstate' },
             crmpro: { starter: 'crm', growth: 'crm', scale: 'crm' },
         }
-        
+
         const map = pricingMap[productId]
         if (!map) return null
-        
+
         const tiers = {}
         Object.keys(map).forEach(tier => {
             const priceData = getProductPrice(map[tier], tier)

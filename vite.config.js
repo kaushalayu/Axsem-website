@@ -20,11 +20,14 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-icons': ['react-icons'],
+          'vendor-other': ['@tanstack/react-query', 'framer-motion', 'gsap', 'zustand'],
+          'vendor-icons': ['react-icons', 'lucide-react'],
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    minify: 'terser',
+    sourcemap: false,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom']

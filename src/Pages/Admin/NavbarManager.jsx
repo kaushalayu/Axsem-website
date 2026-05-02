@@ -9,6 +9,7 @@ import {
   FiMinusCircle, FiToggleLeft, FiToggleRight, FiList, FiGrid
 } from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion"
+import { useToast } from "../../Components/Toast"
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
@@ -53,6 +54,7 @@ function FiBuilding(props) {
 }
 
 export default function NavbarManager() {
+  const { addToast } = useToast()
   const [links, setLinks] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -103,18 +105,30 @@ export default function NavbarManager() {
       
       const method = editId ? 'PUT' : 'POST'
       
+      // Clean up the form data
+      const formData = {
+        ...form,
+        url: form.url || form.title?.toLowerCase().replace(/\s+/g, '-'),
+        parentId: form.parentId || null,
+        order: parseInt(form.order) || 0
+      }
+      
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify(formData)
       })
       
-      if (!response.ok) throw new Error('Failed to save')
+      if (!response.ok) {
+        const err = await response.json()
+        throw new Error(err.message || 'Failed to save')
+      }
       
+      addToast(editId ? 'Link updated successfully!' : 'Link created successfully!', 'success')
       await loadLinks()
       closeModal()
     } catch (err) {
-      setError(err.message)
+      addToast(err.message, 'error')
     } finally {
       setSaving(false)
     }
@@ -130,9 +144,10 @@ export default function NavbarManager() {
       
       if (!response.ok) throw new Error('Failed to delete')
       
+      addToast('Link deleted successfully!', 'success')
       await loadLinks()
     } catch (err) {
-      setError(err.message)
+      addToast(err.message, 'error')
     }
   }
 
@@ -488,9 +503,9 @@ export default function NavbarManager() {
                     >
                       <option value="">None (Main Link)</option>
                       {links
-                        .filter(l => l.category === form.category && !l.parentId && l._id !== editId)
+                        .filter(l => !l.parentId && l._id !== editId)
                         .map(l => (
-                          <option key={l._id} value={l._id}>{l.title}</option>
+                          <option key={l._id} value={l._id}>{l.title} ({l.category})</option>
                         ))
                       }
                     </select>

@@ -2,8 +2,9 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FiMail, FiLock, FiEye, FiEyeOff, FiShield } from "react-icons/fi"
 import { api } from "../../services/api"
+import { useToast } from "../../Components/Toast"
 import "../../Styles/Admin/Admin.css"
-import logo from "../../assets/axsem.jpg"
+import logo from "../../assets/Axsem.jpg"
 
 export default function AdminLogin() {
   const navigate = useNavigate()
@@ -12,20 +13,29 @@ export default function AdminLogin() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const { addToast } = useToast()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
     setLoading(true)
 
-    const result = await api.login(email, password)
-    
-    if (result.success) {
-      navigate("/admin")
-    } else {
-      setError("Invalid email or password. Please try again.")
+    try {
+      const result = await api.login(email, password)
+
+      if (result.success) {
+        addToast("Login successful! Welcome back.", "success")
+        setTimeout(() => navigate("/admin"), 500)
+      } else {
+        setError(result.message || "Invalid credentials")
+        addToast(result.message || "Invalid credentials", "error")
+      }
+    } catch (err) {
+      setError(err.message)
+      addToast(err.message, "error")
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   return (
@@ -33,7 +43,7 @@ export default function AdminLogin() {
       <div className="admin-login-card">
         <div className="admin-login-brand">
           <img src={logo} alt="Axsem" className="admin-login-logo" />
-          <h1>AXSEM</h1>
+          <h1>Axsem</h1>
           <span>Admin Panel</span>
         </div>
 
@@ -48,7 +58,7 @@ export default function AdminLogin() {
                 <span>{error}</span>
               </div>
             )}
-            
+
             <div className="admin-login-group">
               <label>Email</label>
               <div className="admin-login-input">
@@ -74,8 +84,8 @@ export default function AdminLogin() {
                   placeholder="Enter your password"
                   required
                 />
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="admin-login-toggle"
                   onClick={() => setShowPassword(!showPassword)}
                 >
@@ -84,8 +94,8 @@ export default function AdminLogin() {
               </div>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="admin-login-btn"
               disabled={loading}
             >
@@ -102,7 +112,7 @@ export default function AdminLogin() {
         </div>
 
         <div className="admin-login-footer">
-          <p>© {new Date().getFullYear()} AXSEM Softwares</p>
+          <p>© {new Date().getFullYear()} Axsem Softwares</p>
         </div>
       </div>
 
