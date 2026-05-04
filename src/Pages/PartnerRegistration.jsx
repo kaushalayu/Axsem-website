@@ -44,6 +44,8 @@ export default function PartnerRegistration() {
     contactPerson: "",
     mobile: "",
     email: "",
+    emailVerified: false,
+    mobileVerified: false,
     businessType: "",
     city: "",
     state: "",
@@ -58,6 +60,7 @@ export default function PartnerRegistration() {
   })
   const [errors, setErrors] = useState({})
   const [otpModal, setOtpModal] = useState({ show: false, type: null, value: "" })
+  const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const formRef = useRef(null)
@@ -138,15 +141,41 @@ export default function PartnerRegistration() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleSendOtp = (type) => {
+  const handleSendOtp = async (type) => {
     const value = type === 'mobile' ? formData.mobile : formData.email
-    if (value) {
+    
+    if (!value) {
+      addToast(`Please enter your ${type} first`, "error")
+      return
+    }
+
+    if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      addToast("Please enter a valid email address", "error")
+      return
+    }
+
+    if (type === 'mobile' && !/^\d{10}$/.test(value)) {
+      addToast("Please enter a valid 10-digit mobile number", "error")
+      return
+    }
+
+    try {
+      await api.partnerSendOtp(value, 'registration')
       setOtpModal({ show: true, type, value })
+      addToast(`OTP sent to your ${type}`, "success")
+    } catch (error) {
+      addToast(error.message || `Failed to send OTP to ${type}`, "error")
     }
   }
 
   const handleOtpVerified = () => {
     setOtpModal({ show: false, type: null, value: "" })
+    if (otpModal.type === 'email') {
+      setFormData(prev => ({ ...prev, emailVerified: true }))
+    }
+    if (otpModal.type === 'mobile') {
+      setFormData(prev => ({ ...prev, mobileVerified: true }))
+    }
   }
 
   const handleSubmit = async () => {
@@ -303,6 +332,7 @@ export default function PartnerRegistration() {
                       <FiSend /> OTP
                     </button>
                   </div>
+                  {formData.mobileVerified && <span className="pr-verified">✓ Verified</span>}
                   {errors.mobile && <span className="pr-error"><FiAlertCircle /> {errors.mobile}</span>}
                 </div>
 
@@ -325,6 +355,7 @@ export default function PartnerRegistration() {
                       <FiSend /> OTP
                     </button>
                   </div>
+                  {formData.emailVerified && <span className="pr-verified">✓ Verified</span>}
                   {errors.email && <span className="pr-error"><FiAlertCircle /> {errors.email}</span>}
                 </div>
               </div>

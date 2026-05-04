@@ -326,7 +326,7 @@ body.dark .sp-card {
 }
 
 /* Shine Effect on Card */
-.sp-card::after {
+/* .sp-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -337,11 +337,11 @@ body.dark .sp-card {
   transition: left 0.6s ease;
   pointer-events: none;
   z-index: 10;
-}
+} */
 
-.sp-card:hover::after {
+/* .sp-card:hover::after {
   left: 100%;
-}
+} */
 
 body.dark .sp-card::after {
   /* background: linear-gradient(

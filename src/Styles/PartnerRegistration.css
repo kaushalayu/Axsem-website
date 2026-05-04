@@ -270,6 +270,15 @@ body.dark {
   color: var(--pr-error);
 }
 
+.pr-verified {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--pr-success);
+  font-weight: 500;
+}
+
 .pr-char-count {
   font-size: 0.75rem;
   color: var(--pr-text-muted);

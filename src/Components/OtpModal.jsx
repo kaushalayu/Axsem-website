@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from "react"
 import { FiX, FiCheck, FiAlertCircle, FiRefreshCw } from "react-icons/fi"
+import { api } from "../services/api"
+import { useToast } from "./Toast"
 import "../Styles/OtpModal.css"
 
 export default function OtpModal({ type, value, onClose, onVerified }) {
+  const { addToast } = useToast()
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const [error, setError] = useState("")
   const [isVerifying, setIsVerifying] = useState(false)
@@ -62,34 +65,42 @@ export default function OtpModal({ type, value, onClose, onVerified }) {
     setError("")
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      const response = await api.partnerVerifyRegistrationOtp(value, otpValue)
       
-      if (otpValue === "123456" || otpValue === "000000") {
+      if (response.success) {
         setIsVerified(true)
+        addToast("Email verified successfully!", "success")
         setTimeout(() => {
           onVerified()
         }, 1500)
       } else {
-        setError("Invalid OTP. Please try again.")
+        setError(response.message || "Invalid OTP. Please try again.")
         setOtp(["", "", "", "", "", ""])
         inputRefs.current[0]?.focus()
       }
     } catch (err) {
-      setError("Verification failed. Please try again.")
+      setError(err.message || "Verification failed. Please try again.")
+      setOtp(["", "", "", "", "", ""])
+      inputRefs.current[0]?.focus()
     } finally {
       setIsVerifying(false)
     }
   }
 
-  const handleResend = () => {
+  const handleResend = async () => {
     setIsResending(true)
-    setResendTimer(30)
-    setOtp(["", "", "", "", "", ""])
     setError("")
     
-    setTimeout(() => {
+    try {
+      await api.partnerSendOtp(value, 'registration')
+      setResendTimer(30)
+      setOtp(["", "", "", "", "", ""])
+      addToast("OTP resent to your email", "success")
+    } catch (err) {
+      setError(err.message || "Failed to resend OTP")
+    } finally {
       setIsResending(false)
-    }, 1000)
+    }
   }
 
   const maskedValue = type === 'mobile' 
@@ -176,7 +187,7 @@ export default function OtpModal({ type, value, onClose, onVerified }) {
             </div>
 
             <p className="otp-note">
-              <FiAlertCircle /> Demo OTP: Use <strong>123456</strong> or <strong>000000</strong> for testing
+              <FiAlertCircle /> Check your inbox and spam folder for the OTP
             </p>
           </>
         )}

@@ -418,6 +418,14 @@ export const api = {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   }),
+  partnerSendOtp: (email, type = 'registration') => fetchWithErrorHandling(`${API_URL}/partners/send-otp`, {
+    method: 'POST',
+    body: JSON.stringify({ email, type }),
+  }),
+  partnerVerifyRegistrationOtp: (email, otp) => fetchWithErrorHandling(`${API_URL}/partners/verify-registration-otp`, {
+    method: 'POST',
+    body: JSON.stringify({ email, otp }),
+  }),
   partnerForgotPassword: (email) => fetchWithErrorHandling(`${API_URL}/partners/forgot-password`, {
     method: 'POST',
     body: JSON.stringify({ email }),
