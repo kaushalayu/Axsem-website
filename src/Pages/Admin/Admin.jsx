@@ -4,7 +4,7 @@ import {
   FiUsers, FiBriefcase, FiMessageSquare, FiFileText,
   FiHome, FiPlus, FiTrash2, FiEdit, FiX, FiFolder, FiSave,
   FiSettings, FiUpload, FiLogOut, FiDollarSign, FiUser, FiMail, FiPhone, FiCalendar,
-  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool, FiTarget
+  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool, FiTarget, FiClock
 } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
@@ -20,6 +20,7 @@ import ProductManager from "./ProductManager"
 import TestimonialManager from "./TestimonialManager"
 import AboutSectionManager from "./AboutSectionManager"
 import PortfolioManager from "./PortfolioManager"
+import JourneyManager from "./JourneyManager"
 
 function Dashboard() {
   const [stats, setStats] = useState({ team: 0, careers: 0, contacts: 0, blogs: 0, projects: 0, inquiries: 0 })
@@ -200,7 +201,7 @@ function TeamManager() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [uploading, setUploading] = useState(false)
-  const [form, setForm] = useState({ name: '', role: '', department: 'Team', image: '', experience: '', video: '', linkedin: '', twitter: '', instagram: '', bio: '' })
+  const [form, setForm] = useState({ name: '', role: '', department: 'Team', image: '', experience: '', video: '', linkedin: '', twitter: '', instagram: '', bio: '', quote: '' })
   const [imageFile, setImageFile] = useState(null)
 
   useEffect(() => { loadTeam() }, [])
@@ -224,7 +225,7 @@ function TeamManager() {
     }
     setShowModal(false)
     setEditId(null)
-    setForm({ name: '', role: '', image: '', experience: '', video: '', linkedin: '', twitter: '', instagram: '', bio: '' })
+    setForm({ name: '', role: '', department: 'Team', image: '', experience: '', video: '', linkedin: '', twitter: '', instagram: '', bio: '', quote: '' })
     setImageFile(null)
     loadTeam()
   }
@@ -241,7 +242,8 @@ function TeamManager() {
       linkedin: member.linkedin || '',
       twitter: member.twitter || '',
       instagram: member.instagram || '',
-      bio: member.bio || ''
+      bio: member.bio || '',
+      quote: member.quote || ''
     })
     setImageFile(null)
     setShowModal(true)
@@ -269,7 +271,7 @@ function TeamManager() {
   const closeModal = () => {
     setShowModal(false)
     setEditId(null)
-    setForm({ name: '', role: '', department: 'Team', image: '', experience: '', video: '', linkedin: '', twitter: '', instagram: '', bio: '' })
+    setForm({ name: '', role: '', department: 'Team', image: '', experience: '', video: '', linkedin: '', twitter: '', instagram: '', bio: '', quote: '' })
     setImageFile(null)
   }
 
@@ -375,8 +377,12 @@ function TeamManager() {
                 </div>
               </div>
               <div className="admin-form-group">
-                <label>Bio</label>
+                <label>Bio (About)</label>
                 <textarea value={form.bio} onChange={e => setForm({ ...form, bio: e.target.value })} rows={3} />
+              </div>
+              <div className="admin-form-group">
+                <label>Quote (Tagline - e.g. "Coding is Poetry")</label>
+                <input value={form.quote} onChange={e => setForm({ ...form, quote: e.target.value })} placeholder="Enter a short quote or tagline" />
               </div>
               <button type="submit" className="admin-btn admin-btn-primary">{editId ? <><FiSave /> Save Changes</> : 'Add Member'}</button>
             </form>
@@ -1605,6 +1611,7 @@ export default function AdminLayout() {
     { path: '/admin/testimonials', icon: <FiMessageSquare />, label: 'Testimonials' },
     { path: '/admin/company', icon: <FiAward />, label: 'Company Info' },
     { path: '/admin/about', icon: <FiTarget />, label: 'About Section' },
+    { path: '/admin/journey', icon: <FiClock />, label: 'Our Journey' },
     { path: '/admin/portfolio', icon: <FiLayers />, label: 'Portfolio' },
     { path: '/admin/services', icon: <FiTool />, label: 'Services' },
     { path: '/admin/projects', icon: <FiFolder />, label: 'Projects' },
@@ -1655,6 +1662,7 @@ export default function AdminLayout() {
           <Route path="/admin/partners" element={<PartnerManager />} />
           <Route path="/admin/company" element={<CompanyInfoManager />} />
           <Route path="/admin/about" element={<AboutSectionManager />} />
+          <Route path="/admin/journey" element={<JourneyManager />} />
           <Route path="/admin/portfolio" element={<PortfolioManager />} />
           <Route path="/admin/services" element={<ServicesManager />} />
           <Route path="/admin/projects" element={<ProjectsManager />} />

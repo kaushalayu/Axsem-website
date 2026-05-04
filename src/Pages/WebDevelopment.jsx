@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { usePageData } from "../hooks/usePageData"
 import { Link } from "react-router-dom"
 import {
     FiGlobe, FiLayout, FiShoppingCart, FiZap, FiSearch,
@@ -75,6 +76,7 @@ const faqs = [
 ]
 
 export default function WebDevelopmentPage() {
+    const pageData = usePageData("/services/web-development", { faqs, gallery: [{ url: WebImg }] })
     const overviewRef = useReveal()
     const statsRef = useReveal()
     const servicesRef = useReveal()
@@ -82,14 +84,18 @@ export default function WebDevelopmentPage() {
     const techRef = useReveal()
     const faqRef = useReveal()
 
+    const displayImage = pageData.gallery?.[0]?.url || WebImg
+    const displayFaqs = pageData.faqs
+    const displayHero = pageData.hero || {}
+
     return (
         <div className="sp-page">
             <PageHero
                 breadcrumbs={[{ label: "Services" }, { label: "Website Development" }]}
                 pill="Website Development"
                 pillIcon={<FiGlobe />}
-                title={<>Websites That <span className="ph-gradient">Work & Convert</span></>}
-                subtitle="Fast, beautiful, SEO-optimised websites built with modern frameworks. From landing pages to full e-commerce platforms — we deliver pixel-perfect results."
+                title={displayHero.title || <>Websites That <span className="ph-gradient">Work & Convert</span></>}
+                subtitle={displayHero.subtitle || "Fast, beautiful, SEO-optimised websites built with modern frameworks. From landing pages to full e-commerce platforms — we deliver pixel-perfect results."}
                 tag="50+ Websites Delivered"
             />
 
@@ -120,7 +126,7 @@ export default function WebDevelopmentPage() {
                     <div className="sp-overview-visual">
                         <div className="sp-visual-box">
                             <FiGlobe className="sp-visual-icon" />
-                            <img src={WebImg} alt="Web Development" />
+                            <img src={displayImage} alt="Web Development" />
                             <span className="sp-visual-label">Website Development</span>
                         </div>
                         <div className="sp-visual-badge sp-vb-1"><FiZap style={{ color: "var(--sp-orange)" }} /> PageSpeed 98</div>
@@ -201,7 +207,7 @@ export default function WebDevelopmentPage() {
                         <h2 className="sp-section-title">Common <span className="sp-hl">Questions</span></h2>
                     </div>
                     <div className="sp-faq-list sp-anim" ref={faqRef}>
-                        {faqs.map((f, i) => (
+                        {displayFaqs.map((f, i) => (
                             <div key={i} style={{ "--delay": `${i * 0.07}s` }}>
                                 <FaqItem q={f.q} a={f.a} />
                             </div>

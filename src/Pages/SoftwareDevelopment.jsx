@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { usePageData } from "../hooks/usePageData"
 import { Link } from "react-router-dom"
 import {
   FiCode, FiLayers, FiSettings, FiShield, FiTrendingUp,
@@ -76,6 +77,8 @@ const faqs = [
 ]
 
 export default function SoftwareDevelopmentPage() {
+  const pageData = usePageData("/services/software-development", { faqs, gallery: [{ url: SoftImg }] })
+  
   const overviewRef = useReveal()
   const statsRef = useReveal()
   const servicesRef = useReveal()
@@ -83,14 +86,18 @@ export default function SoftwareDevelopmentPage() {
   const techRef = useReveal()
   const faqRef = useReveal()
 
+  const displayImage = pageData.gallery?.[0]?.url || SoftImg
+  const displayFaqs = pageData.faqs
+  const displayHero = pageData.hero || {}
+
   return (
     <div className="sp-page">
       <PageHero
         breadcrumbs={[{ label: "Services", }, { label: "Software Development" }]}
         pill="Software Development"
         pillIcon={<FiCode />}
-        title={<>Custom Software <span className="ph-gradient">Built to Scale</span></>}
-        subtitle="We engineer software that solves real problems — from MVPs to enterprise platforms. Clean architecture, agile execution, on-time delivery."
+        title={displayHero.title || <>Custom Software <span className="ph-gradient">Built to Scale</span></>}
+        subtitle={displayHero.subtitle || "We engineer software that solves real problems — from MVPs to enterprise platforms. Clean architecture, agile execution, on-time delivery."}
         tag="80+ Projects Delivered"
       />
 
@@ -121,7 +128,7 @@ export default function SoftwareDevelopmentPage() {
           <div className="sp-overview-visual">
             <div className="sp-visual-box">
               <FiCode className="sp-visual-icon" />
-              <img src={SoftImg} alt="Software Development" />
+              <img src={displayImage} alt="Software Development" />
               <span className="sp-visual-label">Software Development</span>
             </div>
             <div className="sp-visual-badge sp-vb-1"><FiCheckCircle style={{ color: "var(--sp-orange)" }} /> 99% On-time</div>
@@ -202,7 +209,7 @@ export default function SoftwareDevelopmentPage() {
             <h2 className="sp-section-title">Common <span className="sp-hl">Questions</span></h2>
           </div>
           <div className="sp-faq-list sp-anim" ref={faqRef}>
-            {faqs.map((f, i) => (
+            {displayFaqs.map((f, i) => (
               <div key={i} style={{ "--delay": `${i * 0.07}s` }} className="sp-faq-item-wrap">
                 <FaqItem q={f.q} a={f.a} />
               </div>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import PageHero from "../Components/PageHero"
+import PageLoader from "../Components/PageLoader"
 import "../Styles/JourneyPage.css"
 import Journay1 from "../assets/journay1.jpeg"
 import Journay2 from "../assets/journay2.jpeg"
@@ -133,7 +134,7 @@ const Icons = {
 /* ═══════════════════════════════════════════
    JOURNEY DATA
 ═══════════════════════════════════════════ */
-const MILESTONES = [
+const FALLBACK_MILESTONES = [
     {
         id: 1, year: "2020", month: "March 2020", era: "The Founding",
         headline: "A Garage, a Laptop & a Dream",
@@ -207,6 +208,8 @@ const MILESTONES = [
         color: "#3d3d9e", side: "left",
     },
 ]
+
+import { api } from "../services/api"
 
 /* ═══════════════════════════════════════════
    PARTICLE CANVAS
@@ -382,6 +385,30 @@ function Item({ m, idx }) {
 ═══════════════════════════════════════════ */
 export default function JourneyPage() {
     const [dark, setDark] = useState(false)
+    const [milestones, setMilestones] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
+    useEffect(() => {
+        const fetchMilestones = async () => {
+            try {
+                const data = await api.getJourney()
+                if (data && data.length > 0) {
+                    setMilestones(data)
+                } else {
+                    setMilestones(FALLBACK_MILESTONES)
+                }
+            } catch (err) {
+                console.error("Failed to fetch journey:", err)
+                setMilestones(FALLBACK_MILESTONES)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchMilestones()
+    }, [])
+
     useEffect(() => {
         const fn = () => setDark(document.body.classList.contains("dark"))
         fn()
@@ -389,6 +416,8 @@ export default function JourneyPage() {
         obs.observe(document.body, { attributes: true, attributeFilter: ["class"] })
         return () => obs.disconnect()
     }, [])
+
+    if (loading) return <PageLoader />
 
     return (
         <div className="jp-page">
@@ -418,7 +447,16 @@ export default function JourneyPage() {
             <div className="jp-timeline-wrap">
                 <Spine />
                 <div className="jp-items-wrap">
-                    {MILESTONES.map((m, i) => <Item key={m.id} m={m} idx={i} />)}
+                    {milestones.map((m, i) => (
+                        <Item 
+                            key={m._id || m.id} 
+                            m={{
+                                ...m,
+                                image: m.image?.startsWith('/uploads') ? `${API_URL}${m.image}` : m.image
+                            }} 
+                            idx={i} 
+                        />
+                    ))}
                 </div>
             </div>
 

@@ -422,15 +422,96 @@ export default function PageBuilder() {
                               <label>Section Title</label>
                               <input type="text" value={section.title} onChange={e => updateSection(index, 'title', e.target.value)} />
                             </div>
-                            <div className="pb-form-group">
-                              <label>Content</label>
-                              <textarea 
-                                value={section.content?.description || ''} 
-                                onChange={e => updateSectionContent(index, { ...section.content, description: e.target.value })}
-                                rows={3}
-                                placeholder="Section content (JSON or text)"
-                              />
-                            </div>
+                            
+                            {(section.type === 'faq' || section.type === 'gallery' || section.type === 'features' || section.type === 'stats') ? (
+                              <div className="pb-items-editor">
+                                <label>Items ({section.content?.items?.length || 0})</label>
+                                <div className="pb-items-list">
+                                  {(section.content?.items || []).map((item, itemIdx) => (
+                                    <div key={itemIdx} className="pb-item-row">
+                                      <div className="pb-item-fields">
+                                        {section.type === 'faq' && (
+                                          <>
+                                            <input type="text" placeholder="Question" value={item.question || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, question: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} />
+                                            <textarea placeholder="Answer" value={item.answer || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, answer: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} rows={2} />
+                                          </>
+                                        )}
+                                        {section.type === 'gallery' && (
+                                          <>
+                                            <input type="text" placeholder="Image URL" value={item.url || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, url: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} />
+                                            <input type="text" placeholder="Alt Text" value={item.alt || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, alt: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} />
+                                          </>
+                                        )}
+                                        {section.type === 'features' && (
+                                          <>
+                                            <input type="text" placeholder="Feature Title" value={item.title || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, title: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} />
+                                            <textarea placeholder="Description" value={item.description || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, description: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} rows={2} />
+                                          </>
+                                        )}
+                                        {section.type === 'stats' && (
+                                          <>
+                                            <input type="text" placeholder="Metric (e.g. 500+)" value={item.metric || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, metric: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} />
+                                            <input type="text" placeholder="Label" value={item.label || ''} onChange={e => {
+                                              const newItems = [...section.content.items];
+                                              newItems[itemIdx] = { ...item, label: e.target.value };
+                                              updateSectionContent(index, { ...section.content, items: newItems });
+                                            }} />
+                                          </>
+                                        )}
+                                      </div>
+                                      <button type="button" className="pb-item-remove" onClick={() => {
+                                        const newItems = section.content.items.filter((_, i) => i !== itemIdx);
+                                        updateSectionContent(index, { ...section.content, items: newItems });
+                                      }}><FiTrash2 size={14} /></button>
+                                    </div>
+                                  ))}
+                                </div>
+                                <button type="button" className="pb-add-item-btn" onClick={() => {
+                                  const newItems = [...(section.content?.items || []), {}];
+                                  updateSectionContent(index, { ...section.content, items: newItems });
+                                }}>
+                                  <FiPlus size={14} /> Add Item
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="pb-form-group">
+                                <label>Content</label>
+                                <textarea 
+                                  value={section.content?.description || ''} 
+                                  onChange={e => updateSectionContent(index, { ...section.content, description: e.target.value })}
+                                  rows={3}
+                                  placeholder="Section content description or body"
+                                />
+                              </div>
+                            )}
                           </div>
                         </div>
                       )
@@ -564,6 +645,17 @@ export default function PageBuilder() {
           .pb-form-row { grid-template-columns: 1fr; }
           .pb-modal { max-width: 100%; }
         }
+
+        .pb-items-editor { margin-top: 10px; border-top: 1px dashed #e5e7eb; padding-top: 15px; }
+        .pb-items-editor > label { font-size: 0.8rem; color: #6b7280; margin-bottom: 10px; display: block; }
+        .pb-items-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .pb-item-row { display: flex; gap: 10px; align-items: flex-start; background: #f9fafb; padding: 12px; border-radius: 8px; }
+        .pb-item-fields { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .pb-item-fields input, .pb-item-fields textarea { padding: 8px 12px !important; font-size: 0.85rem !important; }
+        .pb-item-remove { padding: 8px; background: #fee2e2; color: #ef4444; border: none; border-radius: 6px; cursor: pointer; }
+        .pb-item-remove:hover { background: #ef4444; color: white; }
+        .pb-add-item-btn { padding: 8px 16px; background: white; border: 1px solid #6366f1; color: #6366f1; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+        .pb-add-item-btn:hover { background: #eef2ff; }
       `}</style>
     </div>
   )

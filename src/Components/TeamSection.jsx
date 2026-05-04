@@ -99,6 +99,7 @@ const TeamSection = () => {
                                             <div className="team-overlay-info">
                                                 <h4>{typeof member.name === 'string' ? member.name : 'Team Member'}</h4>
                                                 <p>{typeof member.role === 'string' ? member.role : ''}</p>
+                                                {member.quote && <p className="team-card-quote">"{member.quote}"</p>}
                                                 <span>{typeof member.experience === 'string' ? member.experience : ''}</span>
                                             </div>
                                         </div>

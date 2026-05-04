@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { usePageData } from "../hooks/usePageData"
 import { Link } from "react-router-dom"
 import {
     FiSmartphone, FiTablet, FiBell, FiMapPin, FiShield,
@@ -75,6 +76,7 @@ const faqs = [
 ]
 
 export default function MobileAppDevelopmentPage() {
+    const pageData = usePageData("/services/mobile-app-development", { faqs, gallery: [{ url: MobileImg }] })
     const overviewRef = useReveal()
     const statsRef = useReveal()
     const servicesRef = useReveal()
@@ -82,14 +84,18 @@ export default function MobileAppDevelopmentPage() {
     const techRef = useReveal()
     const faqRef = useReveal()
 
+    const displayImage = pageData.gallery?.[0]?.url || MobileImg
+    const displayFaqs = pageData.faqs
+    const displayHero = pageData.hero || {}
+
     return (
         <div className="sp-page">
             <PageHero
                 breadcrumbs={[{ label: "Services" }, { label: "Mobile App Development" }]}
                 pill="Mobile App Development"
                 pillIcon={<FiSmartphone />}
-                title={<>Apps People <span className="ph-gradient">Actually Use</span></>}
-                subtitle="Flutter, React Native, Swift, Kotlin — we build cross-platform and native apps that are fast, reliable, and polished. From MVP to App Store launch."
+                title={displayHero.title || <>Apps People <span className="ph-gradient">Actually Use</span></>}
+                subtitle={displayHero.subtitle || "Flutter, React Native, Swift, Kotlin — we build cross-platform and native apps that are fast, reliable, and polished. From MVP to App Store launch."}
                 tag="25+ Apps Launched · 4.7★ avg. rating"
             />
 
@@ -120,7 +126,7 @@ export default function MobileAppDevelopmentPage() {
                     <div className="sp-overview-visual">
                         <div className="sp-visual-box">
                             <FiSmartphone className="sp-visual-icon" />
-                            <img src={MobileImg} alt="Mobile Development" />
+                            <img src={displayImage} alt="Mobile Development" />
                             <span className="sp-visual-label">Mobile App Development</span>
                         </div>
                         <div className="sp-visual-badge sp-vb-1"><FiShield style={{ color: "var(--sp-orange)" }} /> iOS & Android</div>
@@ -201,7 +207,7 @@ export default function MobileAppDevelopmentPage() {
                         <h2 className="sp-section-title">Common <span className="sp-hl">Questions</span></h2>
                     </div>
                     <div className="sp-faq-list sp-anim" ref={faqRef}>
-                        {faqs.map((f, i) => (
+                        {displayFaqs.map((f, i) => (
                             <div key={i} style={{ "--delay": `${i * 0.07}s` }}>
                                 <FaqItem q={f.q} a={f.a} />
                             </div>

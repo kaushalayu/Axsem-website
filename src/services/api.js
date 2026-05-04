@@ -145,6 +145,42 @@ export const api = {
     method: 'DELETE',
   }),
 
+  // Journey
+  getJourney: () => fetchWithErrorHandling(`${API_URL}/journey`),
+  addJourney: async (data, imageFile = null) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+        if (key === 'stat') {
+            formData.append(key, JSON.stringify(data[key]));
+        } else {
+            formData.append(key, data[key]);
+        }
+    });
+    if (imageFile) formData.append('image', imageFile);
+    return fetchFormData(`${API_URL}/journey`, {
+      method: 'POST',
+      body: formData,
+    });
+  },
+  updateJourney: async (id, data, imageFile = null) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+        if (key === 'stat') {
+            formData.append(key, JSON.stringify(data[key]));
+        } else {
+            formData.append(key, data[key]);
+        }
+    });
+    if (imageFile) formData.append('image', imageFile);
+    return fetchFormData(`${API_URL}/journey/${id}`, {
+      method: 'PUT',
+      body: formData,
+    });
+  },
+  deleteJourney: (id) => fetchWithErrorHandling(`${API_URL}/journey/${id}`, {
+    method: 'DELETE',
+  }),
+
   // Careers
   getCareers: () => fetchWithErrorHandling(`${API_URL}/careers`),
   addCareer: (data) => fetchWithErrorHandling(`${API_URL}/careers`, {

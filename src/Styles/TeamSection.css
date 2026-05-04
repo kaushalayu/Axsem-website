@@ -210,6 +210,15 @@
 .team-overlay-info p {
   font-size: 14px;
   color: #ddd;
+  margin-bottom: 2px;
+}
+
+.team-card-quote {
+  font-size: 13px !important;
+  color: var(--accent-orange) !important;
+  font-style: italic;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .team-overlay-info span {
