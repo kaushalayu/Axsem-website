@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { FiHome, FiChevronRight, FiCode, FiCloud, FiDatabase, FiShield, FiServer, FiGlobe, FiTool } from "react-icons/fi"
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaReact, FaNodeJs, FaPython, FaAndroid, FaVuejs, FaAws, FaDocker, FaFigma } from "react-icons/fa6"
+import OrbitNav from "./OrbitNav"
 import "../Styles/PageHero.css"
 
 const SOCIALS = [
@@ -655,31 +656,7 @@ export default function PageHero({ breadcrumbs = [], pill, pillIcon, title, subt
                 {/* ── RIGHT ── */}
                 <div className="ph-right">
                     <div className="ph-3d-wrap">
-                        <div className="ph-orbiting-container">
-                            <div className="ph-orbit-sun">
-                                <FiCode />
-                            </div>
-                            <div className="ph-orbit-path ph-orbit-path-1"></div>
-                            <div className="ph-orbit-path ph-orbit-path-2"></div>
-                            <div className="ph-orbit-path ph-orbit-path-3"></div>
-                            <div className="ph-orbit-path ph-orbit-path-4"></div>
-                            <div className="ph-orbit-path ph-orbit-path-5"></div>
-                            <div className="ph-orbit-1">
-                                <div className="ph-orbiting-icon"><FaReact /></div>
-                            </div>
-                            <div className="ph-orbit-2">
-                                <div className="ph-orbiting-icon"><FaNodeJs /></div>
-                            </div>
-                            <div className="ph-orbit-3">
-                                <div className="ph-orbiting-icon"><FaPython /></div>
-                            </div>
-                            <div className="ph-orbit-4">
-                                <div className="ph-orbiting-icon"><FaAws /></div>
-                            </div>
-                            <div className="ph-orbit-5">
-                                <div className="ph-orbiting-icon"><FaDocker /></div>
-                            </div>
-                        </div>
+                        <OrbitNav />
                     </div>
                 </div>
             </div>

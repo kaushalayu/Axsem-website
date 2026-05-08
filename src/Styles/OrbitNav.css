@@ -1,0 +1,497 @@
+/* ============================================================
+   ORBIT NAV — Circular rotating navigation for ph-right
+============================================================ */
+
+.orbitnav {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+/* ── Center logo ── */
+.orbitnav-center {
+    position: absolute;
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 0 0 25px rgba(102, 126, 234, 0.35),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.6);
+    animation: orbitnavPulse 3s ease-in-out infinite;
+}
+body.dark .orbitnav-center {
+    box-shadow: 0 0 35px rgba(102, 126, 234, 0.5),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+.orbitnav-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ── Inner decorative ring ── */
+.orbitnav-ring-inner {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 1px dashed rgba(102, 126, 234, 0.25);
+    animation: orbitnavSpin 14s reverse linear infinite;
+    pointer-events: none;
+}
+body.dark .orbitnav-ring-inner {
+    border-color: rgba(165, 180, 252, 0.3);
+}
+
+/* ── Ring base ── */
+.orbitnav-ring {
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbitnav-ring-circle {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 0.5px solid #5b5f62;
+    pointer-events: none;
+}
+body.dark .orbitnav-ring-circle {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.orbitnav-ring-mid .orbitnav-ring-circle {
+    border-color: #eb860e;
+}
+body.dark .orbitnav-ring-mid .orbitnav-ring-circle {
+    border-color: #f5a623;
+}
+
+.orbitnav-ring-mid-2 .orbitnav-ring-circle {
+    border-color: #5b5f62;
+}
+
+/* ── Ring sizes & rotation ── */
+.orbitnav-ring-mid {
+    width: 195px;
+    height: 195px;
+    animation: orbitnavSpin 16s linear infinite;
+}
+
+.orbitnav-ring-mid-2 {
+    width: 250px;
+    height: 250px;
+    animation: orbitnavSpin 18s reverse linear infinite;
+}
+
+.orbitnav-ring-out {
+    width: 295px;
+    height: 295px;
+    animation: orbitnavSpin 20s linear infinite;
+}
+
+/* ── Dots ── */
+.orbitnav-dot {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #f05a28;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 3;
+    padding: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+body.dark .orbitnav-dot {
+    background: rgba(30, 31, 60, 0.95);
+    color: #a5b4fc;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.orbitnav-dot:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 20px rgba(240, 90, 40, 0.4);
+}
+body.dark .orbitnav-dot:hover {
+    box-shadow: 0 0 20px rgba(165, 180, 252, 0.5);
+}
+
+.orbitnav-dot-l {
+    left: -23px;
+    top: calc(50% - 23px);
+}
+
+.orbitnav-dot-r {
+    left: calc(100% - 23px);
+    top: calc(50% - 23px);
+}
+
+/* Counter-rotate dots so they stay upright */
+.orbitnav-ring-mid .orbitnav-dot {
+    animation: orbitnavSpinRev 16s linear infinite;
+}
+
+.orbitnav-ring-mid-2 .orbitnav-dot {
+    animation: orbitnavSpin 18s linear infinite;
+}
+
+.orbitnav-ring-out .orbitnav-dot {
+    animation: orbitnavSpinRev 20s linear infinite;
+}
+
+/* ── Tooltips ── */
+.orbitnav-tip {
+    position: absolute;
+    white-space: nowrap;
+    padding: 5px 12px;
+    height: 26px;
+    background: #eb860e;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    border-radius: 3px;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+}
+
+.orbitnav-dot-l .orbitnav-tip {
+    left: 52px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+}
+
+.orbitnav-dot-r .orbitnav-tip {
+    right: 52px;
+    top: 50%;
+    transform: translateY(-50%) translateX(4px);
+}
+
+.orbitnav-dot:hover .orbitnav-tip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* ── Menu overlay ── */
+.orbitnav-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: orbitnavFadeIn 0.2s ease-out;
+}
+body.dark .orbitnav-overlay {
+    background: rgba(18, 20, 40, 0.95);
+}
+
+.orbitnav-menu {
+    text-align: center;
+    cursor: default;
+    padding: 24px;
+    max-width: 240px;
+    position: relative;
+}
+
+.orbitnav-menu-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #5b5f62;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    transition: color 0.2s;
+}
+body.dark .orbitnav-menu-close {
+    color: rgba(255, 255, 255, 0.5);
+}
+.orbitnav-menu-close:hover {
+    color: #f05a28;
+}
+
+.orbitnav-menu-icon {
+    font-size: 32px;
+    color: #eb860e;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.orbitnav-menu-title {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #eb860e;
+    margin: 0 0 10px;
+}
+
+.orbitnav-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.orbitnav-menu-list li {
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #5b5f62;
+}
+body.dark .orbitnav-menu-list li {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Keyframes ── */
+@keyframes orbitnavSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes orbitnavSpinRev {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes orbitnavPulse {
+    0%,
+    100% {
+        box-shadow: 0 0 25px rgba(102, 126, 234, 0.35);
+    }
+    50% {
+        box-shadow: 0 0 45px rgba(102, 126, 234, 0.6);
+    }
+}
+
+@keyframes orbitnavFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   Match PageHero breakpoints
+═══════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+    .orbitnav {
+        width: 340px;
+        height: 340px;
+    }
+    .orbitnav-center {
+        width: 68px;
+        height: 68px;
+    }
+    .orbitnav-ring-inner {
+        width: 140px;
+        height: 140px;
+    }
+    .orbitnav-ring-mid {
+        width: 210px;
+        height: 210px;
+    }
+    .orbitnav-ring-mid-2 {
+        width: 265px;
+        height: 265px;
+    }
+    .orbitnav-ring-out {
+        width: 310px;
+        height: 310px;
+    }
+    .orbitnav-dot {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+    }
+    .orbitnav-dot-l {
+        left: -23px;
+        top: calc(50% - 23px);
+    }
+    .orbitnav-dot-r {
+        left: calc(100% - 23px);
+        top: calc(50% - 23px);
+    }
+    .orbitnav-menu {
+        max-width: 260px;
+    }
+}
+
+@media (max-width: 960px) {
+    .orbitnav {
+        width: 260px;
+        height: 260px;
+    }
+    .orbitnav-center {
+        width: 56px;
+        height: 56px;
+    }
+    .orbitnav-ring-inner {
+        width: 105px;
+        height: 105px;
+    }
+    .orbitnav-ring-mid {
+        width: 155px;
+        height: 155px;
+    }
+    .orbitnav-ring-mid-2 {
+        width: 200px;
+        height: 200px;
+    }
+    .orbitnav-ring-out {
+        width: 235px;
+        height: 235px;
+    }
+    .orbitnav-dot {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+    .orbitnav-dot-l {
+        left: -19px;
+        top: calc(50% - 19px);
+    }
+    .orbitnav-dot-r {
+        left: calc(100% - 19px);
+        top: calc(50% - 19px);
+    }
+    .orbitnav-menu-title {
+        font-size: 14px;
+    }
+    .orbitnav-menu-list li {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 760px) {
+    .orbitnav {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+    }
+    .orbitnav-center {
+        width: 50px;
+        height: 50px;
+    }
+    .orbitnav-ring-inner {
+        width: 95px;
+        height: 95px;
+    }
+    .orbitnav-ring-mid {
+        width: 145px;
+        height: 145px;
+    }
+    .orbitnav-ring-mid-2 {
+        width: 185px;
+        height: 185px;
+    }
+    .orbitnav-ring-out {
+        width: 220px;
+        height: 220px;
+    }
+    .orbitnav-dot {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+    .orbitnav-dot-l {
+        left: -18px;
+        top: calc(50% - 18px);
+    }
+    .orbitnav-dot-r {
+        left: calc(100% - 18px);
+        top: calc(50% - 18px);
+    }
+}
+
+@media (max-width: 520px) {
+    .orbitnav {
+        width: 195px;
+        height: 195px;
+    }
+    .orbitnav-center {
+        width: 42px;
+        height: 42px;
+    }
+    .orbitnav-ring-inner {
+        width: 70px;
+        height: 70px;
+    }
+    .orbitnav-ring-mid {
+        width: 110px;
+        height: 110px;
+    }
+    .orbitnav-ring-mid-2 {
+        width: 140px;
+        height: 140px;
+    }
+    .orbitnav-ring-out {
+        width: 170px;
+        height: 170px;
+    }
+    .orbitnav-dot {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+    .orbitnav-dot-l {
+        left: -15px;
+        top: calc(50% - 15px);
+    }
+    .orbitnav-dot-r {
+        left: calc(100% - 15px);
+        top: calc(50% - 15px);
+    }
+    .orbitnav-tip {
+        display: none;
+    }
+    .orbitnav-menu-title {
+        font-size: 13px;
+    }
+    .orbitnav-menu-list li {
+        font-size: 10px;
+        line-height: 1.6;
+    }
+    .orbitnav-menu-icon {
+        font-size: 24px;
+    }
+}

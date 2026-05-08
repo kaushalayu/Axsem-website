@@ -377,6 +377,15 @@ export const api = {
     });
   },
 
+  changePassword: (currentPassword, newPassword) => {
+    const token = localStorage.getItem('adminToken');
+    return fetchWithErrorHandling(`${API_URL}/auth/password`, {
+      method: 'PUT',
+      body: JSON.stringify({ currentPassword, newPassword }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+
   forgotPassword: (email) => fetchWithErrorHandling(`${API_URL}/auth/forgot-password`, {
     method: 'POST',
     body: JSON.stringify({ email }),

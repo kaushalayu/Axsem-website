@@ -4,7 +4,7 @@ import {
   FiUsers, FiBriefcase, FiMessageSquare, FiFileText,
   FiHome, FiPlus, FiTrash2, FiEdit, FiX, FiFolder, FiSave,
   FiSettings, FiUpload, FiLogOut, FiDollarSign, FiUser, FiMail, FiPhone, FiCalendar,
-  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool, FiTarget, FiClock
+  FiInbox, FiSend, FiAward, FiMapPin, FiActivity, FiLayers, FiMenu, FiGlobe, FiCpu, FiTool, FiTarget, FiClock, FiKey
 } from "react-icons/fi"
 import { api } from "../../services/api"
 import "../../Styles/Admin/Admin.css"
@@ -21,6 +21,7 @@ import TestimonialManager from "./TestimonialManager"
 import AboutSectionManager from "./AboutSectionManager"
 import PortfolioManager from "./PortfolioManager"
 import JourneyManager from "./JourneyManager"
+import PasswordChange from "./PasswordChange"
 
 function Dashboard() {
   const [stats, setStats] = useState({ team: 0, careers: 0, contacts: 0, blogs: 0, projects: 0, inquiries: 0 })
@@ -1620,6 +1621,7 @@ export default function AdminLayout() {
     { path: '/admin/inquiries', icon: <FiSend />, label: 'Inquiries' },
     { path: '/admin/contacts', icon: <FiMessageSquare />, label: 'Contact Us' },
     { path: '/admin/blogs', icon: <FiFileText />, label: 'Blogs' },
+    { path: '/admin/password', icon: <FiKey />, label: 'Change Password' },
   ]
 
   return (
@@ -1678,6 +1680,7 @@ export default function AdminLayout() {
           <Route path="/admin/testimonials" element={<TestimonialManager />} />
           <Route path="/admin/contacts" element={<ContactsManager />} />
           <Route path="/admin/blogs" element={<BlogsManager />} />
+          <Route path="/admin/password" element={<PasswordChange />} />
         </Routes>
       </main>
     </div>
