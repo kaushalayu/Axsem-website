@@ -45,7 +45,7 @@ export default function PartnerRegistration() {
     mobile: "",
     email: "",
     emailVerified: false,
-    mobileVerified: false,
+
     businessType: "",
     city: "",
     state: "",
@@ -172,9 +172,6 @@ export default function PartnerRegistration() {
     setOtpModal({ show: false, type: null, value: "" })
     if (otpModal.type === 'email') {
       setFormData(prev => ({ ...prev, emailVerified: true }))
-    }
-    if (otpModal.type === 'mobile') {
-      setFormData(prev => ({ ...prev, mobileVerified: true }))
     }
   }
 
@@ -313,26 +310,15 @@ export default function PartnerRegistration() {
                   {errors.contactPerson && <span className="pr-error"><FiAlertCircle /> {errors.contactPerson}</span>}
                 </div>
 
-                <div className="pr-form-group pr-otp-group">
+                <div className="pr-form-group">
                   <label>Mobile Number <span className="required">*</span></label>
-                  <div className="pr-otp-input-wrapper">
-                    <input
-                      type="tel"
-                      placeholder="Enter 10-digit mobile"
-                      value={formData.mobile}
-                      onChange={(e) => updateField('mobile', e.target.value.replace(/\D/g, '').slice(0, 10))}
-                      className={errors.mobile ? 'error' : ''}
-                    />
-                    <button
-                      type="button"
-                      className="pr-otp-btn"
-                      onClick={() => handleSendOtp('mobile')}
-                      disabled={!formData.mobile || formData.mobile.length !== 10}
-                    >
-                      <FiSend /> OTP
-                    </button>
-                  </div>
-                  {formData.mobileVerified && <span className="pr-verified">✓ Verified</span>}
+                  <input
+                    type="tel"
+                    placeholder="Enter 10-digit mobile"
+                    value={formData.mobile}
+                    onChange={(e) => updateField('mobile', e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    className={errors.mobile ? 'error' : ''}
+                  />
                   {errors.mobile && <span className="pr-error"><FiAlertCircle /> {errors.mobile}</span>}
                 </div>
 
